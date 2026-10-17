@@ -949,6 +949,8 @@ function lessonSentences(w,arg,done){
 /* --- シャドーイング --- */
 function lessonShadow(w,step,done){
   const lines=w.dialogue.lines;let st=step||"listen",showJa=st==="listen"||st==="read",role="A",rate=S.settings.rate,playing=-1,reps=0;
+  // 一時停止して続きから：pos＝次に読む行。録音の声は文の途中から、端末の声はその行の頭から再開する
+  let pos=0,run=false,loopTk=0,midAudio=false;
   const speakers=[...new Set(lines.map(l=>l.s))];
   function enClass(){return (st==="listen"||st==="shadow")?"en blur":"en"}
   function draw(body){
@@ -959,23 +961,37 @@ function lessonShadow(w,step,done){
      <div class="stack" style="gap:4px">${lines.map((l,k)=>`<div class="dl ${k===playing?"playing":""} ${st==="role"&&l.s===role?"mine":""}" data-line="${k}">
        <span class="who">${esc(l.name||l.s)}</span><div class="t"><span class="${st==="role"&&l.s===role?"en blur":enClass()}">${tg(l.en)}</span>${showJa?`<span class="ja">${esc(l.ja)}</span>`:""}</div>${spkBtn(l.en)}</div>`).join("")}</div>
      <div class="row"><button class="btn sm ghost" id="tja">${showJa?"日本語を隠す":"日本語を表示"}</button><button class="btn sm ghost" id="ten">文を一時表示</button></div>
-     <div class="ctrl"><button class="btn accent" id="play">▶ 再生</button><button class="btn" id="stop">■ 止める</button>
+     <p class="small muted">行をタップすると、その行から読み始めます。</p>
+     <div class="ctrl">${run?`<button class="btn accent" id="pause">❚❚ 一時停止</button>`:`<button class="btn accent" id="play">▶ ${pos>0?`続きから（${pos+1}行目）`:"再生"}</button>`}<button class="btn" id="stop">${pos>0||run?"⟲ 最初に戻す":"■ 止める"}</button>
       <select id="rate" aria-label="速さ">${[0.6,0.7,0.8,0.9,1].map(r=>`<option value="${r}" ${r==rate?"selected":""}>速さ ${r}</option>`).join("")}</select>
       <span class="small muted mono">${reps}回</span><button class="btn primary" data-finish style="margin-left:auto">完了</button></div></div>`;
     bindFinish(body,done);
-    body.querySelectorAll("[data-st]").forEach(b=>b.onclick=()=>{stopSpeak();st=b.dataset.st;showJa=st==="listen"||st==="read";playing=-1;draw(body)});
+    body.querySelectorAll("[data-st]").forEach(b=>b.onclick=()=>{stopSpeak();st=b.dataset.st;showJa=st==="listen"||st==="read";playing=-1;pos=0;run=false;midAudio=false;draw(body)});
     body.querySelectorAll("[data-role]").forEach(b=>b.onclick=()=>{role=b.dataset.role;draw(body)});
     body.querySelector("#tja").onclick=()=>{showJa=!showJa;draw(body)};
     body.querySelector("#ten").onclick=()=>{body.querySelectorAll(".en.blur").forEach(e=>e.classList.remove("blur"))};
     body.querySelector("#rate").onchange=e=>{rate=+e.target.value};
-    body.querySelector("#stop").onclick=()=>{stopSpeak();playing=-1;draw(body)};
-    body.querySelector("#play").onclick=async()=>{stopSpeak();const tk=++speakToken;
-      for(let k=0;k<lines.length;k++){if(tk!==speakToken)return;playing=k;mark(body,k);
-        const l=lines[k];
-        if(st==="role"&&l.s===role){const words=l.en.split(/\s+/).length;await sleep(Math.max(2500,words*600/rate))}
-        else{await speak(l.en,rate);await sleep(st==="listen"||st==="read"?500:300)}}
-      if(tk===speakToken){playing=-1;reps++;draw(body)}};
+    body.querySelector("#stop").onclick=()=>{stopSpeak();playing=-1;pos=0;run=false;midAudio=false;draw(body)};
+    const pl=body.querySelector("#play");if(pl)pl.onclick=()=>resume(body);
+    const pa=body.querySelector("#pause");if(pa)pa.onclick=()=>pause(body);
+    body.querySelectorAll("[data-line]").forEach(e=>e.onclick=ev=>{if(ev.target.closest("[data-say]"))return;const k=+e.dataset.line,was=run;
+      stopSpeak();run=false;midAudio=false;pos=k;playing=k;if(was)play(body);else draw(body)});
   }
+  const audEl=()=>typeof AUD!=="undefined"&&AUD?AUD:null;
+  const audBusy=()=>typeof audDone!=="undefined"&&!!audDone;
+  async function play(body){stopSpeak();const tk=++speakToken;loopTk=tk;run=true;midAudio=false;draw(body);
+    for(let k=pos;k<lines.length;k++){if(tk!==speakToken)return;pos=k;playing=k;mark(body,k);
+      const l=lines[k];
+      if(st==="role"&&l.s===role){const words=l.en.split(/\s+/).length;await sleep(Math.max(2500,words*600/rate));if(tk!==speakToken)return;pos=k+1}
+      else{await speak(l.en,rate);if(tk!==speakToken)return;pos=k+1;await sleep(st==="listen"||st==="read"?500:300)}}
+    if(tk===speakToken){playing=-1;pos=0;run=false;reps++;draw(body)}}
+  function pause(body){run=false;const a=audEl();
+    if(a&&audBusy()&&!a.paused){a.pause();midAudio=true}   // 録音の声：その場で止める（続きは同じ位置から）
+    else{midAudio=false;stopSpeak()}                         // 端末の声：止めて、その行の頭から読み直す
+    if(pos>=lines.length)pos=0;playing=pos;draw(body);mark(body,pos)}
+  function resume(body){const a=audEl();
+    if(midAudio&&loopTk===speakToken&&audBusy()&&a){midAudio=false;run=true;draw(body);mark(body,pos);const r=a.play();if(r)r.catch(()=>play(body))}
+    else play(body)}
   function mark(body,k){body.querySelectorAll(".dl").forEach((e,j)=>e.classList.toggle("playing",j===k));const e=body.querySelector(`[data-line="${k}"]`);if(e)e.scrollIntoView({block:"center",behavior:"smooth"})}
   openLesson("シャドーイング",`W${w.week}`,"",draw)}
 
