@@ -369,6 +369,21 @@ h2{font-weight:800}
 .hi{font-family:var(--f-en)}
 .rom{display:block;font-family:var(--f-rom);font-size:.68em;line-height:1.45;color:var(--muted);font-weight:500;letter-spacing:.01em}
 .hi-rom{font-family:var(--f-rom)}
+.kana{display:block;font-family:var(--f-body);font-size:.7em;line-height:1.55;color:#B4541A;font-weight:700;letter-spacing:.02em}
+.kana u.rf,.kanalegend u.rf{text-decoration:underline;text-decoration-color:#EF4E5A;text-decoration-thickness:2px;text-underline-offset:3px}
+.kana sup.asp,.kanalegend sup.asp{font-size:.72em;color:#2C63E6;font-weight:800;margin-left:1px}
+.kana .nas,.kanalegend .nas{opacity:.5}
+.flash .word .kana{font-size:.52em;margin-top:2px}
+.tile small.kana{display:block;font-size:11px;color:#B4541A}
+.kanalegend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--muted)}
+.kanalegend b{color:#B4541A;font-size:14px}
+.pair{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.pair:first-of-type{border-top:none}
+.pair .w{display:flex;gap:8px;align-items:center;min-width:0}
+.pair .w .t{min-width:0}
+.pair .vs{font-size:12px;color:var(--muted);font-weight:700}
+.pair .en{font-size:19px;display:block;line-height:1.4}
+@media (max-width:480px){.pair{grid-template-columns:1fr 1fr;gap:6px 10px}.pair [data-cmp]{order:3;grid-column:1/-1;justify-content:center}.pair .w{flex-direction:column;align-items:flex-start}}
 .flash .word{line-height:1.45}
 .flash .word .rom{font-size:.5em;margin-top:2px}
 .tile small{display:block;font-family:var(--f-rom);font-size:11px;color:var(--muted);line-height:1.3}
@@ -418,10 +433,54 @@ function normItem(o){if(!o)return o;if(o.hi!=null&&o.en==null)o.en=o.hi;addRom(o
 function regNote(n){if(!n)return;["sentences","grammar","vocab","fixes","dialogue"].forEach(k=>(n[k]||[]).forEach(normItem))}
 function romOf(s){return ROM[s]||""}
 /* 学ぶ言葉を表示：設定で「文字＋ローマ字」「文字だけ」「ローマ字だけ」 */
-function tg(s){const r=romOf(s);const m=(typeof S!=="undefined"&&S.settings&&S.settings.script)||"both";
+function tg(s){const r=romOf(s);const m=(typeof S!=="undefined"&&S.settings&&S.settings.script)||"full";
   if(m==="rom"&&r)return `<span class="hi-rom">${esc(r)}</span>`;
-  return `<span class="hi">${esc(s)}</span>${m==="both"&&r?`<span class="rom">${esc(r)}</span>`:""}`}
-const SCRIPTNAME={both:"文字＋ローマ字",hi:"文字だけ",rom:"ローマ字だけ"};
+  return `<span class="hi">${esc(s)}</span>${(m==="full"||m==="kana")&&r?`<span class="kana">${kanaHTML(r)}</span>`:""}${(m==="full"||m==="both")&&r?`<span class="rom">${esc(r)}</span>`:""}`}
+/* ============ カタカナ読み（ローマ字から自動で作る。だいたいの音）
+   下線＝舌を反らす音（ṭ ḍ ṇ ṛ）、ʰ＝息を強く出す音、うすいン＝鼻にかける音 ============ */
+const KC=[["chh","ch",1,0],["ch","ch",0,0],["kh","k",1,0],["gh","g",1,0],["jh","j",1,0],["ṭh","t",1,1],["ḍh","d",1,1],["th","t",1,0],["dh","d",1,0],["ph","p",1,0],["bh","b",1,0],["ṛh","r",1,1],["sh","sh",0,0],
+ ["k","k",0,0],["g","g",0,0],["j","j",0,0],["ṭ","t",0,1],["ḍ","d",0,1],["ṇ","n",0,1],["ṛ","r",0,1],["t","t",0,0],["d","d",0,0],["n","n",0,0],["ñ","n",0,0],["ṅ","n",0,0],["p","p",0,0],["b","b",0,0],["m","m",0,0],["y","y",0,0],["r","r",0,0],["l","l",0,0],["v","v",0,0],["w","v",0,0],["s","s",0,0],["h","h",0,0],["z","z",0,0],["f","f",0,0],["q","k",0,0],["x","k",0,0],["c","k",0,0]];
+const KVW=[["ai",3,1],["au",4,1],["ā",0,1],["ī",1,1],["ū",2,1],["a",0,0],["i",1,0],["u",2,0],["e",3,1],["o",4,1]];
+const KROW={"":"アイウエオ",k:"カキクケコ",g:"ガギグゲゴ",ch:["チャ","チ","チュ","チェ","チョ"],j:["ジャ","ジ","ジュ","ジェ","ジョ"],t:["タ","ティ","トゥ","テ","ト"],d:["ダ","ディ","ドゥ","デ","ド"],n:"ナニヌネノ",p:"パピプペポ",b:"バビブベボ",m:"マミムメモ",y:["ヤ","イ","ユ","イェ","ヨ"],r:"ラリルレロ",l:"ラリルレロ",v:["ヴァ","ヴィ","ヴ","ヴェ","ヴォ"],sh:["シャ","シ","シュ","シェ","ショ"],s:["サ","スィ","ス","セ","ソ"],h:"ハヒフヘホ",z:["ザ","ズィ","ズ","ゼ","ゾ"],f:["ファ","フィ","フ","フェ","フォ"]};
+const KEND={k:"ク",g:"グ",ch:"チ",j:"ジ",t:"ト",d:"ド",n:"ン",p:"プ",b:"ブ",m:"ム",y:"イ",r:"ル",l:"ル",v:"ヴ",sh:"シュ",s:"ス",h:"フ",z:"ズ",f:"フ"};
+const KYO=["ャ",null,"ュ",null,"ョ"];
+const KSPECIAL={vah:[{k:"ヴォ"}],yah:[{k:"イェ"}]};
+const kRow=(b,i)=>{const r=KROW[b];return r?r[i]:""};
+function kUnits(w){const u=[];let i=0;
+  while(i<w.length){let m=null;
+    if(w[i]==="ṁ"||w[i]==="ṃ"){u.push({m:1});i++;continue}
+    for(const c of KC)if(w.startsWith(c[0],i)){m={c:c[1],asp:c[2],rf:c[3]};i+=c[0].length;break}
+    if(m){u.push(m);continue}
+    for(const v of KVW)if(w.startsWith(v[0],i)){m={v:v[0],vi:v[1],long:v[2]};i+=v[0].length;break}
+    if(m){u.push(m);continue}
+    u.push({o:w[i]==="-"?"・":w[i]});i++}
+  return u}
+function kanaParts(word){const w=word.toLowerCase().normalize("NFC");if(KSPECIAL[w])return KSPECIAL[w];
+  const u=kUnits(w),out=[];
+  for(let i=0;i<u.length;i++){const x=u[i],n1=u[i+1],n2=u[i+2],n3=u[i+3];
+    if(x.m){out.push({k:"ン",nas:1});continue}
+    if(x.o){out.push({k:x.o});continue}
+    if(x.v){ // 母音だけ
+      out.push({k:kRow("",x.vi),long:x.long});continue}
+    // 子音
+    if(x.c==="y"&&n1&&n1.v&&i>0&&u[i-1].v&&u[i-1].vi===1){out.push({k:kRow("",n1.vi),long:n1.long});i++;continue} // āiye＝アーイエー
+    if(n1&&n1.v){
+      // 「a の後ろに h」→ エ＋ヘ（rahtā＝レヘター、pahle＝ペヘレー）、語末なら エ（yah＝イェ）
+      if(n1.v==="a"&&n2&&n2.c==="h"&&!n2.asp&&(!n3||n3.c)){out.push({k:kRow(x.c,3),asp:x.asp,rf:x.rf});if(n3)out.push({k:"ヘ"});i+=2;continue}
+      out.push({k:kRow(x.c,n1.vi),asp:x.asp,rf:x.rf,long:n1.long});i++;continue}
+    if(n1&&n1.c==="y"&&n2&&n2.v&&KYO[n2.vi]&&x.c!=="y"){ // kyā＝キャー
+      if(x.c==="n"&&i>0&&u[i-1].v)out.push({k:"ン"});
+      out.push({k:kRow(x.c,1)+KYO[n2.vi],asp:x.asp,rf:x.rf,long:n2.long});i+=2;continue}
+    if(n1&&n1.c===x.c&&x.c!=="n"&&x.c!=="m"){out.push({k:"ッ"});continue} // achchhā＝アッチャー
+    if(x.c==="m"&&n1&&/^[pbm]$/.test(n1.c||""))out.push({k:"ン"});
+    else out.push({k:KEND[x.c]||"",asp:x.asp,rf:x.rf})}
+  return out}
+function kanaHTML(rom){return String(rom||"").split(/(\s+)/).map(t=>/^\s+$/.test(t)?" ":kanaParts(t).map(p=>(p.rf?`<u class="rf">${esc(p.k)}</u>`:p.nas?`<span class="nas">${esc(p.k)}</span>`:esc(p.k))+(p.asp?`<sup class="asp">ʰ</sup>`:"")+(p.long?"ー":"")).join("")).join("")}
+function kanaText(rom){return String(rom||"").split(/(\s+)/).map(t=>/^\s+$/.test(t)?" ":kanaParts(t).map(p=>p.k+(p.asp?"ʰ":"")+(p.long?"ー":"")).join("")).join("")}
+
+const SCRIPTNAME={full:"文字＋カナ＋ローマ字",kana:"文字＋カナ",both:"文字＋ローマ字",hi:"文字だけ",rom:"ローマ字だけ"};
+const SCRIPTORDER=["full","kana","both","hi","rom"];
+const KANALEGEND=`<div class="kanalegend"><span><b>ー</b> 長くのばす</span><span><b><u class="rf">タ</u></b> 下線＝舌を反らす</span><span><b>カ<sup class="asp">ʰ</sup></b> 息を強く出す</span><span><b><span class="nas">ン</span></b> うすいン＝鼻にかける</span></div>`;
 function normHi(s){return String(s||"").normalize("NFC").replace(/\u093C/g,"").replace(/\u0901/g,"\u0902").toLowerCase()}
 /* ============ 52週の骨組み（データ未読込でもロードマップは表示） ============ */
 const PHASES=[
@@ -465,12 +524,12 @@ const LSKEY="hindi52-state-v1";
 const today=()=>{const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
 const addDays=(s,n)=>{const d=new Date(s+"T00:00:00");d.setDate(d.getDate()+n);return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
 const diffDays=(a,b)=>Math.round((new Date(b+"T00:00:00")-new Date(a+"T00:00:00"))/864e5);
-function fresh(){return{v:1,startDate:today(),week:1,day:1,doneToday:{date:"",tasks:[]},srs:{},log:{},tests:{},scores:[],diary:[],people:[],settings:{accent:"hi-IN",rate:0.9,dir:"en",script:"both"},updatedAt:0}}
+function fresh(){return{v:1,startDate:today(),week:1,day:1,doneToday:{date:"",tasks:[]},srs:{},log:{},tests:{},scores:[],diary:[],people:[],settings:{accent:"hi-IN",rate:0.9,dir:"en",script:"full",kanaIntro:1},updatedAt:0}}
 let S=fresh();
 let DB=null, UID=null, SAMPLE=null, saveTimer=null;
 function lsGet(){try{const t=localStorage.getItem(LSKEY);return t?JSON.parse(t):null}catch(e){return null}}
 function lsSet(o){try{localStorage.setItem(LSKEY,JSON.stringify(o))}catch(e){}}
-function merge(o){const f=fresh();return Object.assign(f,o,{settings:Object.assign(f.settings,o.settings||{}),doneToday:o.doneToday||f.doneToday})}
+function merge(o){const f=fresh();const r=Object.assign(f,o,{settings:Object.assign(f.settings,o.settings||{}),doneToday:o.doneToday||f.doneToday});if(!(o.settings&&o.settings.kanaIntro)){r.settings.script="full";r.settings.kanaIntro=1}return r}
 function save(){S.updatedAt=Date.now();lsSet(S);clearTimeout(saveTimer);saveTimer=setTimeout(pushDB,1200);if(typeof scheduleSync==="function")scheduleSync()}
 async function pushDB(){if(!DB||!UID)return;try{await DB.doc("data/users/"+UID+"/progress").set(JSON.parse(JSON.stringify(S)))}catch(e){if(e&&e.code==="quota_exceeded")toast("保存容量がいっぱいです")}}
 async function initStore(){
@@ -612,7 +671,7 @@ function viewToday(){
   const title=w?w.title:OUTLINE[S.week-1];
   const tm=todayMascot(allDone);
   let html=`<div class="top"><div class="hello">${pic(tm.img,"mascot","あき先生")}<div><div class="eyebrow">${today().replace(/-/g,".")} ・ ${esc(tm.msg)}</div><h1>今日のメニュー</h1></div></div>
-   <div class="daybadge"><span class="streak">${pic("ic-streak","","")}連続 ${streak()}日</span><br><button class="scriptbtn" data-act="cyclescript">表示：${SCRIPTNAME[S.settings.script||"both"]}</button>${!IN_ARTIFACT&&syncCfg()?`<br><span id="syncchip">${syncChipText()}</span>`:""}</div></div>
+   <div class="daybadge"><span class="streak">${pic("ic-streak","","")}連続 ${streak()}日</span><br><button class="scriptbtn" data-act="cyclescript">表示：${SCRIPTNAME[S.settings.script||"full"]}</button>${!IN_ARTIFACT&&syncCfg()?`<br><span id="syncchip">${syncChipText()}</span>`:""}</div></div>
   <div class="tgrid"><div class="ta stack">${boardingPass(w,behind)}
   <div class="phases">${PHASES.map(p=>`<div class="${phaseOf(S.week).n===p.n?"on":""}">${IMG_HAVE.has("stamp-"+p.n)?pic("stamp-"+p.n,"stamp",""):""}<b>PHASE ${p.n} · ${p.cefr}</b>${p.name}</div>`).join("")}</div></div>
   <div class="tb stack"><div class="spread"><h2>${S.day}日目　${plan.name}</h2><span class="mono small muted">約${tasks.reduce((a,t)=>a+t[1],0)}分</span></div>
@@ -625,7 +684,7 @@ function viewToday(){
    <div class="stat"><b>${mastered("v")}</b><span>覚えた単語</span></div>
    <div class="stat"><b>${(speakingMinutes()/60).toFixed(1)}</b><span>ヒンディー語で話した（h）</span></div>
   </div>
-  ${introRow()}
+  ${S.week<=13?pronRow():""}${introRow()}${S.week>13?pronRow():""}
   <p class="note">アプリ以外に、毎日<b>20分の「耳だけ学習」</b>（移動中や施術の合間に今週の会話やヒンディー語の音声を聞く）をすると、1年で約400時間になります。${S.week>=14?"第2期からは<b>オンラインのヒンディー語レッスン</b>も足しましょう。":""}</p>
   ${SAMPLE||!IN_ARTIFACT?"":`<p class="note">AI添削・AI会話は claude.ai にサインインして開くと使えます。</p>`}
   </div></div>`;
@@ -723,9 +782,11 @@ function viewGuide(){
    <li><b>やさしいところ</b>：語順が日本語と同じ（私は・ご飯を・食べます）。में・से・को などの「後置詞」は、日本語の助詞（で・から・に）と同じく名詞のあとに置きます。母音も日本語に近い音です。</li>
    <li><b>むずかしいところ</b>：①文字（デーヴァナーガリー）②息を強く出す音（kh・ph など）と、舌を反らせる音（ṭ・ḍ）③名詞の男性・女性で形容詞や動詞の形が変わること。どれも、くり返し声に出せば慣れます。</li>
    <li>ていねいに話すときは <span class="hi">आप</span>（āp）と、名前のあとの <span class="hi">जी</span>（jī）。この教材は基本 आप で話します。</li></ul></div>
-  <div class="card"><h3>文字とローマ字の見方</h3><ul>
-   <li>はじめは<b>文字＋ローマ字</b>で。第1期の後半からは、慣れた単語だけでも<b>文字だけ</b>で読んでみましょう。表示は「今日」の画面のボタンか、下の設定で切り替えられます。</li>
-   <li><b>ā ī ū</b>：のばす音（आ＝アー）。<b>ṭ ḍ ṇ ṛ</b>：舌先を上あごの奥へ反らせる音。<b>kh ph bh</b> など h がつく音：息を強く出す（手のひらに息が当たる）。<b>ṁ</b>：前の母音を鼻にかける（हूँ＝hūṁ）。</li>
+  <div class="card"><h3>文字・カタカナ・ローマ字の見方</h3><ul>
+   <li>はじめは<b>文字＋カタカナ＋ローマ字</b>で。カタカナで読めば、だいたい通じます。慣れてきたら「文字＋カナ」→「文字だけ」へ。表示は「今日」の画面のボタンか、下の設定で切り替えられます。</li>
+   <li>カタカナの印は3つ：</li></ul>${KANALEGEND}<ul>
+   <li>ローマ字では <b>ā ī ū</b>＝のばす、<b>ṭ ḍ ṇ ṛ</b>＝舌を反らす、<b>kh ph bh</b> など h がつく音＝息を強く、<b>ṁ</b>＝鼻にかける、です。</li>
+   <li>くわしくは「発音のきほん」で、聞き比べながら練習できます。</li></ul><div style="margin-top:8px">${pronRow()}</div><ul>
    <li>1〜4週は、1〜4日目に<b>文字カード</b>がつきます。全部の文字を一度に覚えなくて大丈夫。毎日の単語の中で何度も出会います。</li></ul></div>
   <div class="card"><h3>iPhone・iPad で使うコツ</h3><ul>
    <li><b>ホーム画面に置く</b>：Safari でこのページを開き、共有ボタン →「ホーム画面に追加」。アプリのように1タップで開けます。</li>
@@ -766,7 +827,7 @@ function viewGuide(){
    <li><a href="https://www.duolingo.com/" target="_blank" rel="noopener">Duolingo</a>（英語からヒンディー語のコース）</li></ul></div>
   <div class="card stack"><h3>設定</h3>
    <label class="small" for="set-script">ヒンディー語の表示</label>
-   <select id="set-script"><option value="both">文字＋ローマ字（はじめはこれ）</option><option value="hi">文字だけ（デーヴァナーガリー）</option><option value="rom">ローマ字だけ</option></select>
+   <select id="set-script"><option value="full">文字＋カタカナ＋ローマ字（はじめはこれ）</option><option value="kana">文字＋カタカナ</option><option value="both">文字＋ローマ字</option><option value="hi">文字だけ（デーヴァナーガリー）</option><option value="rom">ローマ字だけ</option></select>
    <label class="small" for="set-voice">声の種類（この端末に入っているヒンディー語の声）</label>
    <select id="set-voice"><option value="">おまかせ（いちばん滑らかな声を自動で選ぶ）</option>${goodVoices().map(v=>`<option value="${esc(v.name)}|${esc(v.voiceURI||"")}" ${S.settings.voiceName===v.name&&(!S.settings.voiceURI||S.settings.voiceURI===v.voiceURI)?"selected":""}>${["","◎ ","★ "][voiceQuality(v)]}${esc(v.name)}（${esc(v.lang)}）${["","・拡張","・プレミアム"][voiceQuality(v)]}</option>`).join("")}</select>
    ${(()=>{const v=pickVoice();const q=v?voiceQuality(v):0;return v?`<p class="small ${q?"":"muted"}">いま使っている声：<b>${esc(v.name)}</b>${q===2?"（プレミアム・いちばん滑らか）":q===1?"（拡張・滑らか）":"（標準の声。少し機械っぽく聞こえます）"}</p>${q<1?`<p class="note">もっと滑らかにするには、iPhone・iPad の「設定」→「アクセシビリティ」→「読み上げコンテンツ」→「声」→「ヒンディー語」で、<b>「拡張」の声</b>をダウンロードしてください。ダウンロード後にアプリを開き直すと、自動でその声に切り替わります。</p>`:""}`
@@ -981,7 +1042,7 @@ function lessonTest(w,done){
   const vq=shuffle(w.vocab).slice(0,10).map(v=>{const wrong=shuffle(w.vocab.filter(x=>x.en!==v.en)).slice(0,3).map(x=>x.ja);return{kind:"v",q:v.en,a:v.ja,opts:shuffle([v.ja,...wrong])}});
   const sp=x=>String(x||"").replace(/([।.?!,])/g," $1").split(/\s+/).filter(Boolean);
   const sq=shuffle(w.sentences).slice(0,5).map(s=>{const h=sp(s.en),r=sp(s.rom);return{kind:"s",q:s.ja,a:s.en,tiles:shuffle(h.map((t,k)=>({t,r:r.length===h.length?r[k]:""})))}});
-  const tileH=x=>{const m=S.settings.script||"both";return m==="rom"&&x.r?`<span class="hi-rom">${esc(x.r)}</span>`:esc(x.t)+(m==="both"&&x.r?`<small>${esc(x.r)}</small>`:"")};
+  const tileH=x=>{const m=S.settings.script||"full";return m==="rom"&&x.r?`<span class="hi-rom">${esc(x.r)}</span>`:esc(x.t)+((m==="full"||m==="kana")&&x.r?`<small class="kana">${kanaHTML(x.r)}</small>`:m==="both"&&x.r?`<small>${esc(x.r)}</small>`:"")};
   const Q=[...vq,...sq];let i=0,score=0,picked=[],answered=false;
   const norm=s=>normHi(s).replace(/[^\p{L}\p{M}\p{N}' ]/gu,"").replace(/\s+/g," ").trim();
   function draw(body){
@@ -1223,6 +1284,47 @@ function openNote(id){const n=noteById(id);if(!n)return;regNote(n);
     const del=body.querySelector("#np-del");del.onclick=async()=>{if(!del.dataset.ok){del.dataset.ok=1;del.textContent="もう一度押すと削除します（元に戻せません）";return}
       await deleteNote(id);closeLesson();toast("削除しました")};
   })}
+
+/* ============ 発音のきほん（初心者向け。聞き比べつき） ============
+   ex：[文字, ローマ字, 意味]、pairs：[[文字,ローマ字,意味],[文字,ローマ字,意味]] */
+const PRON=[
+ {t:"まずはここだけ",lead:"カタカナで読めば、ほぼ通じます",p:["アプリのカタカナは「だいたいの音」です。最初はカタカナで読んで大丈夫。","日本語にない音にだけ、3つの印がついています。下の4つを覚えれば、どの文も読めます。","最後は音声をまねるのがいちばんの近道。🔈を押して、まねして3回。"],legend:1,ex:[["नमस्ते","namaste","こんにちは"],["धन्यवाद","dhanyavād","ありがとう"],["अच्छा","achchhā","いいね・なるほど"],["ठीक है","ṭhīk hai","OK・わかりました"]]},
+ {t:"① のばす音（ー）",lead:"長さで意味が変わります",p:["「ー」がついたところは、日本語の「おばあさん」の「ばあ」くらい、しっかり長くのばします。","「ー」がないところは短く軽く。長さを間違えると、別の単語に聞こえます。"],pairs:[[["कम","kam","少ない"],["काम","kām","仕事"]],[["बल","bal","力"],["बाल","bāl","髪の毛"]],[["मिल","mil","会う（言い切りの形）"],["मील","mīl","マイル"]]]},
+ {t:"② エーとオー",lead:"口の形を少し変えるだけ",p:["ए e と ओ o は、いつも少し長めの「エー」「オー」。","ऐ ai は口を横に大きく開けた「エー」、औ au は口を縦に大きく開けた「オー」。カタカナでは同じ「エー」「オー」ですが、口を大きく開けるだけで十分伝わります。"],ex:[["केला","kelā","バナナ"],["पैसा","paisā","お金"],["दो","do","2"],["सौ","sau","100"]]},
+ {t:"③ 息を強く出す音（カʰ）",lead:"ʰ がついたら、息をパッと出す",p:["kh・gh・chh・jh・th・dh・ph・bh のように h がつく音です。カタカナでは小さな ʰ がついています。","練習法：ティッシュを口の前にたらして言ってみます。ʰ のない音ではほとんどゆれず、ʰ のある音ではゆれればOK。","日本語にない区別なので、最初は大げさなくらいでちょうどいいです。"],pairs:[[["काना","kānā","片目の"],["खाना","khānā","食べ物・食べる"]],[["पल","pal","一瞬"],["फल","phal","果物"]],[["सात","sāt","7"],["साथ","sāth","一緒に"]],[["दान","dān","寄付"],["धान","dhān","稲"]]]},
+ {t:"④ 舌を反らす音（下線）",lead:"下線のタ・ダ・ナは、舌先を奥へ",p:["下線のついたタ行・ダ行・ナ（ṭ ḍ ṇ）は、舌先を上あごの奥のかたいところに当ててから、はじくように出します。少しこもった音になります。","下線のない タ・ダ（t d）は反対に、舌先を前歯の裏に当てます。日本語のタ・ダより少し前です。","英語から来た言葉の t・d は、ヒンディー語ではたいてい反らす音になります（टैक्सी タクシー、डॉक्टर ドクター）。"],pairs:[[["दाल","dāl","豆のカレー"],["डाल","ḍāl","枝"]],[["तीन","tīn","3"],["टीन","ṭīn","ブリキ"]]],ex:[["ठंडा","ṭhanḍā","冷たい"],["टैक्सी","ṭaiksī","タクシー"],["डॉक्टर","ḍokṭar","医者"]]},
+ {t:"⑤ ड़（下線のラ）",lead:"ラとダの間の音",p:["ड़ ṛ・ढ़ ṛh は、舌を奥に反らせてから、前へはじく音です。「ラ」と「ダ」の間に聞こえます。カタカナでは下線つきのラ行です。"],ex:[["बड़ा","baṛā","大きい"],["पढ़ना","paṛhnā","読む・勉強する"],["लड़की","laṛkī","女の子"]]},
+ {t:"⑥ 鼻にかける音（うすいン）",lead:"「ン」をはっきり言わない",p:["ṁ（文字の上の点や月の形 ं ँ）は、「ン」をはっきり言わずに、前の音を鼻に抜きます。","日本語の「ほんや」の「ん」くらい、軽く。カタカナでは、うすい色の「ン」です。"],ex:[["हाँ","hāṁ","はい"],["मैं","maiṁ","私"],["नहीं","nahīṁ","いいえ"],["हूँ","hūṁ","（私は）〜です"]]},
+ {t:"⑦ 書いてある「ア」を読まない",lead:"カタカナはもう落としてあります",p:["デーヴァナーガリーの子音には「ア」が入っていますが、単語の終わりと、単語の真ん中の弱いところでは「ア」を読みません。","नाम は「ナーマ」ではなく「ナーム」、कमरा は「カマラー」ではなく「カムラー」。アプリのカタカナとローマ字は、読まない「ア」をもう落としてあります。"],ex:[["नाम","nām","名前"],["घर","ghar","家"],["कमरा","kamrā","部屋"],["समझना","samajhnā","わかる"]]},
+ {t:"⑧ そのほかの音",lead:"ヴァ・ラ・ズ・フ・エヘ",p:["व v：「ヴァ」と「ワ」の間。下くちびるに軽く歯を当てるくらいで、強くかまない。","र r：舌先を1回だけ軽くはじく「ラ」。巻き舌にしすぎない。","ज़ z・फ़ f：点のある文字は、英語の z・f の音です（外来語に多い）。","a のあとに h が来ると「エヘ」に近くなります：रहता（レヘター）、पहले（ペヘレー）。"],ex:[["ज़रूर","zarūr","ぜひ・もちろん"],["रोटी","roṭī","ローティー（パン）"],["वहाँ","vahāṁ","あそこ"],["पहले","pahle","先に・前に"]]},
+ {t:"練習のしかた",lead:"聞き比べ → ゆっくり → ふつうの速さ",p:["① 🔈で聞く → ② 「ゆっくり」でまねる → ③ ふつうの速さでまねる。","「聞き比べ」で2つの違いがわかるまで聞くのが近道です。違いが聞こえるようになると、言えるようになります。","ボイスメモで自分の声を録って、お手本と聞き比べるのもおすすめです。"]}
+];
+PRON.forEach(c=>{(c.ex||[]).forEach(e=>addRom(e[0],e[1]));(c.pairs||[]).forEach(p=>p.forEach(e=>addRom(e[0],e[1])))});
+function pronRow(){return `<button class="introbtn" data-act="pron"><span class="seal" style="font-family:var(--f-en)">आ</span><span><b>発音のきほん</b><small class="muted" style="display:block;font-size:12.5px">カタカナの印の見方と、日本語にない音（のばす・息を出す・舌を反らす）を聞き比べで。</small></span><span class="min mono small muted">→</span></button>`}
+function openPron(start){let cur=start||0;
+  openLesson("発音のきほん","",()=>"",body=>{
+    function exLine(e){return `<div class="exline">${spkBtn(e[0])}<div class="t"><span class="en">${tg(e[0])}</span><span class="small muted">${esc(e[2])}</span></div></div>`}
+    function pairLine(p,k){const w=e=>`<div class="w">${spkBtn(e[0])}<div class="t"><span class="en">${tg(e[0])}</span><span class="small muted">${esc(e[2])}</span></div></div>`;
+      return `<div class="pair">${w(p[0])}<button class="btn sm" data-cmp="${k}">聞き比べ</button>${w(p[1])}</div>`}
+    function draw(){const c=PRON[cur];
+      body.innerHTML=`<div class="stack">
+       <div class="mascot-side">${pic("aki-study","","")}<div><div class="eyebrow">${cur+1} / ${PRON.length}</div><h2>${esc(c.t)}</h2><p class="small muted" style="margin-top:4px">${esc(c.lead)}</p></div></div>
+       <div class="tabs">${PRON.map((x,i)=>`<button data-pt="${i}" class="${i===cur?"on":""}">${i===0?"はじめに":i===PRON.length-1?"練習法":["①","②","③","④","⑤","⑥","⑦","⑧"][i-1]}</button>`).join("")}</div>
+       ${c.legend?`<div class="card stack"><h3>カタカナの印</h3>${KANALEGEND}<p class="small muted">例：खाना＝<span class="kana" style="display:inline;font-size:15px">${kanaHTML("khānā")}</span>（カーナー、カで息を強く）　ठंडा＝<span class="kana" style="display:inline;font-size:15px">${kanaHTML("ṭhanḍā")}</span></p></div>`:""}
+       <div class="card stack">${c.p.map((t,i)=>`<div class="point"><span class="n">${i+1}</span><p>${esc(t)}</p></div>`).join("")}</div>
+       ${c.pairs?`<div class="card"><div class="spread" style="margin-bottom:4px"><h3>聞き比べ</h3><span class="small muted">ゆっくり2回ずつ</span></div>${c.pairs.map(pairLine).join("")}</div>`:""}
+       ${c.ex?`<div class="card"><div class="spread" style="margin-bottom:4px"><h3>聞いてまねる</h3><button class="btn sm" id="pr-all">ゆっくり全部聞く</button></div>${c.ex.map(exLine).join("")}</div>`:""}
+       <div class="row">${cur>0?`<button class="btn" id="pr-prev">← 前へ</button>`:""}${cur<PRON.length-1?`<button class="btn primary" id="pr-next">次へ →</button>`:`<button class="btn primary" id="pr-done">おわり</button>`}</div>
+       <p class="note">読み上げは端末のヒンディー語の声です。声が機械っぽいときは、ガイドの「ヒンディー語の声を入れる」を見てください。</p></div>`;
+      body.querySelectorAll("[data-pt]").forEach(b=>b.onclick=()=>{stopSpeak();cur=+b.dataset.pt;draw();body.closest(".lesson").scrollTop=0});
+      body.querySelectorAll("[data-cmp]").forEach(b=>b.onclick=async()=>{stopSpeak();const p=c.pairs[+b.dataset.cmp];const tk=++speakToken;
+        for(let r=0;r<2;r++)for(const e of p){if(tk!==speakToken)return;await speak(e[0],0.7);await sleep(700)}});
+      const pa=body.querySelector("#pr-all");if(pa)pa.onclick=async()=>{stopSpeak();const tk=++speakToken;for(const e of c.ex){if(tk!==speakToken)return;await speak(e[0],0.7);await sleep(900)}};
+      const pv=body.querySelector("#pr-prev");if(pv)pv.onclick=()=>{stopSpeak();cur--;draw();body.closest(".lesson").scrollTop=0};
+      const nx=body.querySelector("#pr-next");if(nx)nx.onclick=()=>{stopSpeak();cur++;draw();body.closest(".lesson").scrollTop=0};
+      const dn=body.querySelector("#pr-done");if(dn)dn.onclick=()=>{logMinutes(10,"pron");save();closeLesson();toast("おつかれさまでした")};
+    }
+    draw()})}
 
 /* ============ 自己紹介（ヒンディー語。経歴は公式サイトから） ============
    lines は {hi,rom,ja}。qa は {q:{…}, a:{…}} */
@@ -1475,6 +1577,7 @@ document.addEventListener("click",e=>{
   else if(act==="quickpaste"){pasteInto($("#quick-raw"))}
   else if(act==="quickgo"){const v=$("#quick-raw").value.trim();if(!v){toast("会話を貼り付けてください");return}openNoteEditor("",v);$("#quick-raw").value=""}
   else if(act==="intro"){openIntro(0)}
+  else if(act==="pron"){openPron(0)}
   else if(act==="quicklog"){openQuickLog("")}
   else if(act==="notereview"){lessonCards(dueNoteKeys().slice(0,30).map(cardFromKey).filter(Boolean),"ノートの復習",()=>{logMinutes(10,"note");save();closeLesson()},true)}
   else if(act==="backup"||act==="backupcopy"){const data=JSON.stringify({app:"hindi52",v:1,savedAt:new Date().toISOString(),state:S,notes:NOTES});
@@ -1488,7 +1591,7 @@ document.addEventListener("click",e=>{
   else if(act==="syncnow"){syncNow().then(()=>{render();toast(syncState==="ok"?"同期しました":"同期できませんでした")})}
   else if(act==="syncoff"){const b=$("#syncoffbtn");if(!b.dataset.ok){b.dataset.ok=1;b.textContent="もう一度押すと、この端末の同期をやめます（記録は残ります）";return}setSyncCfg(null);render();toast("この端末の同期をやめました")}
   else if(act==="testvoice"){speak("नमस्ते, मैं आकिहिरो हूँ। आपसे मिलकर खुशी हुई।")}
-  else if(act==="cyclescript"){const o=["both","hi","rom"];S.settings.script=o[(o.indexOf(S.settings.script||"both")+1)%3];save();render();toast("表示："+SCRIPTNAME[S.settings.script])}
+  else if(act==="cyclescript"){const o=SCRIPTORDER;S.settings.script=o[(o.indexOf(S.settings.script||"full")+1)%o.length];save();render();toast("表示："+SCRIPTNAME[S.settings.script])}
 });
 document.addEventListener("focusin",e=>{if(e.target.matches("textarea,input[type=text]"))setTimeout(()=>{try{e.target.scrollIntoView({block:"center",behavior:"smooth"})}catch(_){}},350)});
 function restoreBackup(txt){const d=parseJSONLoose(txt);if(!d||d.app!=="hindi52"||!d.state){toast(d&&d.app==="eigo52"?"これは英語52週のバックアップです":"バックアップの形が違います");return}
@@ -1500,7 +1603,7 @@ document.addEventListener("change",e=>{
   if(e.target.id==="set-rate"){S.settings.rate=+e.target.value;save()}
   if(e.target.id==="set-start"&&e.target.value){S.startDate=e.target.value;save()}
 });
-const _rg=render;render=function(){_rg();const a=$("#set-script");if(a)a.value=S.settings.script||"both";const r=$("#set-rate");if(r)r.value=String(S.settings.rate)};
+const _rg=render;render=function(){_rg();const a=$("#set-script");if(a)a.value=S.settings.script||"full";const r=$("#set-rate");if(r)r.value=String(S.settings.rate)};
 initStore().then(()=>{if(!IN_ARTIFACT&&syncCfg()){syncNow();setInterval(()=>{if(document.visibilityState==="visible")syncNow()},120000)}});
 document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&!IN_ARTIFACT&&syncCfg())syncNow()});
 </script>
