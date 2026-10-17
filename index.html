@@ -1,0 +1,1510 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#3D7BFF">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="ヒンディー語52週">
+<meta name="robots" content="noindex">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="icon-192.png">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>ヒンディー語52週</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@700;800&family=Zen+Maru+Gothic:wght@500;700&family=Nunito:wght@600;700;800&family=Noto+Sans+Devanagari:wght@500;600;700&family=Noto+Sans:ital,wght@0,500;0,600&display=swap">
+<style>
+/* Layout: 青空の搭乗券（今日の週）を主役に、白いカードと色つきの丸アイコンで「旅のしおり」のように軽く。明るい1テーマ。 */
+:root{
+  --bg:#F1F6FF; --surface:#FFFFFF; --ink:#1F2B4D; --muted:#66729A; --line:#E0E8F6;
+  --indigo:#3D7BFF; --indigo-2:#2C63E6; --on-indigo:#FFFFFF; --on-indigo-muted:#DCE8FF;
+  --accent:#FF7A45; --accent-ink:#D4501A; --accent-soft:#FFEDE3;
+  --green:#18B487; --green-soft:#DCF6EC; --red:#EF4E5A; --red-soft:#FDE5E7;
+  --yellow:#FFC93C; --yellow-soft:#FFF4D2; --pink:#FF7EA8; --pink-soft:#FFE6EF; --purple:#8A6BFF; --purple-soft:#EEE9FF; --sky-soft:#E3EEFF;
+  --tint:#EDF3FD; --shadow:0 10px 24px -14px rgba(61,123,255,.45),0 2px 6px -2px rgba(31,43,77,.08);
+  --f-head:"M PLUS Rounded 1c","Hiragino Maru Gothic ProN","Hiragino Sans",sans-serif;
+  --f-body:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Hiragino Sans",system-ui,sans-serif;
+  --f-en:"Noto Sans Devanagari","Kohinoor Devanagari","Devanagari Sangam MN",sans-serif;
+  --f-rom:"Noto Sans","Helvetica Neue",Arial,sans-serif;
+  --f-mono:"Nunito","Avenir Next",ui-rounded,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.75;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+a{color:var(--indigo-2)}
+.wrap{max-width:680px;margin:0 auto;padding-inline:16px;padding-block:22px 120px}
+.en{font-family:var(--f-en);letter-spacing:0;font-feature-settings:"kern"}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+.eyebrow{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500}
+h1,h2,h3{text-wrap:balance;margin:0;line-height:1.35}
+h1{font-family:var(--f-head);font-size:27px;font-weight:900;letter-spacing:.02em}
+h2{font-family:var(--f-head);font-size:20px;font-weight:700;letter-spacing:.02em}
+h3{font-size:15.5px;font-weight:700}
+p{margin:0}
+.stack{display:flex;flex-direction:column;gap:14px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.spread{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:9px 18px;font-weight:700;font-size:14px;display:inline-flex;align-items:center;gap:6px;min-height:44px;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--muted)}
+.btn.primary{background:var(--indigo);color:var(--on-indigo);border-color:var(--indigo)}
+.btn.primary:hover{background:var(--indigo-2)}
+.btn.accent{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn.ghost{background:transparent}
+.btn.sm{padding:5px 13px;min-height:36px;font-size:13px}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.chip{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:700;border-radius:4px;padding:1px 8px;background:var(--tint);color:var(--muted)}
+.chip.a{background:var(--accent-soft);color:var(--accent-ink)}
+.chip.g{background:var(--green-soft);color:var(--green)}
+.speak{border:1px solid var(--line);background:var(--surface);border-radius:50%;width:34px;height:34px;display:inline-grid;place-items:center;flex:none;color:var(--indigo-2)}
+.speak svg{width:15px;height:15px}
+.speak:hover{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-ink)}
+
+/* page header */
+.top{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:16px}
+.daybadge{font-family:var(--f-mono);font-size:11.5px;color:var(--muted)}
+
+/* 搭乗券（今日の週） */
+.pass{display:grid;grid-template-columns:1fr 128px;background:linear-gradient(135deg,#3D7BFF 0%,#5B9BFF 55%,#86C8FF 100%);background-size:cover;background-position:center;color:var(--on-indigo);border-radius:22px;overflow:hidden;box-shadow:var(--shadow);position:relative}
+.pass.has-img{background-image:linear-gradient(90deg,rgba(45,99,230,.92) 0%,rgba(61,123,255,.70) 55%,rgba(61,123,255,.25) 100%),var(--hero)}
+.pass::after{content:"";position:absolute;right:140px;top:-30px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.35),rgba(255,255,255,0) 70%);pointer-events:none}
+.pass-main{padding:18px 20px 20px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.pass-top{display:flex;justify-content:space-between;gap:8px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.16em;color:var(--on-indigo-muted)}
+.route{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center}
+.route .end b{display:block;font-family:var(--f-mono);font-size:22px;font-weight:600;letter-spacing:.06em;line-height:1}
+.route .end small{font-size:10.5px;color:var(--on-indigo-muted)}
+.route .end:last-child{text-align:right}
+.flight{position:relative;height:22px}
+.flight .seg{position:absolute;top:10px;height:2px;background:color-mix(in srgb,var(--on-indigo) 22%,transparent)}
+.flight .seg.on{background:var(--yellow)}
+.flight .dot{position:absolute;top:7px;width:8px;height:8px;margin-left:-4px;border-radius:50%;background:var(--indigo);border:2px solid color-mix(in srgb,var(--on-indigo) 45%,transparent)}
+.flight .plane{position:absolute;top:0;width:22px;height:22px;margin-left:-11px;color:var(--yellow);filter:drop-shadow(0 2px 2px rgba(0,0,0,.2));transition:left .8s cubic-bezier(.2,.7,.2,1)}
+.flight .plane svg{width:22px;height:22px;fill:currentColor;transform:rotate(90deg)}
+.pass-title small{font-family:var(--f-mono);font-size:11.5px;font-weight:800;letter-spacing:.12em;color:var(--yellow)}
+.pass-title h2{color:var(--on-indigo);font-size:23px;margin-top:2px}
+.pass-title p{font-size:13.5px;color:var(--on-indigo-muted);margin-top:6px}
+.pass-stub{border-left:2px dashed rgba(255,255,255,.55);padding:18px 14px;display:flex;flex-direction:column;gap:12px;background:rgba(255,255,255,.16);position:relative}
+.pass-stub::before,.pass-stub::after{content:"";position:absolute;left:-10px;width:18px;height:18px;border-radius:50%;background:var(--bg)}
+.pass-stub::before{top:-9px}.pass-stub::after{bottom:-9px}
+.pass-stub div small{display:block;font-family:var(--f-mono);font-size:9.5px;letter-spacing:.14em;color:var(--on-indigo-muted);text-transform:uppercase}
+.pass-stub div b{font-family:var(--f-mono);font-size:15px;font-weight:600;line-height:1.3}
+@media (max-width:480px){.pass{grid-template-columns:1fr}.pass-stub{border-left:none;border-top:2px dashed color-mix(in srgb,var(--on-indigo) 30%,transparent);flex-direction:row;justify-content:space-between;padding:12px 20px}.pass-stub::before,.pass-stub::after{top:-10px;left:auto;bottom:auto}.pass-stub::before{left:-9px}.pass-stub::after{right:-9px}}
+.phases{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.phases div{font-size:11px;line-height:1.4;padding:7px 9px;border-radius:8px;border:1px solid var(--line);color:var(--muted)}
+.phases div b{display:block;font-family:var(--f-mono);font-size:10px;letter-spacing:.1em}
+.phases div.on{border-color:var(--accent);color:var(--accent-ink);background:var(--accent-soft)}
+.goal{border-left:3px solid var(--accent);padding-left:10px;font-size:14px}
+
+/* tasks */
+.tasks{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.task{display:grid;grid-template-columns:34px 1fr auto;gap:14px;align-items:center;text-align:left;background:none;border:none;border-top:1px solid var(--line);padding:14px 16px;width:100%;transition:background .15s}
+.task:first-child{border-top:none}
+.task:hover{background:var(--tint)}
+.task .ic{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;font-family:var(--f-mono);font-weight:600;font-size:13px;color:var(--muted)}
+.task.done .ic{background:var(--green);border-color:var(--green);color:#fff}
+.task.done b{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--line)}
+.task b{display:block;font-size:15px}
+.task small{color:var(--muted);font-size:12.5px;display:block;line-height:1.5;margin-top:1px}
+.task .min{font-family:var(--f-mono);font-size:11.5px;color:var(--muted)}
+
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border:1px solid var(--line);border-radius:12px;background:var(--surface);overflow:hidden}
+.stat{padding:12px 14px;border-left:1px solid var(--line)}
+.stat:first-child{border-left:none}
+.stat b{display:block;font-family:var(--f-mono);font-size:21px;font-weight:600;line-height:1.25}
+.stat span{font-size:11px;color:var(--muted)}
+@media (max-width:480px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.stat:nth-child(3){border-left:none}.stat:nth-child(n+3){border-top:1px solid var(--line)}.phases{grid-template-columns:repeat(2,1fr)}}
+
+/* bottom nav */
+.nav{position:fixed;left:0;right:0;bottom:0;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);display:flex;justify-content:center;padding-bottom:env(safe-area-inset-bottom,0px);z-index:20}
+.nav div{display:grid;grid-template-columns:repeat(5,1fr);max-width:680px;width:100%}
+.nav button{border:none;background:none;padding:9px 2px 10px;font-size:10.5px;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:3px;font-weight:700;position:relative}
+.nav button svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.7}
+.nav button.on{color:var(--indigo-2)}
+.nav button.on::before{content:"";position:absolute;top:0;left:30%;right:30%;height:2px;border-radius:2px;background:var(--accent)}
+
+/* lesson overlay */
+.lesson{position:fixed;inset:0;background:var(--bg);z-index:30;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.lhead{position:sticky;top:0;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);z-index:2;padding-top:env(safe-area-inset-top,0px)}
+.lhead .in{max-width:680px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:10px}
+.lhead h3{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:var(--f-head)}
+.back{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 14px;font-weight:700;font-size:13px}
+.lbody{max-width:680px;margin:0 auto;padding-inline:16px;padding-block:20px 64px}
+
+/* flash card */
+.flash{min-height:260px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:12px;padding:30px 20px;border-radius:16px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow)}
+.flash .word{font-family:var(--f-en);font-size:36px;font-weight:600;line-height:1.2;overflow-wrap:anywhere;color:var(--ink)}
+.flash .jp{font-size:21px;font-weight:700}
+.flash .ex{font-size:14.5px;color:var(--muted)}
+.flash .ex .en{color:var(--ink);font-size:18px}
+.rate{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.rate button{border-radius:12px;border:1px solid var(--line);background:var(--surface);padding:11px 4px;font-weight:700;font-size:14px;line-height:1.3}
+.rate button small{display:block;font-weight:400;font-size:11px;color:var(--muted)}
+.rate .r0{color:var(--red)} .rate .r2{color:var(--green)}
+.rate .r0:hover{background:var(--red-soft)} .rate .r2:hover{background:var(--green-soft)}
+.progress{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.progress span{display:block;height:100%;background:var(--accent);transition:width .3s}
+
+/* grammar */
+.point{display:grid;grid-template-columns:28px 1fr;gap:12px}
+.point .n{font-family:var(--f-mono);font-weight:600;color:var(--accent-ink);border:1.5px solid var(--accent);border-radius:50%;height:28px;display:grid;place-items:center;font-size:12px}
+.exline{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-top:1px solid var(--line)}
+.exline:first-child{border-top:none}
+.exline .t{min-width:0;flex:1}
+.exline .en{font-size:17.5px;display:block;line-height:1.5}
+.tip{background:var(--accent-soft);color:var(--accent-ink);border-radius:10px;padding:12px 14px;font-size:14px}
+
+/* shadowing */
+.steps{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px}
+.steps button{flex:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 13px;font-size:12.5px;font-weight:700}
+.steps button.on{background:var(--indigo);color:var(--on-indigo);border-color:var(--indigo)}
+.dl{display:flex;gap:10px;padding:10px 12px;border-radius:10px;align-items:flex-start;border:1px solid transparent}
+.dl.playing{background:var(--accent-soft);border-color:var(--accent)}
+.dl.mine{background:var(--green-soft)}
+.dl .who{font-family:var(--f-mono);font-size:10.5px;font-weight:600;color:var(--muted);min-width:66px;padding-top:5px;line-height:1.3;letter-spacing:.04em}
+.dl .t{flex:1;min-width:0}
+.dl .en{font-size:17.5px;line-height:1.5;display:block}
+.dl .en.blur{filter:blur(6px);user-select:none}
+.dl .ja{font-size:13px;color:var(--muted);display:block}
+.ctrl{display:flex;gap:8px;align-items:center;flex-wrap:wrap;position:sticky;bottom:0;background:var(--bg);padding:10px 0 calc(10px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}
+select{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:7px 10px;min-height:40px}
+
+/* writing / AI */
+textarea,input[type=text],input[type=date],input[type=number]{width:100%;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:10px 12px;line-height:1.6}
+textarea{min-height:140px;resize:vertical;font-family:var(--f-en);font-size:16px}
+.ai{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--green);border-radius:10px;padding:14px 16px;font-size:14.5px;overflow-wrap:anywhere}
+.ai h4{margin:10px 0 4px;font-size:14px}
+.ai ul{margin:4px 0;padding-left:20px}
+.chat{display:flex;flex-direction:column;gap:10px}
+.bub{max-width:88%;padding:10px 14px;border-radius:16px;font-size:16px;line-height:1.55;overflow-wrap:anywhere}
+.bub.ai2{align-self:flex-start;background:var(--surface);border:1px solid var(--line);border-bottom-left-radius:4px}
+.bub.me{align-self:flex-end;background:var(--indigo);color:var(--on-indigo);border-bottom-right-radius:4px}
+.bub .row{margin-top:6px}
+
+/* quiz */
+.opts{display:grid;gap:8px}
+.opt{text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:12px 14px;font-size:15px}
+.opt.ok{background:var(--green-soft);border-color:var(--green)}
+.opt.ng{background:var(--red-soft);border-color:var(--red)}
+.tiles{display:flex;flex-wrap:wrap;gap:6px}
+.tile{border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:6px 10px;font-family:var(--f-en);font-size:17px}
+.tile.used{opacity:.25}
+.answer{min-height:54px;border:1px dashed var(--muted);border-radius:10px;padding:8px;display:flex;flex-wrap:wrap;gap:6px}
+
+/* roadmap */
+.phase{display:flex;flex-direction:column;gap:10px}
+.phead{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start}
+.pnum{font-family:var(--f-head);font-weight:900;font-size:40px;line-height:1;color:var(--accent)}
+.targets{display:flex;flex-wrap:wrap;gap:6px}
+.wk{display:grid;grid-template-columns:44px 1fr auto;gap:10px;align-items:center;padding:10px 6px;border-top:1px solid var(--line);text-align:left;background:none;border-left:none;border-right:none;border-bottom:none;width:100%}
+.wk:hover{background:var(--tint)}
+.wk .wn{font-family:var(--f-mono);font-size:11.5px;color:var(--muted)}
+.wk.cur{background:var(--accent-soft);border-radius:8px;border-top-color:transparent}
+.wk.cur .wn{color:var(--accent-ink);font-weight:600}
+.wk.done .wn{color:var(--green)}
+
+/* record */
+.heat{display:grid;grid-template-rows:repeat(7,12px);grid-auto-flow:column;grid-auto-columns:12px;gap:3px;overflow-x:auto;padding-bottom:4px}
+.heat i{border-radius:3px;background:var(--tint)}
+.heat i.l1{background:color-mix(in srgb,var(--green) 35%,var(--tint))}
+.heat i.l2{background:color-mix(in srgb,var(--green) 65%,var(--tint))}
+.heat i.l3{background:var(--green)}
+.bars{display:flex;align-items:flex-end;gap:3px;height:90px;border-bottom:1px solid var(--line);overflow-x:auto}
+.bars div{flex:1 0 8px;max-width:22px;background:var(--indigo-2);border-radius:3px 3px 0 0;min-height:2px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11.5px;color:var(--muted);font-weight:700}
+.tablewrap{overflow-x:auto}
+
+.guide p+p{margin-top:8px}
+.guide ul{margin:6px 0;padding-left:20px}
+.guide li{margin:3px 0}
+.res{display:grid;gap:8px}
+.res div{border-top:1px solid var(--line);padding-top:8px}
+.res b{display:block}
+.toast{position:fixed;left:50%;bottom:calc(86px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--indigo);color:var(--on-indigo);padding:9px 18px;border-radius:999px;font-size:13.5px;font-weight:700;z-index:50;max-width:90vw}
+.note{font-size:12.5px;color:var(--muted);background:var(--tint);border-radius:10px;padding:9px 13px}
+.celebrate{background:var(--green);color:#fff;border-radius:12px;padding:16px 18px}
+.celebrate .btn{background:#fff;color:var(--green);border-color:#fff}
+
+/* 会話ノート */
+.pick{display:grid;grid-template-columns:22px 1fr auto;gap:10px;align-items:start;padding:10px 0;border-top:1px solid var(--line)}
+.pick:first-of-type{border-top:none}
+.pick input{width:18px;height:18px;margin-top:4px;accent-color:var(--green)}
+.pick .en{font-size:16.5px;display:block;line-height:1.45}
+.notecard{display:block;width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.notecard:hover{border-color:var(--muted)}
+.notecard p{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:13.5px;color:var(--muted)}
+.fix{display:grid;gap:2px;padding:10px 0;border-top:1px solid var(--line)}
+.fix .old{text-decoration:line-through;color:var(--muted);font-family:var(--f-en)}
+.fix .new{color:var(--green);font-weight:600}
+.thumbs{display:flex;gap:6px;flex-wrap:wrap}
+.thumbs img{width:64px;height:96px;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
+
+/* 自己紹介 */
+.introbtn{display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:center;width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.introbtn:hover{border-color:var(--muted)}
+.introbtn .seal{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-family:var(--f-head);font-weight:900;font-size:17px}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);overflow-x:auto}
+.tabs button{flex:none;background:none;border:none;border-bottom:2px solid transparent;padding:8px 12px;font-weight:700;font-size:13.5px;color:var(--muted)}
+.tabs button.on{color:var(--ink);border-bottom-color:var(--accent)}
+.script .exline .en{font-size:18px}
+.stats.s6{grid-template-columns:repeat(3,minmax(0,1fr))}
+.stats.s6 .stat{border-left:1px solid var(--line);border-top:1px solid var(--line)}
+.stats.s6 .stat:nth-child(3n+1){border-left:none}
+.stats.s6 .stat:nth-child(-n+3){border-top:none}
+@media (max-width:480px){.stats.s6{grid-template-columns:repeat(2,minmax(0,1fr))}.stats.s6 .stat{border-left:1px solid var(--line);border-top:1px solid var(--line)}.stats.s6 .stat:nth-child(odd){border-left:none}.stats.s6 .stat:nth-child(-n+2){border-top:none}}
+/* iPhone・iPad */
+html{-webkit-text-size-adjust:100%}
+body{touch-action:manipulation;overscroll-behavior-y:none}
+button,a,label,select{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+button{-webkit-user-select:none;user-select:none}
+input,select,textarea{font-size:16px}
+.lesson{overscroll-behavior:contain}
+.wrap,.lbody{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.lhead .in{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.speak{width:40px;height:40px}
+.btn:active,.task:active,.rate button:active,.opt:active,.tile:active,.notecard:active,.introbtn:active{transform:scale(.98)}
+.flash{transition:transform .15s,border-color .15s;cursor:pointer}
+.swipehint{text-align:center}
+@media (hover:none){.task:hover,.wk:hover{background:none}.btn:hover,.notecard:hover,.introbtn:hover{border-color:var(--line)}.speak:hover{background:var(--surface);border-color:var(--line);color:var(--indigo-2)}.swipehint{display:block}}
+@media (hover:hover){.swipehint{display:none}}
+.tgrid{display:flex;flex-direction:column;gap:16px}
+.cardgrid{display:grid;gap:10px}
+@media (min-width:768px){
+  body{font-size:16px}
+  .wrap,.lbody,.lhead .in{max-width:860px}
+  .nav div{max-width:860px}
+  h1{font-size:32px}
+  .flash{min-height:340px}.flash .word{font-size:46px}.flash .jp{font-size:24px}
+  .exline .en,.dl .en,.script .exline .en{font-size:20px}
+  .rate button{padding:14px 6px;font-size:15px}
+  .cardgrid{grid-template-columns:1fr 1fr}
+  .nav button{flex-direction:row;justify-content:center;gap:8px;font-size:12.5px;padding:12px 4px 13px}
+}
+@media (min-width:1000px){
+  .wrap{max-width:1120px}
+  .tgrid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);grid-template-areas:"a b" "c b";gap:20px 28px;align-items:start}
+  .ta{grid-area:a}.tb{grid-area:b}.tc{grid-area:c}
+  .tb{position:sticky;top:calc(16px + env(safe-area-inset-top,0px))}
+  #app>.stack>.phase,#app .stack .phase{break-inside:avoid}
+}
+/* ===== ポップ（明るい1テーマ） ===== */
+h1{font-weight:800;letter-spacing:.01em}
+h2{font-weight:800}
+.eyebrow{font-weight:800;letter-spacing:.12em;color:var(--indigo)}
+.card,.tasks,.stats,.notecard,.introbtn{border-radius:20px;border-color:transparent;box-shadow:var(--shadow)}
+.btn{border-radius:16px;border:2px solid var(--line);font-weight:700;box-shadow:0 3px 0 var(--line)}
+.btn:active{transform:translateY(2px);box-shadow:0 1px 0 var(--line)}
+.btn.primary{box-shadow:0 3px 0 #2552C4}
+.btn.accent{box-shadow:0 3px 0 #D9541F}
+.btn.ghost{box-shadow:none;border-color:transparent;color:var(--indigo-2)}
+.btn.sm{border-radius:12px}
+.chip{border-radius:999px;padding:2px 10px;background:var(--sky-soft);color:var(--indigo-2)}
+.chip.a{background:var(--yellow-soft);color:#9A6B00}
+.speak{background:var(--sky-soft);border-color:transparent;color:var(--indigo-2)}
+.task{padding:14px 16px}
+.task .ic{width:46px;height:46px;border-radius:15px;border:none;font-size:22px;background:var(--sky-soft);color:var(--indigo-2)}
+.task .ic img{width:40px;height:40px;object-fit:contain}
+.task[data-type=grammar] .ic{background:var(--purple-soft)}
+.task[data-type=vocab] .ic{background:var(--yellow-soft)}
+.task[data-type=sentences] .ic{background:var(--accent-soft)}
+.task[data-type=shadow] .ic,.task[data-type=input] .ic{background:var(--sky-soft)}
+.task[data-type=review] .ic{background:var(--green-soft)}
+.task[data-type=writing] .ic{background:var(--pink-soft)}
+.task[data-type=test] .ic{background:var(--yellow-soft)}
+.task[data-type=roleplay] .ic,.task[data-type=speak] .ic{background:var(--accent-soft)}
+.task.done .ic{background:var(--green);color:#fff;font-size:20px}
+.task .num{font-family:var(--f-mono);font-size:11px;font-weight:800;color:var(--muted);display:block;line-height:1}
+.task.done b{text-decoration:none;color:var(--green)}
+.tasks{gap:0;padding:4px}
+.task{border-top:none;border-radius:16px}
+.task + .task{margin-top:2px}
+.stat b{color:var(--indigo-2);font-weight:800}
+.stat:nth-child(2) b{color:var(--accent-ink)}.stat:nth-child(3) b{color:var(--green)}.stat:nth-child(4) b{color:#B98500}
+.phases div{border:none;background:var(--surface);box-shadow:var(--shadow);border-radius:14px}
+.phases div.on{background:var(--yellow-soft);color:#7A5600}
+.celebrate{background:linear-gradient(135deg,#18B487,#3BCFA5);border-radius:22px;box-shadow:var(--shadow);display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}
+.celebrate .mascot{width:110px;height:auto}
+.flash{border:none;border-radius:26px}
+.rate button{border-radius:16px;border:2px solid var(--line)}
+.nav{background:rgba(255,255,255,.92)}
+.nav button.on{color:var(--indigo-2)}
+.nav button.on::before{left:22%;right:22%;top:4px;bottom:auto;height:4px;background:var(--yellow)}
+.nav button img{width:26px;height:26px;object-fit:contain}
+.introbtn .seal{border:none;background:var(--yellow-soft);color:#9A6B00}
+.lhead{background:rgba(241,246,255,.92)}
+.back{border:none;background:var(--surface);box-shadow:var(--shadow)}
+.top{align-items:center}
+.hello{display:flex;align-items:center;gap:12px}
+.hello .mascot{width:auto;height:88px;object-fit:contain;flex:none;margin-block:-8px}
+.mascot-side{display:flex;gap:12px;align-items:center}
+.mascot-side img{width:84px;height:auto;flex:none}
+.stamp{width:54px;height:54px;object-fit:contain}
+.empty-img{width:min(240px,70%);margin:0 auto;display:block}
+.tip{background:var(--yellow-soft);color:#6E4E00;border-radius:16px}
+.note{background:var(--surface);box-shadow:var(--shadow);border-radius:16px}
+.ai{border-radius:16px;border-left-width:4px}
+.bub.me{background:var(--indigo)}
+.maproute{width:100%;display:block;border-radius:20px;box-shadow:var(--shadow);aspect-ratio:3/1;object-fit:cover}
+.avatar{width:36px;height:36px;border-radius:50%;background:var(--sky-soft);object-fit:cover;flex:none}
+.bub .avatar{float:left;margin:0 8px 2px 0}
+.introbtn .seal{overflow:hidden}
+.introbtn .seal img{width:40px;height:40px;object-fit:contain;object-position:top}
+.streak{display:inline-flex;align-items:center;gap:4px;font-weight:800;color:var(--accent-ink)}
+.streak img{width:22px;height:22px}
+.mascot-side h2,.mascot-side h3{flex:1;min-width:0}
+.scene{width:100%;display:block;aspect-ratio:3/1;object-fit:cover;border-radius:16px}
+.chip img{width:16px;height:16px;object-fit:contain}
+.avatar.big{width:64px;height:64px}
+/* ヒンディー語：文字＋ローマ字 */
+.hi{font-family:var(--f-en)}
+.rom{display:block;font-family:var(--f-rom);font-size:.68em;line-height:1.45;color:var(--muted);font-weight:500;letter-spacing:.01em}
+.hi-rom{font-family:var(--f-rom)}
+.flash .word{line-height:1.45}
+.flash .word .rom{font-size:.5em;margin-top:2px}
+.tile small{display:block;font-family:var(--f-rom);font-size:11px;color:var(--muted);line-height:1.3}
+.task[data-type=letters] .ic{background:var(--purple-soft);font-family:var(--f-en);font-weight:700}
+.letterja{font-size:16px!important;font-weight:500!important;line-height:1.6}
+.eng{font-size:12.5px;color:var(--muted);display:block;font-family:var(--f-rom)}
+.scriptbtn{border:none;background:var(--surface);box-shadow:var(--shadow);border-radius:999px;padding:4px 12px;font-size:12px;font-weight:700;color:var(--indigo-2);margin-top:6px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+
+
+<main class="wrap" id="app" aria-live="polite"></main>
+
+<nav class="nav" id="nav" aria-label="メインメニュー"><div>
+  <button data-tab="today" class="on"><svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1z"/></svg>今日</button>
+  <button data-tab="notes"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg>会話ノート</button>
+  <button data-tab="map"><svg viewBox="0 0 24 24"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"/></svg>ロードマップ</button>
+  <button data-tab="record"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>記録</button>
+  <button data-tab="guide"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>ガイド</button>
+</div></nav>
+
+<section class="lesson" id="lesson" hidden>
+  <div class="lhead"><div class="in"><button class="back" id="lback">← 戻る</button><h3 id="ltitle"></h3><span class="chip" id="lchip"></span></div></div>
+  <div class="lbody" id="lbody"></div>
+</section>
+<div class="toast" id="toast" hidden></div>
+
+<script src="data/phase1.js"></script>
+<script src="data/phase2.js"></script>
+<script src="data/phase3.js"></script>
+<script src="data/phase4.js"></script>
+<script>
+"use strict";
+/* ============ ヒンディー語：データをそろえる（hi → en、ローマ字の辞書） ============
+   教材は hi（デーヴァナーガリー）・rom（ローマ字）・ja・eng。アプリの中では英語版と同じく .en を「学ぶ言葉」として使う */
+const ROM={};
+function addRom(h,r){if(h&&r&&typeof h==="string"&&!ROM[h])ROM[h]=String(r)}
+function normItem(o){if(!o)return o;if(o.hi!=null&&o.en==null)o.en=o.hi;addRom(o.en,o.rom);addRom(o.ex,o.exRom);addRom(o.improved,o.improvedRom);return o}
+(window.WEEKS||[]).forEach(w=>{
+  (w.letters||[]).forEach(l=>{l.en=l.ch;addRom(l.ch,l.rom);addRom(l.ex,l.exRom)});
+  if(w.grammar)(w.grammar.examples||[]).forEach(normItem);
+  (w.vocab||[]).forEach(normItem);(w.sentences||[]).forEach(normItem);
+  if(w.dialogue)(w.dialogue.lines||[]).forEach(normItem)});
+function regNote(n){if(!n)return;["sentences","grammar","vocab","fixes","dialogue"].forEach(k=>(n[k]||[]).forEach(normItem))}
+function romOf(s){return ROM[s]||""}
+/* 学ぶ言葉を表示：設定で「文字＋ローマ字」「文字だけ」「ローマ字だけ」 */
+function tg(s){const r=romOf(s);const m=(typeof S!=="undefined"&&S.settings&&S.settings.script)||"both";
+  if(m==="rom"&&r)return `<span class="hi-rom">${esc(r)}</span>`;
+  return `<span class="hi">${esc(s)}</span>${m==="both"&&r?`<span class="rom">${esc(r)}</span>`:""}`}
+const SCRIPTNAME={both:"文字＋ローマ字",hi:"文字だけ",rom:"ローマ字だけ"};
+function normHi(s){return String(s||"").normalize("NFC").replace(/\u093C/g,"").replace(/\u0901/g,"\u0902").toLowerCase()}
+/* ============ 52週の骨組み（データ未読込でもロードマップは表示） ============ */
+const PHASES=[
+ {n:1,name:"文字と音・自己紹介",months:"1〜3か月目",weeks:[1,13],cefr:"A0 → A1",check:"1分の自己紹介",
+  aim:"文字が読めて、自己紹介・家族・数字・好みが言える",
+  res:[["ニューエクスプレスプラス ヒンディー語（白水社）","文法の土台。今週の文法に当たる課だけ読めばOK"],["Duolingo（英語からヒンディー語を学ぶコース）","文字と単語をすき間時間に。英語の復習にもなる"],["YouTube の初級ヒンディー語レッスン（「Learn Hindi for beginners」で検索）","耳だけ学習。ゆっくりの会話から"],["ボリウッドの歌（歌詞つき動画）","耳の日に。好きな1曲を決めてくり返す"]]},
+ {n:2,name:"日常会話・旅行",months:"4〜6か月目",weeks:[14,26],cefr:"A1 → A2",check:"旅の1日を話す（3分）",
+  aim:"食事・買い物・移動・体調の話と、過去・未来のことが言える",
+  res:[["ニューエクスプレスプラス ヒンディー語（白水社）","後半の課（過去形・未来形）"],["オンラインのヒンディー語レッスン（週2回・25分）","この期から開始。習った文をそのまま使う場にする"],["ボリウッド映画（英語字幕つき）","あいさつ・家族の会話の場面を何度も聞く"],["YouTube のインド旅行 vlog（ヒンディー語）","市場・駅・食堂の生の会話"]]},
+ {n:3,name:"関係づくり・仲間との会話",months:"7〜9か月目",weeks:[27,39],cefr:"A2",check:"インドの方と3分の会話",
+  aim:"家に招かれた時やお祭り、WhatsApp でのやりとりができる",
+  res:[["インドの友人・仲間との WhatsApp","短いメッセージをヒンディー語で。会話ノートに記録"],["BBC News हिन्दी","見出しだけ読む練習"],["ボリウッド映画（ヒンディー語字幕）","字幕を目で追いながら聞く"],["オンラインのヒンディー語レッスン","お祭り・家庭訪問の場面を練習"]]},
+ {n:4,name:"実践",months:"10〜12か月目",weeks:[40,52],cefr:"A2 → B1",check:"5分スピーチ＋15分の会話",
+  aim:"自分の話を2〜3分続けて話し、ニュースや映画を少し聞き取れる",
+  res:[["BBC News हिन्दी（動画ニュース）","1本3分をシャドーイング"],["ボリウッド映画・ドラマ","好きな場面の台詞をまねる"],["オンラインのヒンディー語レッスン","スピーチを先生に聞いてもらう"],["インドの仲間との会話","会話ノートに記録して教材にする"]]}
+];
+const OUTLINE=["文字①母音と「नमस्ते」","文字②子音と「मैं … हूँ」","文字③母音記号と है・हैं","文字④結合文字と疑問詞","家族と का・की・के","数字・値段・時刻","後置詞 में・पर・से・को","現在形で毎日のことを話す","मुझे … पसंद है・चाहिए","お願いの言い方 दीजिए・कृपया","形容詞の男性・女性と比べ方","できる सकना・わかる","第1期まとめ：1分自己紹介",
+"進行形 रहा है","未来形 -गा・-गी","過去形①（行った・来た）","過去形② ने 構文","レストランと食事","買い物と値段交渉","移動：リキシャ・タクシー・道を聞く","ホテル・電話","体調と痛み","天気・季節・時間","気持ちを伝える","複合動詞","第2期まとめ：旅の1日を話す",
+"仕事と自分を紹介する","相手の家族・出身を聞く","招かれた家での会話","お祭り：ディワリ・ホーリー","お祝い・お礼・お悔やみのメッセージ","WhatsApp とヒングリッシュ","もし〜なら अगर…तो","関係節 जो…वह","仲間へのあいさつと励まし","勉強会・説明会のひとこと","日本の紹介（食べ物・文化・愛媛）","クリケットと映画の雑談","第3期まとめ：3分の会話",
+"話の組み立て","自分のストーリーを語る","意見と理由を言う","健康と生活習慣の話","ていねいな依頼と断り方","予定調整・待ち合わせ","ボリウッドの台詞で聞き取り","ニュースの見出しを読む","ヒンディー語の動画テロップを作る","現地での1日","感謝のスピーチ","よくある質問に答える","卒業テスト：5分スピーチ＋15分会話"];
+const phaseOf=w=>PHASES.find(p=>w>=p.weeks[0]&&w<=p.weeks[1])||PHASES[3];
+
+/* 1週間の流れ（曜日ではなく「1日目〜7日目」。終わったら次の日へ進む） */
+const DAYS={
+ 1:{name:"文法と単語①",tasks:[["grammar",10],["vocab",10,[0,7]],["shadow",15,"listen"],["speak",10]]},
+ 2:{name:"単語②と瞬間作文",tasks:[["vocab",10,[7,14]],["sentences",15,[0,5]],["shadow",15,"overlap"],["speak",10]]},
+ 3:{name:"単語③と瞬間作文",tasks:[["vocab",10,[14,20]],["sentences",15,[5,10]],["shadow",15,"shadow"],["speak",10]]},
+ 4:{name:"総復習と役になりきる",tasks:[["review",10],["sentences",15,[0,10]],["shadow",15,"role"],["speak",10]]},
+ 5:{name:"書く日",tasks:[["writing",15],["review",10],["speak",10]]},
+ 6:{name:"週テストと話す日",tasks:[["test",15],["roleplay",15]]},
+ 7:{name:"耳の日",tasks:[["input",20],["review",10],["speak",10]]}
+};
+const TASKNAME={letters:"文字カード",grammar:"文法ミニ講義",vocab:"単語カード",sentences:"瞬間作文",shadow:"シャドーイング",review:"復習カード",writing:"ヒンディー語日記＋AI添削",test:"週テスト",roleplay:"AIとヒンディー語会話",input:"耳だけ学習（外部教材）",speak:"話す練習"};
+/* 1〜4週は、1〜4日目のはじめに「文字カード」を足す（1〜3日目で3分の1ずつ、4日目は全部を復習） */
+function dayTasks(w){const base=DAYS[S.day].tasks;if(!w||!w.letters||!w.letters.length||S.day>4)return base;
+  const n=w.letters.length,a=Math.ceil(n/3);const rng=S.day===4?[0,n]:[(S.day-1)*a,Math.min(n,S.day*a)];return [["letters",10,rng],...base]}
+const SHADOWSTEP={listen:"①聞くだけ",read:"②見ながら聞く",overlap:"③重ねて読む",shadow:"④シャドーイング",role:"⑤役になりきる"};
+
+/* ============ 保存（db があればアカウントに、なければこの端末に） ============ */
+const LSKEY="hindi52-state-v1";
+const today=()=>{const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
+const addDays=(s,n)=>{const d=new Date(s+"T00:00:00");d.setDate(d.getDate()+n);return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
+const diffDays=(a,b)=>Math.round((new Date(b+"T00:00:00")-new Date(a+"T00:00:00"))/864e5);
+function fresh(){return{v:1,startDate:today(),week:1,day:1,doneToday:{date:"",tasks:[]},srs:{},log:{},tests:{},scores:[],diary:[],people:[],settings:{accent:"hi-IN",rate:0.9,dir:"en",script:"both"},updatedAt:0}}
+let S=fresh();
+let DB=null, UID=null, SAMPLE=null, saveTimer=null;
+function lsGet(){try{const t=localStorage.getItem(LSKEY);return t?JSON.parse(t):null}catch(e){return null}}
+function lsSet(o){try{localStorage.setItem(LSKEY,JSON.stringify(o))}catch(e){}}
+function merge(o){const f=fresh();return Object.assign(f,o,{settings:Object.assign(f.settings,o.settings||{}),doneToday:o.doneToday||f.doneToday})}
+function save(){S.updatedAt=Date.now();lsSet(S);clearTimeout(saveTimer);saveTimer=setTimeout(pushDB,1200);if(typeof scheduleSync==="function")scheduleSync()}
+async function pushDB(){if(!DB||!UID)return;try{await DB.doc("data/users/"+UID+"/progress").set(JSON.parse(JSON.stringify(S)))}catch(e){if(e&&e.code==="quota_exceeded")toast("保存容量がいっぱいです")}}
+async function initStore(){
+  try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
+  const l=lsGet(); if(l)S=merge(l);
+  try{const n=JSON.parse(localStorage.getItem(NKEY)||"[]");if(Array.isArray(n))NOTES=n}catch(e){}
+  render();
+  if(!window.claude||!window.claude.use)return;
+  try{
+    const [db,user,sample]=await Promise.all([claude.use("db"),claude.use("user"),claude.use("sample")]);
+    SAMPLE=sample||null;
+    if(db&&user){
+      UID=await user.id();
+      if(UID){DB=db;
+        const snap=await db.doc("data/users/"+UID+"/progress").get();
+        if(snap.exists){const r=snap.data();if(!l||(r.updatedAt||0)>(S.updatedAt||0)){S=merge(r);lsSet(S)}else pushDB()}
+        else pushDB();
+        await loadNotesDB();
+      }
+    }
+  }catch(e){}
+  render();
+}
+
+/* ============ 音声（ブラウザの読み上げ） ============ */
+let VOICES=[];
+function loadVoices(){try{VOICES=speechSynthesis.getVoices()||[]}catch(e){VOICES=[]}}
+if("speechSynthesis" in window){loadVoices();speechSynthesis.onvoiceschanged=()=>{loadVoices();if(typeof TAB!=="undefined"&&TAB==="guide")render()}}
+/* 声の良さを点数にして、いちばん滑らかな声を選ぶ。
+   iPhone・iPad の声は voiceURI に premium（プレミアム）／enhanced（拡張）／compact（標準）が入っている */
+const NOVELTY=/(Albert|Bad News|Bahh|Bells|Boing|Bubbles|Cellos|Good News|Jester|Organ|Superstar|Trinoids|Whisper|Wobble|Zarvox|Fred|Junior|Kathy|Ralph|Eddy|Flo|Grandma|Grandpa|Reed|Rocko|Sandy|Shelley|ささやき|オルガン|スーパースター|トリノイド|ベル|道化|震え|バブル|チェロ|アルバート|ボイン|ニュース|おばあ|おじい|ジュニア|フレッド|キャシー|ラルフ|ザーボックス)/i;
+const NATURAL=/(Lekha|Kiyara|Madhur|Swara|Hemant|Kalpana|Ava|Zoe|Samantha|Allison|Susan|Evan|Nathan|Tom|Noelle|Joelle|Serena|Daniel|Kate|Oliver|Stephanie|Jamie|Isha|Rishi|Sangeeta|Karen|Lee|Moira|Tessa|Google|Natural|Neural|Online)/i;
+function voiceQuality(v){const s=(v.voiceURI||"")+" "+v.name;return /premium|プレミアム/i.test(s)?2:/enhanced|拡張|natural|neural|online/i.test(s)?1:0}
+function voiceScore(v,accent){if(NOVELTY.test(v.name))return -999;const lang=v.lang.replace("_","-");
+  return voiceQuality(v)*100+(lang==="hi-IN"?60:/^hi/.test(lang)?30:0)+(NATURAL.test(v.name)?25:0)+(/Google/.test(v.name)?10:0)}
+function goodVoices(){const a=S.settings.accent;return VOICES.filter(v=>/^hi/i.test(v.lang.replace("_","-"))&&!NOVELTY.test(v.name)).sort((x,y)=>voiceScore(y,a)-voiceScore(x,a))}
+function pickVoice(){const en=goodVoices();
+  if(S.settings.voiceName){const f=en.find(v=>v.name===S.settings.voiceName&&(!S.settings.voiceURI||v.voiceURI===S.settings.voiceURI))||en.find(v=>v.name===S.settings.voiceName);if(f)return f}
+  return en[0]||null}
+let speakToken=0;
+let lastCancel=0;
+function stopSpeak(){speakToken++;try{if(speechSynthesis.speaking||speechSynthesis.pending){speechSynthesis.cancel();lastCancel=Date.now()}}catch(e){}}
+function speak(text,rate){return new Promise(res=>{
+  if(!("speechSynthesis" in window)){res();return}
+  // 止めた直後にすぐ話し始めると、iPhone では出だしが切れたり途切れたりするので少し待つ
+  const wait=Math.max(0,120-(Date.now()-lastCancel));
+  setTimeout(()=>{try{const u=new SpeechSynthesisUtterance(String(text).replace(/\s+/g," ").trim());u.pitch=1;u.volume=1;const v=pickVoice();if(v){u.voice=v;u.lang=v.lang}else u.lang="hi-IN";
+    u.rate=rate||S.settings.rate;let done=false;const fin=()=>{if(!done){done=true;res()}};
+    u.onend=fin;u.onerror=fin;try{speechSynthesis.resume()}catch(e){}setTimeout(fin,2500+String(text).length*120/(u.rate||1));speechSynthesis.speak(u)}catch(e){res()}},wait)})}
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const SPK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/></svg>';
+function spkBtn(text){return `<button class="speak" data-say="${esc(text)}" aria-label="読み上げ">${SPK}</button>`}
+
+/* ============ 便利 ============ */
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+const $=s=>document.querySelector(s);
+function toast(t){const el=$("#toast");el.textContent=t;el.hidden=false;clearTimeout(el._t);el._t=setTimeout(()=>el.hidden=true,2200)}
+function weeks(){return (window.WEEKS||[]).slice().sort((a,b)=>a.week-b.week)}
+function W(n){return weeks().find(x=>x.week===n)||null}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function md(t){ // AIの返答を安全に整形
+  const lines=esc(t).split(/\n/);let h="",inUl=false;
+  for(let ln of lines){ln=ln.replace(/\*\*(.+?)\*\*/g,"<b>$1</b>");
+    if(/^\s*[-・*]\s+/.test(ln)){if(!inUl){h+="<ul>";inUl=true}h+="<li>"+ln.replace(/^\s*[-・*]\s+/,"")+"</li>";continue}
+    if(inUl){h+="</ul>";inUl=false}
+    if(/^#{1,4}\s/.test(ln))h+="<h4>"+ln.replace(/^#{1,4}\s/,"")+"</h4>";else if(ln.trim())h+="<p>"+ln+"</p>"}
+  if(inUl)h+="</ul>";return h}
+function logMinutes(m,task){const d=today();const L=S.log[d]||(S.log[d]={m:0,t:[]});L.m+=m;if(task)L.t.push(task);if(task==="speak"||task==="roleplay")L.s=(L.s||0)+m}
+
+/* ============ 間隔反復（SRS） ============ */
+const IV=[0,1,3,7,14,30,60];
+function rateCard(key,r){const c=S.srs[key]||{b:0,d:today()};
+  if(r===0){c.b=0;c.d=today()}else if(r===1){c.b=Math.max(1,c.b);c.d=addDays(today(),1)}else{c.b=Math.min(6,c.b+1);c.d=addDays(today(),IV[c.b])}
+  S.srs[key]=c}
+function cardFromKey(k){if(k[0]==="n")NOTES.forEach(regNote);const iv=k.match(/^i(\d)-(\d+)$/);if(iv)return introCard(+iv[1],+iv[2]);const n=k.match(/^n([a-z0-9]+)-([svgfd])-(\d+)$/);if(n)return noteCard(n[1],n[2],+n[3]);const m=k.match(/^([vsl])(\d+)-(\d+)$/);if(!m)return null;const w=W(+m[2]);if(!w)return null;
+  const it=(m[1]==="v"?w.vocab:m[1]==="l"?(w.letters||[]):w.sentences)[+m[3]];return it?{key:k,type:m[1],item:it,week:+m[2]}:null}
+function dueKeys(){const t=today();return Object.keys(S.srs).filter(k=>S.srs[k].d<=t).sort((a,b)=>S.srs[a].d<S.srs[b].d?-1:1)}
+
+/* ============ 画像（届いたものから順に入れる。ないものは絵文字・SVG のまま） ============ */
+const IMG_HAVE=new Set(["aki-base","aki-wave","aki-cheer","aki-think","aki-talk","aki-study","aki-write","aki-listen","ic-grammar","ic-vocab","ic-sentences","ic-shadow","ic-review","ic-writing","ic-test","ic-roleplay","ic-input","ic-speak","hero-sky","tab-today","tab-notes","tab-map","tab-record","tab-guide","stamp-1","stamp-2","stamp-3","stamp-4","fx-done","empty-notes","aki-card","aki-point","aki-chart","aki-handshake","partner-raj","partner-priya","map-route","sync-devices","ic-streak","aki-goal","aki-graduate","aki-morning","aki-night","aki-rest","aki-medal","aki-cards","aki-check","aki-online","aki-travel","partner-sharma","ch-chat","ch-phone","ch-video","ch-meet","ch-mail","scene-1","scene-2","scene-3","scene-4"]);
+const imgURL=n=>"img/"+n+".webp";
+// あき先生のポーズがまだ無いときは、基本の立ち姿（aki-base）で代用する
+const imgName=n=>IMG_HAVE.has(n)?n:(/^aki-/.test(n)?(IMG_HAVE.has("aki-wave")?"aki-wave":IMG_HAVE.has("aki-base")?"aki-base":null):null);
+/* 場面に合わせたあき先生とあいさつ */
+function todayMascot(allDone){const h=new Date().getHours();const studiedBefore=Object.keys(S.log).some(d=>d<today()&&S.log[d].m>0);
+  if(allDone){if(S.day===7)return{img:S.week%13===0?"aki-graduate":"aki-goal",msg:S.week%13===0?"第"+phaseOf(S.week).n+"期クリア！":"今週クリア！"};return{img:"aki-cheer",msg:"今日もよくがんばりました"}}
+  if(studiedBefore&&streak()===0)return{img:"aki-rest",msg:"おかえりなさい。今日から再開しましょう"};
+  if(h>=5&&h<11)return{img:"aki-morning",msg:"おはようございます"};
+  if(h>=19||h<4)return{img:"aki-night",msg:"こんばんは。今日もおつかれさまです"};
+  return{img:"aki-wave",msg:"こんにちは"}}
+const CH_ICON={"WhatsApp":"ch-chat","電話":"ch-phone","Zoom・Meet":"ch-video","対面":"ch-meet","メール":"ch-mail"};
+function chChip(ch){if(!ch)return"";const n=CH_ICON[ch];return `<span class="chip">${n&&IMG_HAVE.has(n)?pic(n,"",""):""}${esc(ch)}</span>`}
+function pic(n,cls,alt){const m=imgName(n);return m?`<img class="${cls||""}" src="${imgURL(m)}" alt="${esc(alt||"")}" decoding="async">`:""}
+const TASK_EMOJI={letters:"अ",grammar:"📘",vocab:"🔤",sentences:"⚡",shadow:"🎧",review:"🔁",writing:"✏️",test:"📝",roleplay:"💬",input:"👂",speak:"🗣️"};
+function partnerPic(name,cls){const nm=name||"";const k=/Priya|Neha|Mehta|Ms\.|Mrs\.|Madam|Anita|Neha|Pooja|Sangeeta|Isha|Kavya|Divya/i.test(nm)?"partner-priya":(/Sharma|Mr\.|Sir|Gupta|Verma|Singh|Kumar/i.test(nm)&&IMG_HAVE.has("partner-sharma"))?"partner-sharma":"partner-raj";return pic(k,cls||"avatar","")}
+function taskIcon(type){return IMG_HAVE.has("ic-"+type)?pic("ic-"+type,"",""):(TASK_EMOJI[type]||"•")}
+function navImages(){document.querySelectorAll(".nav [data-tab]").forEach(b=>{const n="tab-"+b.dataset.tab;if(IMG_HAVE.has(n)&&!b.querySelector("img")){const s=b.querySelector("svg");if(s)s.outerHTML=pic(n,"","")}})}
+navImages();
+
+/* ============ 画面：今日 ============ */
+let TAB="today";
+function render(){
+  document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("on",b.dataset.tab===TAB));
+  const el=$("#app");
+  if(TAB==="today")el.innerHTML=viewToday();
+  else if(TAB==="map")el.innerHTML=viewMap();
+  else if(TAB==="notes")el.innerHTML=viewNotes();
+  else if(TAB==="record")el.innerHTML=viewRecord();
+  else el.innerHTML=viewGuide();
+}
+function todayTasks(){if(S.doneToday.date!==today())S.doneToday={date:today(),tasks:[]};return dayTasks(W(S.week))}
+function streak(){let n=0,d=today();if(!S.log[d])d=addDays(d,-1);while(S.log[d]&&S.log[d].m>0){n++;d=addDays(d,-1)}return n}
+function totalMin(){return Object.values(S.log).reduce((a,b)=>a+(b.m||0),0)}
+function mastered(type){return Object.keys(S.srs).filter(k=>k[0]===type&&S.srs[k].b>=3).length}
+function boardingPass(w,behind){
+  const pos=((S.week-1)*7+(S.day-1))/(52*7)*100;const ph=phaseOf(S.week);
+  const segs=PHASES.map((p,i)=>`<span class="seg on" style="left:${i*25}%;width:${Math.max(0,Math.min(25,pos-i*25))}%"></span>`).join("");
+  const dots=[25,50,75].map(x=>`<span class="dot" style="left:${x}%"></span>`).join("");
+  const mins=dayTasks(w).reduce((a,t)=>a+t[1],0);
+  return `<section class="pass ${IMG_HAVE.has("hero-sky")?"has-img":""}" style="${IMG_HAVE.has("hero-sky")?`--hero:url(${imgURL("hero-sky")})`:""}" aria-label="今週の学習">
+   <div class="pass-main">
+    <div class="pass-top"><span>BOARDING PASS · ヒンディー語52週</span><span>PHASE ${ph.n}/4</span></div>
+    <div class="route"><div class="end"><b>JPN</b><small>ゼロから</small></div>
+     <div class="flight"><span class="seg" style="left:0;width:100%"></span>${segs}${dots}<span class="plane" style="left:${pos}%"><svg viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></svg></span></div>
+     <div class="end"><b>DEL</b><small>話せる</small></div></div>
+    <div class="pass-title"><small>WEEK ${String(S.week).padStart(2,"0")} · DAY ${S.day}${w?" · "+esc(w.scene):""}</small><h2>${esc(w?w.title:OUTLINE[S.week-1])}</h2>${w?`<p>${esc(w.goal)}</p>`:`<p>この週の教材データがまだ読み込まれていません。</p>`}</div>
+   </div>
+   <div class="pass-stub">
+    <div><small>Level</small><b>${w?esc(w.cefr):ph.cefr}</b></div>
+    <div><small>Progress</small><b>${Math.round(pos)}%</b></div>
+    <div><small>Pace</small><b>${behind>3?behind+"日遅れ":behind<-3?(-behind)+"日先行":"順調"}</b></div>
+    <div><small>Today</small><b>${mins}分</b></div>
+   </div></section>`}
+function viewToday(){
+  const w=W(S.week), plan=DAYS[S.day], tasks=todayTasks();
+  const behind=diffDays(S.startDate,today())-((S.week-1)*7+(S.day-1));
+  const done=S.doneToday.tasks;
+  const allDone=tasks.every((t,i)=>done.includes(i));
+  const title=w?w.title:OUTLINE[S.week-1];
+  const tm=todayMascot(allDone);
+  let html=`<div class="top"><div class="hello">${pic(tm.img,"mascot","あき先生")}<div><div class="eyebrow">${today().replace(/-/g,".")} ・ ${esc(tm.msg)}</div><h1>今日のメニュー</h1></div></div>
+   <div class="daybadge"><span class="streak">${pic("ic-streak","","")}連続 ${streak()}日</span><br><button class="scriptbtn" data-act="cyclescript">表示：${SCRIPTNAME[S.settings.script||"both"]}</button>${!IN_ARTIFACT&&syncCfg()?`<br><span id="syncchip">${syncChipText()}</span>`:""}</div></div>
+  <div class="tgrid"><div class="ta stack">${boardingPass(w,behind)}
+  <div class="phases">${PHASES.map(p=>`<div class="${phaseOf(S.week).n===p.n?"on":""}">${IMG_HAVE.has("stamp-"+p.n)?pic("stamp-"+p.n,"stamp",""):""}<b>PHASE ${p.n} · ${p.cefr}</b>${p.name}</div>`).join("")}</div></div>
+  <div class="tb stack"><div class="spread"><h2>${S.day}日目　${plan.name}</h2><span class="mono small muted">約${tasks.reduce((a,t)=>a+t[1],0)}分</span></div>
+  <div class="tasks">${tasks.map((t,i)=>taskRow(t,i,done.includes(i),w)).join("")}</div>
+  ${allDone?`<div class="celebrate"><div class="stack"><b>今日のメニュー完了です。おつかれさまでした！</b><p class="small">明日は「${S.day<7?DAYS[S.day+1].name:"次の週の1日目"}」です。</p><div><button class="btn" data-act="nextday">次の日へ進む →</button></div></div>${S.day===7&&IMG_HAVE.has(tm.img)?pic(tm.img,"mascot",""):pic("fx-done","mascot","")}</div>`
+   :`<div class="row"><button class="btn sm ghost" data-act="nextday">今日はここまでにして次の日へ</button></div>`}</div>
+  <div class="tc stack"><div class="stats">
+   <div class="stat"><b>${streak()}</b><span>連続学習日数</span></div>
+   <div class="stat"><b>${(totalMin()/60).toFixed(1)}</b><span>合計時間（h）</span></div>
+   <div class="stat"><b>${mastered("v")}</b><span>覚えた単語</span></div>
+   <div class="stat"><b>${(speakingMinutes()/60).toFixed(1)}</b><span>ヒンディー語で話した（h）</span></div>
+  </div>
+  ${introRow()}
+  <p class="note">アプリ以外に、毎日<b>20分の「耳だけ学習」</b>（移動中や施術の合間に今週の会話やヒンディー語の音声を聞く）をすると、1年で約400時間になります。${S.week>=14?"第2期からは<b>オンラインのヒンディー語レッスン</b>も足しましょう。":""}</p>
+  ${SAMPLE||!IN_ARTIFACT?"":`<p class="note">AI添削・AI会話は claude.ai にサインインして開くと使えます。</p>`}
+  </div></div>`;
+  return html}
+function taskRow(t,i,done,w){
+  const [type,min,arg]=t;let sub="";
+  if(type==="letters")sub=`今週の文字 ${arg[0]+1}〜${arg[1]}`;
+  else if(type==="vocab")sub=`今週の単語 ${arg[0]+1}〜${arg[1]}`;
+  else if(type==="sentences")sub=`今週の文 ${arg[0]+1}〜${arg[1]}`;
+  else if(type==="shadow")sub=SHADOWSTEP[arg]+(w?"："+w.dialogue.title:"");
+  else if(type==="review")sub=`復習の時期が来たカード ${Math.min(30,dueKeys().length)}枚`;
+  else if(type==="grammar")sub=w?w.grammar.title:"";
+  else if(type==="writing")sub=w?w.writing:"";
+  else if(type==="roleplay")sub=w?w.speaking:"";
+  else if(type==="test")sub="単語10問＋並べ替え5問";
+  else if(type==="input")sub=phaseOf(S.week).res.slice(-1)[0][0];
+  else if(type==="speak")sub="お題："+speakTopic(w).ja+"（Claude の音声モード・実際の会話・ひとりで）";
+  return `<button class="task ${done?"done":""}" data-task="${i}" data-type="${type}"><span class="ic">${done?"✓":taskIcon(type)}</span><span><span class="num">STEP ${i+1}</span><b>${TASKNAME[type]}</b><small>${esc(sub)}</small></span><span class="min">${min}分</span></button>`}
+
+/* ============ 画面：ロードマップ ============ */
+function viewMap(){
+  return `<div class="top"><div><div class="eyebrow">1年・52週</div><h1>ロードマップ</h1></div></div>
+  <div class="stack">${pic("map-route","maproute","日本からインドへの地図")}
+  <p class="muted small">週をタップすると、その週の教材を自由に練習できます。どの週からでも始め直せます。</p>
+  ${PHASES.map(p=>`<div class="card phase">
+    ${pic("scene-"+p.n,"scene","")}
+    <div class="phead"><div class="pnum">${IMG_HAVE.has("stamp-"+p.n)?pic("stamp-"+p.n,"stamp","第"+p.n+"期"):p.n}</div><div class="stack" style="gap:6px"><div><div class="eyebrow">第${p.n}期 ・ ${p.months}</div><h2>${p.name}</h2></div>
+     <p class="small">${p.aim}</p><div class="targets"><span class="chip a">CEFR ${p.cefr}</span><span class="chip">期末チェック：${p.check}</span></div></div></div>
+    <div>${Array.from({length:p.weeks[1]-p.weeks[0]+1},(_,k)=>p.weeks[0]+k).map(n=>{const w=W(n);const sc=S.tests[n];
+      return `<button class="wk ${n===S.week?"cur":""} ${n<S.week?"done":""}" data-week="${n}"><span class="wn">W${String(n).padStart(2,"0")}</span><span>${esc(w?w.title:OUTLINE[n-1])}${w?`<br><span class="small muted">${esc(w.scene)}</span>`:""}</span><span class="small mono muted">${sc!=null?sc+"点":n===S.week?"今週":""}</span></button>`}).join("")}</div>
+  </div>`).join("")}
+  </div>`}
+function weekList(w){return [...(w&&w.letters&&w.letters.length?[["letters",10,[0,w.letters.length]]]:[]),["grammar",10],["vocab",10,[0,20]],["sentences",15,[0,10]],["shadow",15,"listen"],["writing",15],["test",15],["roleplay",15]]}
+function openWeek(n){
+  const w=W(n);const list=weekList(w);
+  openLesson(`Week ${n}`,w?w.cefr:"",()=>{
+    if(!w)return `<p class="note">この週の教材データがまだありません。</p>`;
+    return `<div class="stack">${pic("scene-"+phaseOf(n).n,"scene","")}<div><div class="eyebrow">${esc(w.scene)}</div><h2>${esc(w.title)}</h2></div><p class="goal">${esc(w.goal)}</p>
+    <div class="tasks">${list.map((t,i)=>`<button class="task" data-free="${i}" data-type="${t[0]}"><span class="ic">${i+1}</span><span><b>${TASKNAME[t[0]]}</b></span><span class="min">${t[1]}分</span></button>`).join("")}</div>
+    <div class="card stack"><b>例文をインドの方に確認してもらう</b><p class="small muted">この週の単語の例文・文・会話を、英語の説明つきで WhatsApp に送れる形にします。直してもらった返事は、Claude に貼って「Week ${n} を直して」と頼んでください。</p>
+     <div class="row"><button class="btn sm" id="rv-copy">確認用の文章をコピー</button>${navigator.share?`<button class="btn sm" id="rv-share">WhatsApp などで送る</button>`:""}</div><textarea id="rv-src" readonly hidden style="min-height:120px;font-size:13px"></textarea></div>
+    ${n!==S.week?`<div class="card stack"><b>この週から始める</b><p class="small muted">今日のメニューが Week ${n} の1日目になります。これまでの記録は残ります。</p><div class="row"><button class="btn accent" data-act="setweek" data-n="${n}" id="setweekbtn">Week ${n} から始める</button></div></div>`:""}</div>`},
+   body=>{
+     body.querySelectorAll("[data-free]").forEach(b=>b.onclick=()=>runTask(list[+b.dataset.free],w,null));
+     const rc=body.querySelector("#rv-copy");if(rc)rc.onclick=()=>{const t=reviewText(w);const ta=body.querySelector("#rv-src");ta.value=t;copyText(t,ta)};
+     const rs=body.querySelector("#rv-share");if(rs)rs.onclick=()=>navigator.share({text:reviewText(w)}).catch(()=>{});
+     const sb=body.querySelector("#setweekbtn");
+     if(sb)sb.onclick=()=>{if(sb.dataset.ok){S.week=n;S.day=1;S.doneToday={date:today(),tasks:[]};save();closeLesson();TAB="today";render();toast(`Week ${n} から始めます`)}else{sb.dataset.ok=1;sb.textContent="もう一度押すと切り替わります"}};
+   })}
+/* インドの方に確認してもらうための文章（英語の説明つき） */
+function reviewText(w){const L=[];
+  L.push("Hi! I'm learning Hindi with my own study app. Could you please check if these Hindi sentences are natural and correct? Just tell me the number and a better way to say it. Thank you so much! 🙏");
+  L.push("","*Week "+w.week+"*");
+  L.push("","*Words (example sentences)*");w.vocab.forEach((v,i)=>L.push(`${i+1}. ${v.hi||v.en} (${v.eng||""}) — ${v.ex}`));
+  L.push("","*Sentences*");w.sentences.forEach((x,i)=>L.push(`${i+1}. ${x.hi||x.en}${x.eng?"  = "+x.eng:""}`));
+  L.push("","*Grammar examples*");w.grammar.examples.forEach((x,i)=>L.push(`${i+1}. ${x.hi||x.en}${x.eng?"  = "+x.eng:""}`));
+  L.push("","*Conversation*");w.dialogue.lines.forEach(l=>L.push(`${l.name}: ${l.hi||l.en}`));
+  return L.join("\n")}
+
+/* ============ 画面：記録 ============ */
+function viewRecord(){
+  const days=Object.keys(S.log).filter(d=>S.log[d].m>0).length;
+  const vocabTotal=weeks().reduce((a,w)=>a+w.vocab.length,0)||1040;
+  const sentTotal=weeks().reduce((a,w)=>a+w.sentences.length,0)||520;
+  // heatmap 20週
+  let start=addDays(today(),-7*20+1);const dow=new Date(start+"T00:00:00").getDay();start=addDays(start,-dow);
+  let cells="";for(let d=start;d<=today();d=addDays(d,1)){const m=(S.log[d]||{}).m||0;cells+=`<i class="${m>=40?"l3":m>=20?"l2":m>0?"l1":""}" title="${d} ${m}分"></i>`}
+  const tw=Object.keys(S.tests).map(Number).sort((a,b)=>a-b);
+  return `<div class="top"><div class="hello">${pic("aki-chart","mascot","")}<div><div class="eyebrow">あなたの記録</div><h1>記録</h1></div></div></div>
+  <div class="stack">
+  <div class="stats s6">
+   <div class="stat"><b>${days}</b><span>学習した日</span></div>
+   <div class="stat"><b>${(speakingMinutes()/60).toFixed(1)}</b><span>ヒンディー語で話した（h）</span></div>
+   <div class="stat"><b>${(totalMin()/60).toFixed(1)}</b><span>合計時間（h）</span></div>
+   <div class="stat"><b>${mastered("v")}<span class="small muted">/${vocabTotal}</span></b><span>覚えた単語</span></div>
+   <div class="stat"><b>${mastered("s")}<span class="small muted">/${sentTotal}</span></b><span>言える文</span></div>
+   <div class="stat"><b>${allPartners().length}</b><span>話した相手（人）</span></div>
+  </div>
+  <div class="card stack"><div class="spread"><h3>学習した日（20週）</h3><span class="small muted">濃いほど長く学習</span></div><div class="heat">${cells}</div></div>
+  <div class="card stack"><h3>週テストの点数</h3>${tw.length?`<div class="bars">${tw.map(n=>`<div style="height:${S.tests[n]}%" title="W${n}: ${S.tests[n]}点"></div>`).join("")}</div><p class="small muted">W${tw[0]}〜W${tw[tw.length-1]}／最新 ${S.tests[tw[tw.length-1]]}点</p>`:`<p class="small muted">6日目の週テストを受けると、ここに点数が並びます。</p>`}</div>
+  <div class="card stack"><h3>期末チェック・話せた記録</h3>
+   <p class="small muted">各期の終わりに、インドの方と何分話せたか・自己紹介が言えたかを記録しましょう。ヒンディー語は日本で受けやすい検定が少ないので、「話せた」をものさしにします。</p>
+   ${S.scores.length?`<div class="tablewrap"><table><tr><th>日付</th><th>試験</th><th>結果</th></tr>${S.scores.map(s=>`<tr><td class="mono">${esc(s.date)}</td><td>${esc(s.test)}</td><td>${esc(s.result)}</td></tr>`).join("")}</table></div>`:""}
+   <div class="row"><input type="date" id="sc-date" value="${today()}" style="width:auto"><select id="sc-test"><option>期末チェック（会話）</option><option>自己紹介</option><option>スピーチ</option><option>その他</option></select></div>
+   <input type="text" id="sc-res" placeholder="例：Neha さんと5分話せた ／ 1分自己紹介を言えた"><div><button class="btn sm" data-act="addscore">記録する</button></div></div>
+  <div class="card stack"><h3>ヒンディー語日記</h3>${S.diary.length?S.diary.slice().reverse().map(d=>`<div style="border-top:1px solid var(--line);padding-top:8px"><div class="small mono muted">${esc(d.date)} ・ W${d.week}</div><p class="en">${esc(d.preview)}</p></div>`).join(""):`<p class="small muted">5日目に書いた日記がここに残ります。</p>`}</div>
+  </div>`}
+
+/* ============ 画面：ガイド ============ */
+function viewGuide(){
+  return `<div class="top"><div class="hello">${pic("aki-point","mascot","")}<div><div class="eyebrow">講師から</div><h1>ガイド</h1></div></div></div>
+  <div class="stack guide">
+  <div class="card"><h3>1年後のゴール</h3><p>インドの取引先やその家族、インドの仲間と、あいさつ・雑談・食事・WhatsApp をヒンディー語でこなせる状態（CEFR A2〜B1 目安）。自分のことを2〜3分続けて話せて、旅行で困らないこと。</p><p>商談の言葉は英語（英語52週で準備）、ヒンディー語は<b>相手との距離を縮める言葉</b>です。ひとことでも相手の言葉で話すと、関係がぐっと近くなります。アプリで毎日約50分、耳だけ学習で20分を続けると、1年で約400時間になります。</p></div>
+  <div class="card"><h3>日本人にとってのヒンディー語</h3><ul>
+   <li><b>やさしいところ</b>：語順が日本語と同じ（私は・ご飯を・食べます）。में・से・को などの「後置詞」は、日本語の助詞（で・から・に）と同じく名詞のあとに置きます。母音も日本語に近い音です。</li>
+   <li><b>むずかしいところ</b>：①文字（デーヴァナーガリー）②息を強く出す音（kh・ph など）と、舌を反らせる音（ṭ・ḍ）③名詞の男性・女性で形容詞や動詞の形が変わること。どれも、くり返し声に出せば慣れます。</li>
+   <li>ていねいに話すときは <span class="hi">आप</span>（āp）と、名前のあとの <span class="hi">जी</span>（jī）。この教材は基本 आप で話します。</li></ul></div>
+  <div class="card"><h3>文字とローマ字の見方</h3><ul>
+   <li>はじめは<b>文字＋ローマ字</b>で。第1期の後半からは、慣れた単語だけでも<b>文字だけ</b>で読んでみましょう。表示は「今日」の画面のボタンか、下の設定で切り替えられます。</li>
+   <li><b>ā ī ū</b>：のばす音（आ＝アー）。<b>ṭ ḍ ṇ ṛ</b>：舌先を上あごの奥へ反らせる音。<b>kh ph bh</b> など h がつく音：息を強く出す（手のひらに息が当たる）。<b>ṁ</b>：前の母音を鼻にかける（हूँ＝hūṁ）。</li>
+   <li>1〜4週は、1〜4日目に<b>文字カード</b>がつきます。全部の文字を一度に覚えなくて大丈夫。毎日の単語の中で何度も出会います。</li></ul></div>
+  <div class="card"><h3>iPhone・iPad で使うコツ</h3><ul>
+   <li><b>ホーム画面に置く</b>：Safari でこのページを開き、共有ボタン →「ホーム画面に追加」。アプリのように1タップで開けます。</li>
+   <li><b>音が出ないとき</b>：消音モード（本体横のスイッチ・アクションボタン）を解除し、音量を上げてください。</li>
+   <li><b>ヒンディー語の声を入れる</b>：「設定」→「アクセシビリティ」→「読み上げコンテンツ」→「声」→「ヒンディー語」で、<b>Lekha</b> などの声（できれば「拡張」）をダウンロード。下の設定で選べるようになります。</li>
+   <li><b>ヒンディー語のキーボード</b>：「設定」→「一般」→「キーボード」→「キーボード」→「新しいキーボードを追加」→「ヒンディー語」→<b>「音訳」</b>。ローマ字で打つと、デーヴァナーガリーの候補が出ます（namaste → नमस्ते）。</li>
+   <li><b>単語カード</b>：カードをタップでめくり、<b>右にスワイプで「わかった」、左で「わからない」</b>。</li>
+   <li><b>AIの添削・会話の整理</b>：「Claude に頼む」の箱が出たら、文章をコピー → Claude アプリに貼る → 答えをコピーしてこのページに貼る、の3ステップです。会話の練習は Claude アプリの音声モードがおすすめ。</li>
+   ${HAS_MIC?`<li><b>瞬間作文</b>は「🎤 話して答える」で、話したヒンディー語とお手本がどのくらい合っているか確かめられます。</li>`:""}
+   <li><b>シャドーイング</b>はイヤホンがおすすめ。練習中は画面が暗くならないようにしています。</li>
+   <li><b>iPad</b>は横向きにすると、今日のメニューが2列で見やすくなります。</li></ul></div>
+  <div class="card"><h3>1日の進め方</h3><ul>
+   <li>「今日」のメニューを上から順に。全部終わったら「次の日へ進む」。</li>
+   <li>カレンダーではなく<b>終わった分だけ進む</b>しくみです。忙しい日は1つだけでもOK。英語52週と同じ日にやるなら、どちらかを朝、もう片方を夜に分けると続けやすいです。</li>
+   <li>1週間は「文法→単語→瞬間作文→シャドーイング→書く→テストと会話→耳」の順に、同じ教材をくり返します。</li>
+   <li><b>必ず声に出す</b>。小声でも口を動かすだけで定着が変わります。</li>
+   <li>インドの方とヒンディー語を使ったら「会話ノート」に記録。AIが<b>自分専用の文・文法・単語カード</b>にして、毎日の復習に混ぜてくれます。</li>
+   <li>ロードマップで週を開くと「例文をインドの方に確認してもらう」があります。週の例文を WhatsApp で送り、直してもらった返事を Claude に渡すと、教材を直せます。</li></ul></div>
+  <div class="card"><h3>このプログラムの考え方</h3><ul>
+   <li><b>間隔反復</b>：忘れかけた頃に復習すると記憶が長持ちします（エビングハウスの忘却曲線、ライトナー方式）。カードは「わかった」ほど次の復習が先に延びます。</li>
+   <li><b>想起練習</b>：見て覚えるより、思い出そうとする方が定着します（Roediger & Karpicke, 2006）。瞬間作文は日本語からヒンディー語を「出す」練習です。</li>
+   <li><b>理解できる量のインプット</b>：少しだけ難しい言葉を大量に聞く（Krashen のインプット仮説）。耳だけ学習はレベルに合った音声で。</li>
+   <li><b>アウトプットで気づく</b>：話す・書くことで「言えないこと」に気づき、伸びます（Swain のアウトプット仮説）。日記とAI会話がこれにあたります。</li>
+   <li><b>シャドーイング</b>：音声に少し遅れてまねることで、聞く力と発音が同時に伸びます。</li></ul></div>
+  <div class="card"><h3>レベルの目安と期末チェック</h3><div class="tablewrap"><table>
+   <tr><th>CEFR</th><th>できること</th></tr>
+   <tr><td>A0</td><td>文字を読み始める・あいさつ</td></tr>
+   <tr><td>A1</td><td>自己紹介・家族・数字・好み・簡単なお願い</td></tr>
+   <tr><td>A2</td><td>買い物・移動・食事・過去や予定の話、身近な話題のやりとり</td></tr>
+   <tr><td>B1</td><td>自分の経験や考えを続けて話す・相手の話の要点がわかる</td></tr></table></div>
+   <ul style="margin-top:10px">${PHASES.map(p=>`<li>第${p.n}期の終わり：<b>${p.check}</b></li>`).join("")}</ul>
+   <p class="small muted">ヒンディー語は日本で受けやすい検定が少ないため、「インドの方と何分話せたか」をものさしにします。結果は「記録」に残せます。</p></div>
+  ${PHASES.map(p=>`<div class="card"><h3>第${p.n}期のおすすめ教材</h3><div class="res">${p.res.map(r=>`<div><b>${esc(r[0])}</b><span class="small muted">${esc(r[1])}</span></div>`).join("")}</div></div>`).join("")}
+  <div class="card"><h3>役に立つサイト</h3><ul>
+   <li><a href="https://www.youtube.com/results?search_query=learn+hindi+for+beginners" target="_blank" rel="noopener">YouTube：初級ヒンディー語</a>（ゆっくりの会話・文字の読み方）</li>
+   <li><a href="https://www.bbc.com/hindi" target="_blank" rel="noopener">BBC News हिन्दी</a>（ニュース。第3期から見出しを読む練習に）</li>
+   <li><a href="https://translate.google.com/?sl=hi&tl=ja" target="_blank" rel="noopener">Google 翻訳（ヒンディー語→日本語）</a>（知らない単語の発音を聞くときに）</li>
+   <li><a href="https://www.duolingo.com/" target="_blank" rel="noopener">Duolingo</a>（英語からヒンディー語のコース）</li></ul></div>
+  <div class="card stack"><h3>設定</h3>
+   <label class="small" for="set-script">ヒンディー語の表示</label>
+   <select id="set-script"><option value="both">文字＋ローマ字（はじめはこれ）</option><option value="hi">文字だけ（デーヴァナーガリー）</option><option value="rom">ローマ字だけ</option></select>
+   <label class="small" for="set-voice">声の種類（この端末に入っているヒンディー語の声）</label>
+   <select id="set-voice"><option value="">おまかせ（いちばん滑らかな声を自動で選ぶ）</option>${goodVoices().map(v=>`<option value="${esc(v.name)}|${esc(v.voiceURI||"")}" ${S.settings.voiceName===v.name&&(!S.settings.voiceURI||S.settings.voiceURI===v.voiceURI)?"selected":""}>${["","◎ ","★ "][voiceQuality(v)]}${esc(v.name)}（${esc(v.lang)}）${["","・拡張","・プレミアム"][voiceQuality(v)]}</option>`).join("")}</select>
+   ${(()=>{const v=pickVoice();const q=v?voiceQuality(v):0;return v?`<p class="small ${q?"":"muted"}">いま使っている声：<b>${esc(v.name)}</b>${q===2?"（プレミアム・いちばん滑らか）":q===1?"（拡張・滑らか）":"（標準の声。少し機械っぽく聞こえます）"}</p>${q<1?`<p class="note">もっと滑らかにするには、iPhone・iPad の「設定」→「アクセシビリティ」→「読み上げコンテンツ」→「声」→「ヒンディー語」で、<b>「拡張」の声</b>をダウンロードしてください。ダウンロード後にアプリを開き直すと、自動でその声に切り替わります。</p>`:""}`
+     :`<p class="note">この端末にヒンディー語の声が見つかりません。「設定」→「アクセシビリティ」→「読み上げコンテンツ」→「声」→「ヒンディー語」で声をダウンロードしてから、アプリを開き直してください。</p>`})()}
+   <label class="small" for="set-rate">読み上げの速さ</label>
+   <select id="set-rate"><option value="0.7">ゆっくり（0.7）</option><option value="0.8">少しゆっくり（0.8）</option><option value="0.9">ふつうより少し遅め（0.9・おすすめ）</option><option value="0.95">ほんの少し遅め（0.95）</option><option value="1">ふつう（1.0）</option></select>
+   <label class="small" for="set-start">学習を始めた日</label><input type="date" id="set-start" value="${esc(S.startDate)}">
+   <div class="row"><button class="btn sm" data-act="testvoice">声を試す</button></div>
+   <p class="small muted">${DB?"記録は claude.ai のアカウントに保存され、スマホとパソコンで同じ記録が使えます。":(syncCfg()?"記録はこの端末と、合言葉でつないだ同期先に保存されています。":"記録はこの端末の中に保存されています。下の「iPhone と iPad をつなぐ」で、2台の記録をそろえられます。英語52週とは別に保存されます。")}</p>
+  </div>
+  ${syncCard()}
+  <div class="card stack"><h3>バックアップ・引っ越し</h3>
+   <p class="small">機種変更や、iPhone の記録を iPad に移すときに使います。月に1回くらいバックアップしておくと安心です。</p>
+   <div class="row"><button class="btn sm" data-act="backup">バックアップをファイルに保存</button><button class="btn sm" data-act="backupcopy">バックアップをコピー</button></div>
+   <textarea id="bk-text" readonly hidden style="min-height:80px;font-size:12px"></textarea>
+   <label class="small" for="bk-file">バックアップを読み込む（今の記録は置き換わります）</label>
+   <div class="row"><input type="file" id="bk-file" accept=".json,application/json,text/plain"></div>
+   <textarea id="bk-paste" style="min-height:70px;font-size:12px" placeholder="コピーしたバックアップを貼り付けて「読み込む」"></textarea>
+   <div><button class="btn sm" data-act="restore">貼り付けたバックアップを読み込む</button></div>
+  </div>
+  </div>`}
+
+/* ============ レッスン画面 ============ */
+let onClose=null;
+let WAKE=null;
+async function keepAwake(on){try{if(on&&!WAKE&&navigator.wakeLock){WAKE=await navigator.wakeLock.request("screen");WAKE.addEventListener("release",()=>{WAKE=null})}else if(!on&&WAKE){await WAKE.release();WAKE=null}}catch(e){WAKE=null}}
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&!$("#lesson").hidden)keepAwake(true)});
+function openLesson(title,chip,html,after){keepAwake(true);
+  stopSpeak();const L=$("#lesson");$("#ltitle").textContent=title;$("#lchip").textContent=chip||"";$("#lchip").hidden=!chip;
+  const body=$("#lbody");body.innerHTML=typeof html==="function"?html():html;L.hidden=false;L.scrollTop=0;$("#nav").hidden=true;
+  if(after)after(body)}
+function closeLesson(){stopSpeak();keepAwake(false);$("#lesson").hidden=true;$("#nav").hidden=false;const f=onClose;onClose=null;if(f)f();render()}
+$("#lback").onclick=closeLesson;
+function finishBtn(label){return `<div class="row" style="margin-top:8px"><button class="btn primary" data-finish>${label||"完了にする"}</button></div>`}
+function bindFinish(body,cb){body.querySelectorAll("[data-finish]").forEach(b=>b.onclick=cb)}
+function completeTask(ti,min,name){
+  if(ti!=null){if(S.doneToday.date!==today())S.doneToday={date:today(),tasks:[]};if(!S.doneToday.tasks.includes(ti))S.doneToday.tasks.push(ti)}
+  logMinutes(min,name);save();closeLesson();toast("記録しました")}
+
+function runTask(t,w,ti){
+  const [type,min,arg]=t;
+  if(!w&&type!=="review"&&type!=="input"&&type!=="speak"){toast("この週の教材データがまだありません");return}
+  const done=(alt)=>completeTask(ti,min,typeof alt==="string"?alt:type);
+  ({letters:()=>lessonCards(w.letters.slice(arg[0],arg[1]).map((it,k)=>({key:`l${w.week}-${arg[0]+k}`,type:"l",item:it,week:w.week})),"文字カード",done),
+   grammar:()=>lessonGrammar(w,done),vocab:()=>lessonCards(w.vocab.slice(arg[0],arg[1]).map((it,k)=>({key:`v${w.week}-${arg[0]+k}`,type:"v",item:it,week:w.week})),"単語カード",done),
+   sentences:()=>lessonSentences(w,arg,done),shadow:()=>lessonShadow(w,arg,done),review:()=>lessonReview(done),writing:()=>lessonWriting(w,done),
+   test:()=>lessonTest(w,done),roleplay:()=>lessonRoleplay(w,done),input:()=>lessonInput(done),speak:()=>lessonSpeak(w,done)})[type]()}
+
+/* --- 文法 --- */
+function lessonGrammar(w,done){const g=w.grammar;
+  openLesson("文法ミニ講義",`W${w.week}`,`<div class="stack"><div class="mascot-side">${pic("aki-study","","")}<div><div class="eyebrow">今週の文法</div><h2>${esc(g.title)}</h2></div></div>
+   ${g.points.map((p,i)=>`<div class="point"><span class="n">${i+1}</span><p>${esc(p)}</p></div>`).join("")}
+   <div class="card"><div class="spread" style="margin-bottom:4px"><h3>例文</h3><button class="btn sm" id="playall">全部聞く</button></div>
+   ${g.examples.map(e=>`<div class="exline">${spkBtn(e.en)}<div class="t"><span class="en">${tg(e.en)}</span><span class="small muted">${esc(e.ja)}</span></div></div>`).join("")}</div>
+   ${g.tip?`<div class="tip"><b>コツ</b>　${esc(g.tip)}</div>`:""}
+   <p class="note">例文は1文ずつ聞いて、まねして3回声に出しましょう。</p>${finishBtn("理解できた・完了")}</div>`,
+   body=>{bindFinish(body,done);body.querySelector("#playall").onclick=async()=>{const tk=++speakToken;for(const e of g.examples){if(tk!==speakToken)break;await speak(e.en);await sleep(900)}}})}
+
+/* --- カード（単語・復習 共通） --- */
+function lessonCards(cards,title,done,isReview){
+  if(!cards.length){openLesson(title,"",`<div class="stack"><p>今日復習するカードはありません。</p><p class="small muted">単語カードと瞬間作文で「わかった」を押したカードが、時期をおいてここに戻ってきます。</p>${finishBtn()}</div>`,b=>bindFinish(b,done));return}
+  let q=cards.slice(),i=0,flipped=false,total=cards.length,cnt=[0,0,0];const retried=new Set();
+  const dir=()=>S.settings.dir;
+  function draw(body){
+    if(i>=q.length){body.innerHTML=`<div class="stack">${pic(cards.some(c=>c.type==="v")&&IMG_HAVE.has("aki-cards")?"aki-cards":IMG_HAVE.has("aki-check")?"aki-check":"aki-cheer","empty-img","")}<h2>おつかれさまでした</h2><p>${total}枚のうち、わかった ${cnt[2]}・あいまい ${cnt[1]}・わからない ${cnt[0]}</p><p class="small muted">「わからない」のカードは明日以降の復習に出てきます。</p>${finishBtn()}</div>`;bindFinish(body,done);return}
+    const c=q[i],it=c.item,isL=c.type==="l",isV=c.type==="v"||isL;
+    const front=isL?`<div class="word" style="font-size:64px">${esc(it.en)}</div><p class="small muted">読み方は？</p>`:isV?(dir()==="en"?`<div class="word">${tg(it.en)}</div>`:`<div class="jp">${esc(it.ja)}</div>`):`<div class="jp">${esc(it.q||it.ja)}</div><p class="small muted">${esc(it.hint||"ヒンディー語で言ってみましょう")}</p>`;
+    const back=isV?`<div class="word" ${isL?'style="font-size:52px"':""}>${tg(it.en)}</div><div class="jp ${isL?"letterja":""}">${esc(it.ja)}</div>${!isL&&it.eng?`<span class="eng">${esc(it.eng)}</span>`:""}${it.ex?`<div class="ex"><div class="row" style="justify-content:center">${spkBtn(it.ex)}<span class="en">${tg(it.ex)}</span></div><div>${esc(it.exJa||"")}</div></div>`:""}`
+      :`<div class="jp" style="font-size:16px;font-weight:500" >${esc(it.q||it.ja)}</div><div class="row" style="justify-content:center">${spkBtn(it.en)}<span class="word" style="font-size:24px">${tg(it.en)}</span></div>${it.q&&it.ja?`<div class="small muted">${esc(it.ja)}</div>`:""}${it.eng?`<span class="eng">英語：${esc(it.eng)}</span>`:""}${it.note?`<div class="tip" style="text-align:left">${esc(it.note)}</div>`:""}`;
+    body.innerHTML=`<div class="stack"><div class="spread"><span class="small muted mono">${Math.min(i+1,q.length)} / ${q.length}</span>${c.type==="v"?`<button class="btn sm ghost" id="dirbtn">${dir()==="en"?"ヒ→日":"日→ヒ"} を切替</button>`:""}</div>
+     <div class="progress"><span style="width:${i/q.length*100}%"></span></div>
+     <div class="flash" id="flash">${flipped?back:front}${!flipped&&c.type==="v"&&dir()==="en"?spkBtn(it.en):""}${isReview?`<span class="chip">${c.noteLabel?esc(c.noteLabel):"W"+c.week}</span>`:""}</div>
+     ${flipped?`<div class="rate"><button class="r0" data-r="0">わからない<small>すぐもう一度</small></button><button class="r1" data-r="1">あいまい<small>明日</small></button><button class="r2" data-r="2">わかった<small>${IV[Math.min(6,((S.srs[c.key]||{}).b||0)+1)]}日後</small></button></div>`
+      :`<button class="btn primary" id="flip" style="justify-content:center;width:100%">答えを見る</button>`}
+     ${flipped?`<p class="small muted swipehint">カードを右にスワイプで「わかった」、左で「わからない」</p>`:""}</div>`;
+    const say=isV?it.en:it.en;
+    if(flipped){speak(isV?it.en:it.en)} else if(c.type==="v"&&dir()==="en"){speak(it.en)}
+    const fb=body.querySelector("#flip");if(fb)fb.onclick=()=>{flipped=true;draw(body)};
+    const fl=body.querySelector("#flash");
+    if(fl){let sx=null,sy=null;
+      fl.addEventListener("click",e=>{if(e.target.closest("[data-say]"))return;if(!flipped){flipped=true;draw(body)}});
+      fl.addEventListener("touchstart",e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
+      fl.addEventListener("touchmove",e=>{if(sx===null||!flipped)return;const dx=e.touches[0].clientX-sx;fl.style.transform=`translateX(${dx*.6}px) rotate(${dx/40}deg)`;fl.style.borderColor=dx>40?"var(--green)":dx<-40?"var(--red)":""},{passive:true});
+      fl.addEventListener("touchend",e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;sx=null;fl.style.transform="";fl.style.borderColor="";
+        if(flipped&&Math.abs(dx)>70&&Math.abs(dx)>Math.abs(dy)){const b=body.querySelector(`[data-r="${dx>0?2:0}"]`);if(b)b.click()}})}
+    const db=body.querySelector("#dirbtn");if(db)db.onclick=()=>{S.settings.dir=dir()==="en"?"ja":"en";save();flipped=false;draw(body)};
+    body.querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>{const r=+b.dataset.r;rateCard(c.key,r);cnt[r]++;
+      if(r===0&&!retried.has(c.key)){retried.add(c.key);q.push(c)}i++;flipped=false;save();draw(body)});
+  }
+  openLesson(title,"","",draw)}
+
+/* --- 瞬間作文 --- */
+function lessonSentences(w,arg,done){
+  const items=w.sentences.slice(arg[0],arg[1]).map((it,k)=>({key:`s${w.week}-${arg[0]+k}`,type:"s",item:it,week:w.week}));
+  let i=0,show=false,heard=null;
+  function draw(body){
+    if(i>=items.length){body.innerHTML=`<div class="stack">${pic(IMG_HAVE.has("aki-check")?"aki-check":"aki-cheer","empty-img","")}<h2>全部できました</h2><p class="small muted">「もう一度」の文は、復習カードに出てきます。言えなかった文は、ノートに書いて3回音読すると効果的です。</p>${finishBtn()}</div>`;bindFinish(body,done);return}
+    const c=items[i];
+    body.innerHTML=`<div class="stack"><div class="spread"><span class="small muted mono">${i+1} / ${items.length}</span><span class="small muted">日本語を見て、3秒以内にヒンディー語を口に出す</span></div>
+     <div class="progress"><span style="width:${i/items.length*100}%"></span></div>
+     <div class="flash"><div class="jp">${esc(c.item.ja)}</div>${show?`<div class="row" style="justify-content:center">${spkBtn(c.item.en)}<span class="word" style="font-size:24px">${tg(c.item.en)}</span></div>${c.item.eng?`<span class="eng">英語：${esc(c.item.eng)}</span>`:""}`:""}</div>
+     ${show?`<div class="rate"><button class="r0" data-r="0">言えなかった<small>もう一度</small></button><button class="r1" data-r="1">少し違った<small>明日</small></button><button class="r2" data-r="2">言えた<small>先へ延ばす</small></button></div>`
+       :`<button class="btn primary" id="reveal" style="justify-content:center;width:100%">答えを見る（声に出してから）</button>`}
+     ${HAS_MIC&&!show?`<button class="btn" id="mic" style="justify-content:center;width:100%">🎤 話して答える</button>`:""}
+     ${heard!==null&&show?`<div class="ai"><div class="small muted">あなたのヒンディー語（聞き取り）</div><div class="en" style="font-size:17px">${esc(heard||"（聞き取れませんでした）")}</div><div class="small" style="margin-top:4px">お手本との一致 <b class="mono">${matchScore(c.item.en,heard)}%</b>${matchScore(c.item.en,heard)>=80?"　よく言えています":""}</div></div>`:""}
+     ${true?`<details><summary class="small" style="cursor:pointer">自分の答えをAIに見てもらう</summary><div class="stack" style="margin-top:8px"><input type="text" id="mine" placeholder="自分の答えを入力（ローマ字でも、音声入力でもOK）"><div><button class="btn sm" id="check">AIにチェックしてもらう</button></div><div id="aiout"></div></div></details>`:""}
+    </div>`;
+    if(show)speak(c.item.en);
+    const rv=body.querySelector("#reveal");if(rv)rv.onclick=()=>{show=true;draw(body)};
+    const mc=body.querySelector("#mic");if(mc)mc.onclick=async()=>{mc.disabled=true;mc.textContent="🎤 聞いています…ヒンディー語で話してください";
+      try{heard=await listenOnce()}catch(e){heard=null;toast(e==="not-allowed"||e==="service-not-allowed"?"マイクの使用を許可してください（設定 → Safari → マイク）":"うまく聞き取れませんでした。もう一度どうぞ");mc.disabled=false;mc.textContent="🎤 話して答える";return}
+      show=true;draw(body)};
+    body.querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>{rateCard(c.key,+b.dataset.r);save();i++;show=false;heard=null;draw(body)});
+    const ck=body.querySelector("#check");if(ck)ck.onclick=async()=>{const mine=body.querySelector("#mine").value.trim();if(!mine)return;const out=body.querySelector("#aiout");
+      await askAI(`あなたは日本人の大人にヒンディー語を教える講師です。学習者はCEFR ${w.cefr}レベルの初心者です。\n日本語：${c.item.ja}\n模範解答：${c.item.en}（${romOf(c.item.en)}）\n学習者の答え（デーヴァナーガリーまたはローマ字）：${mine}\n\n学習者の答えが通じるか、文法（性・数・आप との一致、後置詞）の誤り、より自然な言い方を、やさしい日本語で3〜5行で教えてください。ヒンディー語には必ずローマ字を添えてください。正しければまずほめてください。模範解答と違っても正しいヒンディー語なら正解と伝えてください。`,out,{modelTier:"quick"})}
+  }
+  openLesson("瞬間作文",`W${w.week}`,"",draw)}
+
+/* --- シャドーイング --- */
+function lessonShadow(w,step,done){
+  const lines=w.dialogue.lines;let st=step||"listen",showJa=st==="listen"||st==="read",role="A",rate=S.settings.rate,playing=-1,reps=0;
+  const speakers=[...new Set(lines.map(l=>l.s))];
+  function enClass(){return (st==="listen"||st==="shadow")?"en blur":"en"}
+  function draw(body){
+    body.innerHTML=`<div class="stack"><div class="mascot-side">${pic("aki-listen","","")}<div><div class="eyebrow">${esc(w.scene)}</div><h2>${esc(w.dialogue.title)}</h2></div></div>
+     <div class="steps">${Object.keys(SHADOWSTEP).map(k=>`<button data-st="${k}" class="${k===st?"on":""}">${SHADOWSTEP[k]}</button>`).join("")}</div>
+     <p class="note">${{listen:"文を見ずに2回聞きます。わからなくても大丈夫。日本語訳で内容をつかみます。",read:"文（文字とローマ字）を見ながら聞き、わからない単語を確認します。",overlap:"文を見ながら、音声と同時に声を重ねて読みます（オーバーラッピング）。3回。",shadow:"文を見ずに、音声の0.5秒あとを影のように追いかけて言います。3回。",role:"相手のセリフは音声が読み、あなたの番（緑）は止まります。文を見ずに言えたら合格。"}[st]}</p>
+     ${st==="role"&&speakers.length>1?`<div class="row"><span class="small">あなたの役：</span>${speakers.map(s=>{const nm=(lines.find(l=>l.s===s)||{}).name||s;return `<button class="btn sm ${role===s?"primary":""}" data-role="${s}">${esc(nm)}</button>`}).join("")}</div>`:""}
+     <div class="stack" style="gap:4px">${lines.map((l,k)=>`<div class="dl ${k===playing?"playing":""} ${st==="role"&&l.s===role?"mine":""}" data-line="${k}">
+       <span class="who">${esc(l.name||l.s)}</span><div class="t"><span class="${st==="role"&&l.s===role?"en blur":enClass()}">${tg(l.en)}</span>${showJa?`<span class="ja">${esc(l.ja)}</span>`:""}</div>${spkBtn(l.en)}</div>`).join("")}</div>
+     <div class="row"><button class="btn sm ghost" id="tja">${showJa?"日本語を隠す":"日本語を表示"}</button><button class="btn sm ghost" id="ten">文を一時表示</button></div>
+     <div class="ctrl"><button class="btn accent" id="play">▶ 再生</button><button class="btn" id="stop">■ 止める</button>
+      <select id="rate" aria-label="速さ">${[0.6,0.7,0.8,0.9,1].map(r=>`<option value="${r}" ${r==rate?"selected":""}>速さ ${r}</option>`).join("")}</select>
+      <span class="small muted mono">${reps}回</span><button class="btn primary" data-finish style="margin-left:auto">完了</button></div></div>`;
+    bindFinish(body,done);
+    body.querySelectorAll("[data-st]").forEach(b=>b.onclick=()=>{stopSpeak();st=b.dataset.st;showJa=st==="listen"||st==="read";playing=-1;draw(body)});
+    body.querySelectorAll("[data-role]").forEach(b=>b.onclick=()=>{role=b.dataset.role;draw(body)});
+    body.querySelector("#tja").onclick=()=>{showJa=!showJa;draw(body)};
+    body.querySelector("#ten").onclick=()=>{body.querySelectorAll(".en.blur").forEach(e=>e.classList.remove("blur"))};
+    body.querySelector("#rate").onchange=e=>{rate=+e.target.value};
+    body.querySelector("#stop").onclick=()=>{stopSpeak();playing=-1;draw(body)};
+    body.querySelector("#play").onclick=async()=>{stopSpeak();const tk=++speakToken;
+      for(let k=0;k<lines.length;k++){if(tk!==speakToken)return;playing=k;mark(body,k);
+        const l=lines[k];
+        if(st==="role"&&l.s===role){const words=l.en.split(/\s+/).length;await sleep(Math.max(2500,words*600/rate))}
+        else{await speak(l.en,rate);await sleep(st==="listen"||st==="read"?500:300)}}
+      if(tk===speakToken){playing=-1;reps++;draw(body)}};
+  }
+  function mark(body,k){body.querySelectorAll(".dl").forEach((e,j)=>e.classList.toggle("playing",j===k));const e=body.querySelector(`[data-line="${k}"]`);if(e)e.scrollIntoView({block:"center",behavior:"smooth"})}
+  openLesson("シャドーイング",`W${w.week}`,"",draw)}
+
+/* --- 復習 --- */
+function lessonReview(done){const cards=dueKeys().slice(0,30).map(cardFromKey).filter(Boolean);lessonCards(cards,"復習カード",done,true)}
+
+/* --- Claude アプリとの連携（ログインなしで開いたとき） --- */
+const IN_ARTIFACT=!!(window.claude&&window.claude.use);
+const HAS_MIC=!IN_ARTIFACT&&!!(window.SpeechRecognition||window.webkitSpeechRecognition);
+function parseJSONLoose(s){s=String(s||"").trim();try{return JSON.parse(s)}catch(e){}
+  const m=s.match(/```(?:json)?\s*([\s\S]*?)```/);if(m){try{return JSON.parse(m[1])}catch(e){}}
+  const a=s.indexOf("{"),b=s.lastIndexOf("}");if(a>=0&&b>a){try{return JSON.parse(s.slice(a,b+1))}catch(e){}}return null}
+function copyText(text,fallbackEl){
+  const ok=()=>toast("コピーしました。Claude に貼り付けてください");
+  const ng=()=>{if(fallbackEl){fallbackEl.hidden=false;fallbackEl.focus();fallbackEl.select();toast("全部選んだ状態です。長押しでコピーしてください")}};
+  try{navigator.clipboard.writeText(text).then(ok,ng)}catch(e){ng()}}
+function pasteInto(ta){try{navigator.clipboard.readText().then(t=>{if(!t){toast("コピーした文章がありません");return}ta.value=(ta.value.trim()?ta.value+"\n":"")+t;ta.dispatchEvent(new Event("input"));toast("貼り付けました")},()=>{ta.focus();toast("入力欄を長押しして「ペースト」を選んでください")})}catch(e){ta.focus();toast("入力欄を長押しして「ペースト」を選んでください")}}
+function claudeBridge(out,prompt,o){o=o||{};
+  out.innerHTML=`<div class="card stack bridge"><div><div class="eyebrow">Claude アプリと連携</div><h3>${esc(o.title||"Claude に頼む")}</h3></div>
+   <ol class="small" style="margin:0;padding-left:20px"><li>「頼む文章をコピー」を押す</li><li>「Claude を開く」→ 新しいチャットに貼り付けて送る${o.images?"（スクリーンショットがあれば一緒に添付）":""}</li><li>Claude の答えを長押し →「コピー」して、この下に貼り付ける</li></ol>
+   <div class="row"><button class="btn accent" data-b="copy">頼む文章をコピー</button><a class="btn" href="https://claude.ai/new" target="_blank" rel="noopener">Claude を開く</a></div>
+   <textarea data-b="src" readonly hidden style="min-height:120px;font-size:13px">${esc(prompt)}</textarea>
+   ${o.noPaste?"":`<div class="spread"><label class="small" for="b-paste">Claude の答えを貼り付け</label><button class="btn sm" data-b="pastebtn">📋 貼り付け</button></div><textarea id="b-paste" data-b="paste" style="min-height:110px" placeholder="ここに貼り付け"></textarea><div><button class="btn primary" data-b="take">取り込む</button></div>`}</div>`;
+  out.querySelector('[data-b="copy"]').onclick=()=>copyText(prompt,out.querySelector('[data-b="src"]'));
+  const pb=out.querySelector('[data-b="pastebtn"]');if(pb)pb.onclick=()=>pasteInto(out.querySelector('[data-b="paste"]'));
+  const tk=out.querySelector('[data-b="take"]');if(tk)tk.onclick=()=>{const v=out.querySelector('[data-b="paste"]').value.trim();if(!v){toast("Claude の答えを貼り付けてください");return}o.onResult&&o.onResult(v)}}
+function listenOnce(){return new Promise((res,rej)=>{const R=window.SpeechRecognition||window.webkitSpeechRecognition;if(!R){rej("none");return}
+  const r=new R();r.lang="hi-IN";r.interimResults=false;r.maxAlternatives=1;let txt="";
+  r.onresult=e=>{txt=Array.from(e.results).map(x=>x[0].transcript).join(" ")};r.onerror=e=>rej(e.error||"error");r.onend=()=>res(txt);try{stopSpeak();r.start()}catch(e){rej("start")}})}
+function matchScore(model,heard){const tk=s=>normHi(s).replace(/[^\p{L}\p{M}\p{N}' ]/gu," ").split(/\s+/).filter(Boolean);const a=tk(model),b=tk(heard);if(!a.length)return 0;
+  const d=Array.from({length:a.length+1},()=>new Array(b.length+1).fill(0));for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++)d[i][j]=a[i-1]===b[j-1]?d[i-1][j-1]+1:Math.max(d[i-1][j],d[i][j-1]);
+  return Math.round(d[a.length][b.length]/a.length*100)}
+
+/* --- AI 呼び出し --- */
+async function askAI(input,out,opts){
+  if(!SAMPLE){const prompt=typeof input==="string"?input:input.map(m=>m.content).join("\n\n");claudeBridge(out,prompt,{title:(opts&&opts.title)||"Claude に見てもらう",onResult:v=>{out.innerHTML=`<div class="ai">${md(v)}</div>`}});return null}
+  out.innerHTML=`<div class="ai"><p class="muted">考えています…</p></div>`;
+  try{const r=await SAMPLE(input,Object.assign({onText:({text})=>{out.innerHTML=`<div class="ai">${md(text)}</div>`}},opts||{}));out.innerHTML=`<div class="ai">${md(r.text)}</div>`;return r.text}
+  catch(e){const m=e&&e.code==="rate_limited"?"少し時間をおいてから、もう一度押してください。":e&&e.code==="not_granted"?"AI機能が許可されていません。ページ上部の権限設定から許可できます。":"AIにつながりませんでした。もう一度押してください。";
+    out.innerHTML=`<p class="note">${m}</p>`;return null}}
+
+/* --- 日記 --- */
+function lessonWriting(w,done){
+  const key="hindi52-draft-"+w.week;let draft="";try{draft=localStorage.getItem(key)||""}catch(e){}
+  openLesson("ヒンディー語日記＋AI添削",`W${w.week}`,`<div class="stack">
+   <div class="card mascot-side">${pic("aki-write","","")}<div><div class="eyebrow">今日のお題</div><p style="font-size:16px;font-weight:700">${esc(w.writing)}</p><p class="small muted" style="margin-top:6px">今週の文法「${esc(w.grammar.title)}」を1回は使ってみましょう。ローマ字で書いてもOK。完璧でなくていいので、まず書くこと。</p></div></div>
+   <label for="diary" class="small">ヒンディー語で書く（2〜5文。デーヴァナーガリーでもローマ字でもOK）</label>
+   <textarea id="diary" placeholder="आज मैं … / āj maiṁ …">${esc(draft)}</textarea>
+   <div class="spread"><span class="small muted mono" id="wc">0 words</span><div class="row"><button class="btn accent" id="fix">${SAMPLE?"AIに添削してもらう":"Claude に添削してもらう"}</button><button class="btn" id="savediary">保存</button></div></div>
+   <p class="note">iPhone のキーボードに「ヒンディー語（音訳）」を追加すると、ローマ字で打つだけでデーヴァナーガリーになります（ガイドを見てください）。</p>
+   <div id="aiout"></div>${finishBtn()}</div>`,
+   body=>{const ta=body.querySelector("#diary"),wc=body.querySelector("#wc");
+    const upd=()=>{wc.textContent=(ta.value.trim()?ta.value.trim().split(/\s+/).length:0)+" words";try{localStorage.setItem(key,ta.value)}catch(e){}};ta.oninput=upd;upd();
+    const fix=body.querySelector("#fix");if(fix)fix.onclick=()=>{if(!ta.value.trim())return;
+      askAI(`あなたは日本人の大人にヒンディー語を教える講師です。学習者は岩田章弘さん（愛媛県大洲市の鍼灸整骨院の院長。インドの取引先や仲間とヒンディー語で話せるようになりたい）。レベルはCEFR ${w.cefr}の初心者。今週の文法は「${w.grammar.title}」。\nお題：${w.writing}\n\n学習者のヒンディー語（デーヴァナーガリーまたはローマ字）：\n${ta.value}\n\n次の形で、やさしい日本語で答えてください。ヒンディー語には必ずローマ字を添えてください。\n## よかった点\n（1〜2行）\n## 直したヒンディー語\n（全文。デーヴァナーガリーと、その下にローマ字）\n## 直したところ\n- 元の表現 → 直した表現：理由（各1行。性・数・आप の一致や後置詞など、大事なものから最大5つ）\n## 次に使ってみたい表現\n- このレベルで使える自然な表現を2つ（ヒンディー語・ローマ字・日本語訳）`,body.querySelector("#aiout"))};
+    body.querySelector("#savediary").onclick=()=>saveDiary(w,ta.value,()=>toast("日記を保存しました"));
+    bindFinish(body,()=>{if(ta.value.trim())saveDiary(w,ta.value,()=>{});try{localStorage.removeItem(key)}catch(e){}done()})})}
+async function saveDiary(w,text,cb){text=text.trim();if(!text)return;const d=today();
+  S.diary=S.diary.filter(x=>x.date!==d);S.diary.push({date:d,week:w.week,preview:text.slice(0,140)});if(S.diary.length>400)S.diary.shift();save();
+  if(DB&&UID){try{await DB.doc("data/users/"+UID+"/diary-"+d).set({date:d,week:w.week,text})}catch(e){}}cb()}
+
+/* --- 週テスト --- */
+function lessonTest(w,done){
+  const vq=shuffle(w.vocab).slice(0,10).map(v=>{const wrong=shuffle(w.vocab.filter(x=>x.en!==v.en)).slice(0,3).map(x=>x.ja);return{kind:"v",q:v.en,a:v.ja,opts:shuffle([v.ja,...wrong])}});
+  const sp=x=>String(x||"").replace(/([।.?!,])/g," $1").split(/\s+/).filter(Boolean);
+  const sq=shuffle(w.sentences).slice(0,5).map(s=>{const h=sp(s.en),r=sp(s.rom);return{kind:"s",q:s.ja,a:s.en,tiles:shuffle(h.map((t,k)=>({t,r:r.length===h.length?r[k]:""})))}});
+  const tileH=x=>{const m=S.settings.script||"both";return m==="rom"&&x.r?`<span class="hi-rom">${esc(x.r)}</span>`:esc(x.t)+(m==="both"&&x.r?`<small>${esc(x.r)}</small>`:"")};
+  const Q=[...vq,...sq];let i=0,score=0,picked=[],answered=false;
+  const norm=s=>normHi(s).replace(/[^\p{L}\p{M}\p{N}' ]/gu,"").replace(/\s+/g," ").trim();
+  function draw(body){
+    if(i>=Q.length){const pts=Math.round(score/Q.length*100);S.tests[w.week]=Math.max(S.tests[w.week]||0,pts);save();
+      body.innerHTML=`<div class="stack">${pic(pts>=100&&IMG_HAVE.has("aki-medal")?"aki-medal":pts>=80?"aki-cheer":"aki-think","empty-img","")}<div class="eyebrow">Week ${w.week} 週テスト</div><h2 class="mono" style="font-size:44px">${pts}<span style="font-size:18px">点</span></h2><p>${pts>=80?"合格です。この調子で次の週へ。":"80点未満の週は、復習カードと瞬間作文をもう一度回してから進むのがおすすめです。"}</p>${finishBtn()}</div>`;bindFinish(body,done);return}
+    const q=Q[i];
+    let h=`<div class="stack"><div class="spread"><span class="small muted mono">${i+1} / ${Q.length}</span><span class="small muted mono">${score}問正解</span></div><div class="progress"><span style="width:${i/Q.length*100}%"></span></div>`;
+    if(q.kind==="v"){h+=`<div class="flash" style="min-height:140px"><div class="word">${tg(q.q)}</div>${spkBtn(q.q)}</div><div class="opts">${q.opts.map((o,k)=>`<button class="opt ${answered?(o===q.a?"ok":picked[0]===k?"ng":""):""}" data-o="${k}">${esc(o)}</button>`).join("")}</div>`}
+    else{h+=`<div class="card"><div class="eyebrow">並べ替え</div><p style="font-size:17px;font-weight:700">${esc(q.q)}</p></div>
+      <div class="answer en">${picked.map((k,j)=>`<button class="tile" data-un="${j}">${tileH(q.tiles[k])}</button>`).join("")}</div>
+      <div class="tiles en">${q.tiles.map((t,k)=>`<button class="tile ${picked.includes(k)?"used":""}" data-t="${k}" ${picked.includes(k)?"disabled":""}>${tileH(t)}</button>`).join("")}</div>
+      ${answered?`<div class="ai"><b>${norm(picked.map(k=>q.tiles[k].t).join(" "))===norm(q.a)?"正解":"正解は"}</b>　<span class="en">${tg(q.a)}</span></div>`:`<div><button class="btn primary" id="judge" ${picked.length<q.tiles.length?"disabled":""}>答え合わせ</button></div>`}`}
+    if(answered)h+=`<div><button class="btn primary" id="next">次へ →</button></div>`;
+    body.innerHTML=h+"</div>";
+    body.querySelectorAll("[data-o]").forEach(b=>b.onclick=()=>{if(answered)return;picked=[+b.dataset.o];answered=true;if(q.opts[picked[0]]===q.a)score++;draw(body)});
+    body.querySelectorAll("[data-t]").forEach(b=>b.onclick=()=>{if(answered)return;picked.push(+b.dataset.t);draw(body)});
+    body.querySelectorAll("[data-un]").forEach(b=>b.onclick=()=>{if(answered)return;picked.splice(+b.dataset.un,1);draw(body)});
+    const jg=body.querySelector("#judge");if(jg)jg.onclick=()=>{answered=true;if(norm(picked.map(k=>q.tiles[k].t).join(" "))===norm(q.a))score++;speak(q.a);draw(body)};
+    const nx=body.querySelector("#next");if(nx)nx.onclick=()=>{i++;picked=[];answered=false;draw(body)};
+  }
+  openLesson("週テスト",`W${w.week}`,"",draw)}
+
+/* --- AIロールプレイ --- */
+function lessonRoleplay(w,done){
+  const partner=(w.dialogue.lines.find(l=>l.s!=="A")||{}).name||"Raj";
+  let msgs=[],busy=false,ended=false;
+  const setup=`You are ${partner}, a friendly person from India (Delhi), talking with Akihiro, a Japanese man who runs an acupuncture and bone-setting clinic in Ozu, Ehime, and has business partners and friends in India. Akihiro is a beginner learning Hindi (CEFR ${w.cefr}).\nScene: ${w.scene}. This week's topic: ${w.title} (${w.grammar.title}).\nRules: Speak simple, natural Hindi at ${w.cefr} level and use आप. For every line, write the Hindi in Devanagari, then the romanization in parentheses, then a short Japanese translation on the next line. Keep each reply to 1-2 short sentences. Ask exactly one question each turn so Akihiro has to answer. Naturally use words like: ${w.vocab.slice(0,8).map(v=>v.en+" ("+romOf(v.en)+")").join(", ")}. Do not correct mistakes during the conversation. Akihiro may answer in Devanagari or romanized Hindi. If he writes Japanese, tell him the Hindi way to say it (Devanagari + romanization) and continue.\nStart the conversation now with your first line.`;
+  function draw(body){
+    body.innerHTML=`<div class="stack"><div class="card"><div class="eyebrow">今日のタスク</div><p style="font-weight:700">${esc(w.speaking)}</p>
+      <p class="small muted" style="margin-top:6px">${SAMPLE?`相手は ${esc(partner)} さん。ヒンディー語（ローマ字でもOK）で返事を書くか、キーボードのマイクで話して入力します。6往復ほど続けたら「終わってフィードバック」。`:`Claude アプリが ${esc(partner)} さんの役をして、ヒンディー語（ローマ字と日本語訳つき）で話しかけてくれます。Claude アプリの<b>音声モード</b>で話すと、本当の会話の練習になります。6往復ほど話したら「終わり」と言うと、日本語でフィードバックがもらえます。`}</p></div>
+     ${SAMPLE?"":`<div id="rpbridge"></div>`}
+     ${SAMPLE?`<div class="chat" id="chat">${msgs.slice(1).map((m,k)=>m.role==="assistant"?`<div class="bub ai2">${partnerPic(partner,"avatar")}<span class="en">${esc(m.content)}</span><div class="row">${spkBtn(m.content)}</div></div>`:m.fb?"":`<div class="bub me en">${esc(m.content)}</div>`).join("")}</div>
+      <div id="fbout"></div>
+      ${ended?"":msgs.length?`<textarea id="say" style="min-height:80px" placeholder="ヒンディー語で返事（ローマ字でも、わからなければ日本語でもOK）"></textarea><div class="row"><button class="btn accent" id="send" ${busy?"disabled":""}>送る</button><button class="btn" id="end" ${busy||msgs.length<5?"disabled":""}>終わってフィードバック</button></div>`
+        :`<div><button class="btn accent" id="start">会話を始める</button></div>`}`:""}
+     ${finishBtn()}</div>`;
+    bindFinish(body,done);
+    const rb=body.querySelector("#rpbridge");if(rb)claudeBridge(rb,setup.replace("Start the conversation now with your first line.","When Akihiro says finish or 終わり, stop the role-play and give feedback in simple Japanese: 1) good points (2 lines), 2) up to 4 of his sentences rewritten as natural Hindi (Devanagari + romanization) with a one-line reason, 3) three useful phrases for next time (Devanagari + romanization + Japanese).\nStart the conversation now with your first line."),{title:"Claude アプリでヒンディー語の会話",noPaste:true});
+    const stt=body.querySelector("#start");if(stt)stt.onclick=()=>turn(body,setup);
+    const sd=body.querySelector("#send");if(sd)sd.onclick=()=>{const t=body.querySelector("#say").value.trim();if(t)turn(body,t)};
+    const en=body.querySelector("#end");if(en)en.onclick=()=>feedback(body);
+  }
+  async function turn(body,text){if(busy)return;busy=true;msgs.push({role:"user",content:text});msgs.push({role:"assistant",content:"…"});draw(body);
+    const bubs=()=>body.querySelectorAll(".bub.ai2 .en");
+    try{const r=await SAMPLE(msgs.slice(0,-1),{cache:false,modelTier:"quick",onText:({text})=>{const b=bubs();if(b.length)b[b.length-1].textContent=text}});
+      msgs[msgs.length-1].content=r.text.trim();busy=false;draw(body);speak(r.text.trim())}
+    catch(e){msgs.splice(-2,2);busy=false;draw(body);toast(e&&e.code==="rate_limited"?"少し時間をおいてください":"AIにつながりませんでした")}}
+  async function feedback(body){ended=true;draw(body);
+    const conv=msgs.slice(1).map(m=>(m.role==="user"?"Akihiro: ":partner+": ")+m.content).join("\n");
+    await askAI(`あなたは日本人にヒンディー語を教える講師です。日本人学習者 Akihiro（CEFR ${w.cefr}）が、ヒンディー語の会話練習をしました。今週のテーマは「${w.title}」。\n\n会話：\n${conv}\n\nやさしい日本語で次の形で答えてください。ヒンディー語には必ずローマ字を添えてください。\n## よかった点\n（2行以内）\n## 直すともっと良くなる文\n- Akihiro の文 → 自然なヒンディー語（ローマ字）：ひとこと理由（最大4つ）\n## 次の会話で使いたいフレーズ\n- ヒンディー語（ローマ字・日本語訳）を3つ\n## 今のレベルの目安\n（1行）`,body.querySelector("#fbout"))}
+  openLesson("AIとヒンディー語会話",`W${w.week}`,"",draw)}
+
+/* --- 耳だけ学習 --- */
+function lessonInput(done){const p=phaseOf(S.week);const w=W(S.week);
+  openLesson("耳だけ学習","",`<div class="stack">${pic("aki-listen","empty-img","")}<p>今日はアプリの外で<b>20分</b>、ヒンディー語を聞きます。スマホをポケットに入れて、施術の合間や移動中に。</p>
+   ${w?`<div class="card stack"><h3>① 今週の会話を聞き流す（5分）</h3><p class="small muted">${esc(w.dialogue.title)}</p><div><button class="btn sm" id="loop">▶ 3回くり返し再生</button></div></div>`:""}
+   <div class="card stack"><h3>② レベルに合った音声（15分）</h3><div class="res">${p.res.map(r=>`<div><b>${esc(r[0])}</b><span class="small muted">${esc(r[1])}</span></div>`).join("")}</div>
+   <p class="small"><a href="https://www.youtube.com/results?search_query=learn+hindi+for+beginners" target="_blank" rel="noopener">YouTube：初級ヒンディー語</a> ／ <a href="https://www.youtube.com/results?search_query=hindi+songs+with+lyrics" target="_blank" rel="noopener">歌詞つきのヒンディー語の歌</a> ／ <a href="https://www.bbc.com/hindi" target="_blank" rel="noopener">BBC News हिन्दी</a></p></div>
+   <p class="note">聞きながら、知っている単語が聞こえたら小さく口に出すのがコツ。8割わからない教材は難しすぎるので、1段階やさしいものに替えましょう。</p>${finishBtn("20分聞いた・完了")}</div>`,
+   body=>{bindFinish(body,done);const lp=body.querySelector("#loop");if(lp)lp.onclick=async()=>{const tk=++speakToken;for(let r=0;r<3;r++)for(const l of w.dialogue.lines){if(tk!==speakToken)return;await speak(l.en);await sleep(400)}}})}
+
+/* ============ 会話ノート（実際の会話から自分専用の教材を作る） ============ */
+const NKEY="hindi52-notes-v1";
+let NOTES=[];
+const CHANNELS=["WhatsApp","電話","Zoom・Meet","対面","メール","その他"];
+function saveNotesLocal(){try{localStorage.setItem(NKEY,JSON.stringify(NOTES))}catch(e){}if(typeof scheduleSync==="function")scheduleSync()}
+async function loadNotesDB(){if(!DB||!UID)return;
+  try{const q=await DB.collection("data/users/"+UID).where("kind","==","note").get();
+    const remote=q.docs.map(d=>d.data()).filter(n=>n&&n.id);
+    const byId={};NOTES.forEach(n=>byId[n.id]=n);remote.forEach(n=>byId[n.id]=n);
+    // この端末にだけあるノートはアカウントにも保存
+    NOTES.filter(n=>!remote.find(r=>r.id===n.id)).forEach(n=>pushNote(n));
+    NOTES=Object.values(byId).sort((a,b)=>(b.date+b.createdAt)>(a.date+a.createdAt)?1:-1);saveNotesLocal();
+  }catch(e){}}
+async function pushNote(n){if(!DB||!UID)return;try{await DB.doc("data/users/"+UID+"/note-"+n.id).set(JSON.parse(JSON.stringify(n)))}catch(e){if(e&&e.code==="quota_exceeded")toast("保存容量がいっぱいです")}}
+async function deleteNote(id){NOTES=NOTES.filter(n=>n.id!==id);S.deletedNotes=[...new Set([...(S.deletedNotes||[]),id])];saveNotesLocal();
+  Object.keys(S.srs).forEach(k=>{if(k.startsWith("n"+id+"-"))delete S.srs[k]});save();
+  if(DB&&UID){try{await DB.doc("data/users/"+UID+"/note-"+id).delete()}catch(e){}}}
+function noteById(id){return NOTES.find(n=>n.id===id)}
+function noteLabel(n){return (n.partner||"会話")+" "+(n.date||"").slice(5).replace("-","/")}
+function noteCard(id,type,i){const n=noteById(id);if(!n)return null;const L=noteLabel(n);const key=`n${id}-${type}-${i}`;
+  if(type==="v"){const it=(n.vocab||[])[i];return it?{key,type:"v",item:it,week:S.week,noteLabel:L}:null}
+  if(type==="s"){const it=(n.sentences||[])[i];return it?{key,type:"s",item:{ja:it.ja,en:it.en,note:it.note},week:S.week,noteLabel:L}:null}
+  if(type==="g"){const it=(n.grammar||[])[i];return it?{key,type:"s",item:{ja:it.ja,en:it.en,note:it.title+"："+it.explain},week:S.week,noteLabel:L}:null}
+  if(type==="d"){const it=(n.dialogue||[])[i];return it?{key,type:"s",item:{ja:it.ja,en:it.en,note:"実際の会話で言いたかったこと"},week:S.week,noteLabel:L}:null}
+  if(type==="f"){const it=(n.fixes||[])[i];return it?{key,type:"s",item:{q:it.original,hint:"自分が言ったヒンディー語です。もっと自然に言うと？",en:it.improved,note:it.why},week:S.week,noteLabel:L}:null}
+  return null}
+function noteKeys(n,types){const out=[];(types||"svgfd").split("").forEach(t=>{if(t==="d"){(n.dialogue||[]).forEach((l,i)=>{if(l.s==="A")out.push(`n${n.id}-d-${i}`)});return}const arr=t==="s"?n.sentences:t==="v"?n.vocab:t==="g"?n.grammar:n.fixes;(arr||[]).forEach((_,i)=>out.push(`n${n.id}-${t}-${i}`))});return out}
+function noteCount(n){return (n.dialogue||[]).filter(l=>l.s==="A").length+(n.sentences||[]).length+(n.vocab||[]).length+(n.grammar||[]).length+(n.fixes||[]).length}
+function dueNoteKeys(){return dueKeys().filter(k=>k[0]==="n")}
+
+function viewNotes(){NOTES.forEach(regNote);
+  const total=NOTES.reduce((a,n)=>a+noteCount(n),0);const due=dueNoteKeys().length;
+  return `<div class="top"><div><div class="eyebrow">実際の会話から学ぶ</div><h1>会話ノート</h1></div></div>
+  <div class="stack">
+  <div class="card stack"><div class="mascot-side">${pic("aki-handshake","","")}<h2>今日の会話を貼り付ける</h2></div>
+   <p class="small">インドの方とのチャットや、話した内容のメモを貼り付けてください。AI が<b>自分のヒンディー語を自然なヒンディー語に直した「練習用の会話」</b>と、使える文・文法・単語のカードにします（ローマ字・ヒングリッシュのチャットでもOK）。</p>
+   <div class="spread"><label class="small" for="quick-raw">会話・メモ</label><button class="btn sm" data-act="quickpaste">📋 貼り付け</button></div>
+   <textarea id="quick-raw" style="min-height:110px" placeholder="Neha: Aap kaise hain?&#10;Me: main theek hun, aap?"></textarea>
+   <div class="row"><button class="btn accent" data-act="quickgo">AI で直して練習にする →</button></div>
+   <div class="row"><button class="btn accent" data-act="newnote">＋ 会話を記録する</button><button class="btn" data-act="quicklog">話した記録だけ残す</button>${due?`<button class="btn" data-act="notereview">ノートの復習 ${Math.min(30,due)}枚</button>`:""}</div></div>
+  ${peopleSection()}
+  ${introRow()}
+  <div class="stats">
+   <div class="stat"><b>${NOTES.length}</b><span>記録した会話</span></div>
+   <div class="stat"><b>${total}</b><span>自分専用のカード</span></div>
+   <div class="stat"><b>${noteKeysAll().filter(k=>S.srs[k]&&S.srs[k].b>=3).length}</b><span>覚えたカード</span></div>
+   <div class="stat"><b>${due}</b><span>今日の復習</span></div>
+  </div>
+  ${NOTES.length?`<div class="cardgrid">`+NOTES.map(n=>`<button class="notecard" data-note="${esc(n.id)}"><div class="spread"><span class="small mono muted">${esc(n.date)}</span><span class="row" style="gap:6px">${chChip(n.channel)}${n.minutes?`<span class="chip">${n.minutes}分</span>`:""}${noteCount(n)?`<span class="chip g">${noteCount(n)}枚</span>`:""}</span></div>
+     <h3 style="margin:4px 0 2px">${esc(n.partner?n.partner+"さんと：":"")}${esc(n.title||"会話")}</h3><p>${esc(n.summary||"")}</p></button>`).join("")+`</div>`
+   :`<div class="card stack">${pic("empty-notes","empty-img","")}<h3>まだ記録はありません</h3><p class="small muted">たとえば「Neha さんと WhatsApp で、ディワリのあいさつをした。शुभ दीपावली への返し方がわからなかった」のようなメモでも、ちゃんと教材になります。</p></div>`}
+  <p class="note">ノートのカードは、毎日の「復習カード」にも自動で出てきます。今週の教材と、実際の会話の両方から復習できます。</p>
+  </div>`}
+function noteKeysAll(){return NOTES.flatMap(n=>noteKeys(n))}
+
+/* --- 入力と AI 整理 --- */
+let IMGLIM=null;
+async function imageLimits(){if(IMGLIM!==null)return IMGLIM;try{const l=SAMPLE&&SAMPLE.limits?await SAMPLE.limits():null;IMGLIM=(l&&l.images)||false}catch(e){IMGLIM=false}return IMGLIM}
+async function openNoteEditor(prefill,rawText){
+  const lim=await imageLimits();let imgs=[];let result=null;
+  const partners=allPartners();
+  openLesson("会話を記録する","",`<div class="stack">
+   <div class="row"><div style="flex:1;min-width:140px"><label class="small" for="n-date">日付</label><input type="date" id="n-date" value="${today()}"></div>
+    <div style="flex:1;min-width:140px"><label class="small" for="n-partner">相手</label><input type="text" id="n-partner" list="n-plist" placeholder="例：Raj" value="${esc(prefill||"")}"><datalist id="n-plist">${partners.map(p=>`<option value="${esc(p)}">`).join("")}</datalist></div>
+    <div style="flex:1;min-width:140px"><label class="small" for="n-ch">方法</label><select id="n-ch" style="width:100%">${CHANNELS.map(c=>`<option>${c}</option>`).join("")}</select></div>
+    <div style="flex:1;min-width:140px"><label class="small" for="n-min">話した時間</label><select id="n-min" style="width:100%">${MINUTES.map(m=>`<option value="${m}" ${m===15?"selected":""}>${m}分</option>`).join("")}</select></div></div>
+   <div class="spread"><label class="small" for="n-raw">話した内容（日本語のメモ・ヒンディー語や英語のチャットの貼り付け、どれでもOK）</label><button class="btn sm" id="n-paste">📋 貼り付け</button></div>
+   <textarea id="n-raw" style="min-height:180px" placeholder="例）Neha さんとディワリの話をした。家に招待された。&#10;Neha: Diwali par ghar aaiye!&#10;Me: dhanyavaad, main zaroor aaunga&#10;（自分の発言に Me: や 私: をつけると、AIがヒンディー語を直してくれます）"></textarea>
+   <div class="row"><label class="btn sm" for="n-file" style="cursor:pointer">WhatsApp のトーク履歴（.txt）を読み込む</label><input type="file" id="n-file" accept=".txt,text/plain" hidden>
+    ${lim?`<label class="btn sm" for="n-img" style="cursor:pointer">スクリーンショットを追加（${lim.maxCount}枚まで）</label><input type="file" id="n-img" accept="${esc((lim.mediaTypes||["image/png","image/jpeg"]).join(","))}" multiple hidden>`:""}</div>
+   <div class="thumbs" id="n-thumbs"></div>
+   <details><summary class="small" style="cursor:pointer">自分で覚えたい表現を足す（任意）</summary><div class="stack" style="margin-top:8px">
+    <textarea id="n-own" style="min-height:90px" placeholder="1行に1つ「ヒンディー語 = 日本語」&#10;शुभ दीपावली = ディワリおめでとう"></textarea></div></details>
+   ${SAMPLE?"":`<p class="note">スクリーンショットは、Claude アプリに貼るときに一緒に添付してください（このページには入れなくて大丈夫です）。</p>`}
+   <p class="note">WhatsApp のトーク履歴は、トーク画面の相手の名前 →「チャットをエクスポート」→「メディアなし」で .txt にできます。電話番号やメールアドレスは入れなくて大丈夫です。</p>
+   <div class="row"><button class="btn accent" id="n-ai">${SAMPLE?"AIで整理して練習カードを作る":"Claude で整理して練習カードを作る"}</button><button class="btn" id="n-plain">AIを使わずに保存</button></div>
+   <div id="n-out"></div></div>`,
+  body=>{
+    const raw=body.querySelector("#n-raw");if(rawText)raw.value=rawText;
+    body.querySelector("#n-paste").onclick=()=>pasteInto(raw);
+    body.querySelector("#n-file").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{let txt=String(r.result||"");if(txt.length>40000){txt=txt.slice(-40000);toast("長いので、新しい方の部分だけ使います")}raw.value=(raw.value?raw.value+"\n":"")+txt};r.readAsText(f)};
+    const im=body.querySelector("#n-img");if(im)im.onchange=e=>{const fs=[...e.target.files].filter(f=>f.size<=(lim.maxInputBytes||1e8));imgs=imgs.concat(fs).slice(0,lim.maxCount);
+      body.querySelector("#n-thumbs").innerHTML=imgs.map(f=>`<img src="${URL.createObjectURL(f)}" alt="スクリーンショット">`).join("")};
+    const meta=()=>({date:body.querySelector("#n-date").value||today(),partner:body.querySelector("#n-partner").value.trim(),channel:body.querySelector("#n-ch").value,minutes:+body.querySelector("#n-min").value,raw:raw.value.slice(-20000)});
+    const own=()=>body.querySelector("#n-own").value.split(/\n/).map(l=>l.split(/\s*[=＝]\s*/)).filter(p=>p[0]&&p[0].trim()).map(p=>({en:p[0].trim(),ja:(p[1]||"").trim(),note:"自分で足した表現"}));
+    body.querySelector("#n-plain").onclick=()=>{const m=meta();const o=own();if(!m.raw.trim()&&!o.length){toast("内容を入力してください");return}
+      saveNewNote(Object.assign(m,{title:(m.raw.trim().split(/\n/)[0]||"会話のメモ").slice(0,40),summary:m.raw.slice(0,140),topics:[],sentences:o,grammar:[],vocab:[],fixes:[]}))};
+    const ai=body.querySelector("#n-ai");if(ai)ai.onclick=async()=>{const m=meta();if(!m.raw.trim()&&!imgs.length&&SAMPLE){toast("内容を入力するか、スクリーンショットを追加してください");return}
+      if(!SAMPLE&&!m.raw.trim())m.raw="（会話はスクリーンショットで添付します）";
+      const out=body.querySelector("#n-out");
+      if(!SAMPLE){const w=W(S.week);claudeBridge(out,notePrompt(m,w?w.cefr:phaseOf(S.week).cefr),{title:"Claude で会話を整理する",images:true,onResult:v=>{const r=parseJSONLoose(v);
+        if(!r){toast("答えを読み取れませんでした。Claude の答えを最初から最後まで全部コピーしてください");return}result=cleanResult(r);result.sentences=result.sentences.concat(own());showPicker(body,out,meta(),result)}});
+        out.scrollIntoView({behavior:"smooth",block:"start"});return}
+      ai.disabled=true;out.innerHTML=`<div class="ai"><p class="muted">会話を読んで、練習カードを作っています…（30秒ほど）</p></div>`;
+      try{const w=W(S.week);const r=await SAMPLE.json(notePrompt(m,w?w.cefr:phaseOf(S.week).cefr),Object.assign({modelTier:"default"},imgs.length?{images:imgs}:{}));
+        result=cleanResult(r);result.sentences=result.sentences.concat(own());showPicker(body,out,m,result)}
+      catch(e){out.innerHTML=`<p class="note">${e&&e.code==="rate_limited"?"少し時間をおいてから、もう一度押してください。":e&&e.code==="invalid_json"?"うまく整理できませんでした。もう一度押すか、内容を短くしてください。":"AIにつながりませんでした。もう一度押してください。"}</p>`}
+      ai.disabled=false};
+  })}
+function notePrompt(m,cefr){
+  return `あなたは日本人にヒンディー語を教える講師です。生徒は岩田章弘さん（日本の愛媛県大洲市の鍼灸整骨院の院長。インドに取引先や仲間・友人がいて、ヒンディー語で関係を深めたい）。ヒンディー語はゼロから学び中で、今のレベルは CEFR ${cefr} です（ビジネスの話は英語で行っています）。
+岩田さんがインドの方と実際にした会話の記録（日本語のメモ、ヒンディー語・ローマ字ヒンディー語・英語のチャット、またはスクリーンショット）を渡します。これを整理して、次の会話でそのまま使えるヒンディー語の練習教材を作ってください。
+
+日付：${m.date}／相手：${m.partner||"不明"}／方法：${m.channel}
+--- 記録ここから ---
+${m.raw||"（スクリーンショットを見てください）"}
+--- 記録ここまで ---
+
+作り方：
+- 岩田さんが「次に同じ相手と話すとき」に使えるヒンディー語の文を優先。日本語や英語のメモしかない部分は、岩田さんが言いたかったことを自然でやさしいヒンディー語にする。
+- 相手が使った表現で、岩田さんが知っておくべきもの（ヒングリッシュ、जी・यार・अच्छा・चलो などの言い方も）は意味と使い方を説明する。
+- ヒンディー語は ${cefr} 〜1段上のレベルで、短く、相手に失礼のない自然な言い方（基本は आप）に。
+- すべてのヒンディー語はデーヴァナーガリー（hi）で書き、ローマ字（rom）を付ける。ローマ字は発音どおりで、長母音 ā ī ū、そり舌音 ṭ ḍ ṛ、鼻音化は ṁ（hūṁ, maiṁ）。hi と rom はスペースで区切った語の数をそろえる。
+- 岩田さん本人のヒンディー語（Me: / 私: / Akihiro: などの行、またはスクショの自分側）に誤りや不自然な点があれば fixes に入れる。なければ空配列。
+- 電話番号・メールアドレス・住所などの個人情報は教材に入れない。
+- 説明はやさしい日本語で。
+
+次の形の JSON だけを返してください（キー名は厳守）：
+{"title":"会話の内容を表す短い日本語（20字以内）","summary":"会話の要約（日本語2〜3文）","topics":["話題を短く3つまで"],
+"sentences":[{"hi":"次の会話で使えるヒンディー語","rom":"ローマ字","ja":"日本語訳","note":"使う場面やコツ（日本語1文）"}],
+"grammar":[{"title":"文法・型の名前","explain":"日本語2文以内の説明","hi":"この会話に合わせた例文","rom":"ローマ字","ja":"例文の訳"}],
+"vocab":[{"hi":"単語・フレーズ","rom":"ローマ字","ja":"意味","ex":"この会話に合わせた例文","exRom":"例文のローマ字","exJa":"例文の訳"}],
+"fixes":[{"original":"岩田さんが実際に書いた・言ったヒンディー語","improved":"自然なヒンディー語（デーヴァナーガリー）","improvedRom":"そのローマ字","why":"日本語1文の理由"}],
+"dialogue":[{"s":"A","name":"Akihiro","hi":"岩田さんのセリフ（自然で正しいヒンディー語に直したもの）","rom":"ローマ字","ja":"日本語訳"},{"s":"B","name":"相手の名前","hi":"相手のセリフ","rom":"ローマ字","ja":"日本語訳"}]}
+dialogue は「練習用の会話」です。実際の会話の流れと内容はそのままに、岩田さんのセリフは自然で正しいヒンディー語に直し、相手のセリフは聞き取りやすく整えます。岩田さんは s:"A"、相手は s:"B"。日本語のメモしかない場合は、メモの内容から自然な会話を作ります。1行は1〜2文。
+件数：sentences 6〜10、grammar 2〜3、vocab 6〜12、fixes 0〜5、dialogue 6〜16行。`}
+function cleanResult(r){r=r&&typeof r==="object"?r:{};
+  const fixHi=a=>Array.isArray(a)?a.map(x=>{if(x&&typeof x==="object"){if(typeof x.hi==="string"&&!x.en)x.en=x.hi;normItem(x)}return x}):[];
+  const arr=(a,keys)=>fixHi(a).filter(x=>x&&keys.every(k=>typeof x[k]==="string"&&x[k].trim())).slice(0,15);
+  const keep=x=>{const o={};Object.keys(x).forEach(k=>{if(typeof x[k]==="string")o[k]=x[k]});return o};
+  return{title:String(r.title||"会話").slice(0,40),summary:String(r.summary||""),topics:Array.isArray(r.topics)?r.topics.map(String).slice(0,3):[],
+    sentences:arr(r.sentences,["en","ja"]).map(keep),grammar:arr(r.grammar,["title","en"]).map(keep),vocab:arr(r.vocab,["en","ja"]).map(keep),fixes:arr(r.fixes,["original","improved"]).map(keep),
+    dialogue:fixHi(r.dialogue).filter(x=>x&&typeof x.en==="string"&&x.en.trim()).slice(0,24).map(x=>({s:x.s==="A"?"A":"B",name:String(x.name||(x.s==="A"?"Akihiro":"Partner")),en:x.en.trim(),rom:String(x.rom||""),ja:String(x.ja||"")}))}}
+function showPicker(body,out,m,r){
+  const sec=(title,list,type,fmt)=>list.length?`<div class="card"><div class="spread"><h3>${title}</h3><span class="small muted">${list.length}</span></div>${list.map((x,i)=>`<label class="pick"><input type="checkbox" checked data-pick="${type}-${i}"><span>${fmt(x)}</span>${spkBtn(type==="f"?x.improved:x.en)}</label>`).join("")}</div>`:"";
+  out.innerHTML=`<div class="stack"><div class="ai"><b>${esc(r.title)}</b><p>${esc(r.summary)}</p>${r.topics.length?`<div class="row" style="margin-top:6px">${r.topics.map(t=>`<span class="chip">${esc(t)}</span>`).join("")}</div>`:""}</div>
+   <p class="small muted">練習に入れたいものにチェックを入れたまま保存してください。いらないものはチェックを外します。</p>
+   ${r.dialogue.length?`<div class="card"><div class="spread"><h3>練習用の会話（自然なヒンディー語に直した版）</h3><span class="small muted">${r.dialogue.length}行</span></div>${r.dialogue.map(l=>`<div class="dl ${l.s==="A"?"mine":""}"><span class="who">${esc(l.name)}</span><div class="t"><span class="en">${tg(l.en)}</span><span class="ja">${esc(l.ja)}</span></div>${spkBtn(l.en)}</div>`).join("")}</div>`:""}
+   ${sec("使える文（瞬間作文）",r.sentences,"s",x=>`<span class="en">${tg(x.en)}</span><span class="small">${esc(x.ja)}</span>${x.note?`<span class="small muted" style="display:block">${esc(x.note)}</span>`:""}`)}
+   ${sec("自分のヒンディー語をもっと自然に",r.fixes,"f",x=>`<span class="small" style="text-decoration:line-through;color:var(--muted)">${esc(x.original)}</span><span class="en" style="color:var(--green);font-weight:700">${tg(x.improved)}</span><span class="small muted">${esc(x.why||"")}</span>`)}
+   ${sec("文法・型",r.grammar,"g",x=>`<b class="small">${esc(x.title)}</b><span class="small muted" style="display:block">${esc(x.explain||"")}</span><span class="en">${tg(x.en)}</span><span class="small">${esc(x.ja||"")}</span>`)}
+   ${sec("単語・フレーズ",r.vocab,"v",x=>`<span class="en"><b>${tg(x.en)}</b>　${esc(x.ja)}</span>${x.ex?`<span class="small muted">${tg(x.ex)}</span>`:""}`)}
+   <div class="row"><button class="btn primary" id="n-save">保存して練習カードに追加</button></div></div>`;
+  out.querySelector("#n-save").onclick=()=>{const keep=t=>(i)=>{const c=out.querySelector(`[data-pick="${t}-${i}"]`);return !c||c.checked};
+    saveNewNote(Object.assign({},m,{title:r.title,summary:r.summary,topics:r.topics,dialogue:r.dialogue,sentences:r.sentences.filter((_,i)=>keep("s")(i)),fixes:r.fixes.filter((_,i)=>keep("f")(i)),grammar:r.grammar.filter((_,i)=>keep("g")(i)),vocab:r.vocab.filter((_,i)=>keep("v")(i))}))};
+  out.scrollIntoView({behavior:"smooth",block:"start"})}
+function saveNewNote(n,opt){opt=opt||{};
+  n.kind="note";n.id=Date.now().toString(36);n.createdAt=Date.now();ensurePerson(n.partner);
+  NOTES.unshift(n);NOTES.sort((a,b)=>(b.date+b.createdAt)>(a.date+a.createdAt)?1:-1);saveNotesLocal();pushNote(n);
+  noteKeys(n).forEach(k=>{if(!S.srs[k])S.srs[k]={b:0,d:today()}});if(!opt.quiet)logMinutes(10,"note");save();
+  closeLesson();TAB="notes";render();
+  if(opt.quiet){toast(`${n.partner} さんとの会話を記録しました（${n.minutes||0}分）`);return}
+  toast(`保存しました（カード${noteCount(n)}枚）`);setTimeout(()=>openNote(n.id),300)}
+
+/* --- ノートを開く・練習する --- */
+function openNote(id){const n=noteById(id);if(!n)return;regNote(n);
+  openLesson(n.partner?n.partner+"さんとの会話":"会話ノート",n.date,()=>`<div class="stack">
+   <div><div class="row" style="gap:6px">${n.partner?`<button class="chip a" data-goperson style="border:none;cursor:pointer">${esc(n.partner)} さんのページ →</button>`:""}${chChip(n.channel)}${n.minutes?`<span class="chip">${n.minutes}分</span>`:""}${(n.topics||[]).map(t=>`<span class="chip">${esc(t)}</span>`).join("")}</div><h2 style="margin-top:6px">${esc(n.title)}</h2><p class="muted" style="margin-top:4px">${esc(n.summary)}</p></div>
+   <div class="row">${(n.dialogue||[]).length?`<button class="btn accent" id="np-shadow">この会話でシャドーイング</button>`:""}<button class="btn ${(n.dialogue||[]).length?"":"accent"}" data-np="dsgf">文カードで練習</button>${(n.vocab||[]).length?`<button class="btn" data-np="v">単語カード</button>`:""}<button class="btn" id="np-all">全部聞く</button>${SAMPLE?`<button class="btn" id="np-rp">AIと続きを話す</button>`:""}</div>
+   ${(n.dialogue||[]).length?`<div class="card"><div class="spread"><h3>練習用の会話（自然なヒンディー語に直した版）</h3><span class="small muted">${n.dialogue.length}行</span></div>${n.dialogue.map(l=>`<div class="dl ${l.s==="A"?"mine":""}"><span class="who">${esc(l.name)}</span><div class="t"><span class="en">${tg(l.en)}</span><span class="ja">${esc(l.ja)}</span></div>${spkBtn(l.en)}</div>`).join("")}</div>`:""}
+   ${(n.sentences||[]).length?`<div class="card"><h3>使える文</h3>${n.sentences.map(x=>`<div class="exline">${spkBtn(x.en)}<div class="t"><span class="en">${tg(x.en)}</span><span class="small">${esc(x.ja)}</span>${x.note?`<span class="small muted" style="display:block">${esc(x.note)}</span>`:""}</div></div>`).join("")}</div>`:""}
+   ${(n.fixes||[]).length?`<div class="card"><h3>自分のヒンディー語をもっと自然に</h3>${n.fixes.map(x=>`<div class="fix"><span class="old">${esc(x.original)}</span><span class="row" style="gap:8px">${spkBtn(x.improved)}<span class="new en">${tg(x.improved)}</span></span><span class="small muted">${esc(x.why||"")}</span></div>`).join("")}</div>`:""}
+   ${(n.grammar||[]).length?`<div class="card stack"><h3>文法・型</h3>${n.grammar.map((x,i)=>`<div class="point"><span class="n">${i+1}</span><div><b>${esc(x.title)}</b><p class="small">${esc(x.explain||"")}</p><div class="row" style="margin-top:4px;flex-wrap:nowrap">${spkBtn(x.en)}<span><span class="en">${tg(x.en)}</span><br><span class="small muted">${esc(x.ja||"")}</span></span></div></div></div>`).join("")}</div>`:""}
+   ${(n.vocab||[]).length?`<div class="card"><h3>単語・フレーズ</h3><div class="tablewrap"><table>${n.vocab.map(x=>`<tr><td>${spkBtn(x.en)}</td><td><b class="en">${tg(x.en)}</b><br><span class="small">${esc(x.ja)}</span></td><td class="small muted">${esc(x.ex||"")}<br>${esc(x.exJa||"")}</td></tr>`).join("")}</table></div></div>`:""}
+   ${n.raw?`<details class="card"><summary class="small" style="cursor:pointer">元のメモ・チャットを見る</summary><pre style="white-space:pre-wrap;font-family:var(--f-body);font-size:13px;margin:8px 0 0">${esc(n.raw)}</pre></details>`:""}
+   <div class="row"><button class="btn sm ghost" id="np-del">このノートを削除</button></div></div>`,
+  body=>{
+    const sh=body.querySelector("#np-shadow");if(sh)sh.onclick=()=>lessonShadow({week:S.week,scene:n.title,dialogue:{title:(n.partner?n.partner+"さんとの会話":"会話"),lines:n.dialogue}},"listen",()=>{logMinutes(10,"note");save();closeLesson();setTimeout(()=>openNote(id),50)});
+    const gp=body.querySelector("[data-goperson]");if(gp)gp.onclick=()=>openPerson(n.partner);
+    body.querySelectorAll("[data-np]").forEach(b=>b.onclick=()=>{const cards=noteKeys(n,b.dataset.np).map(cardFromKey).filter(Boolean);
+      const back=()=>{logMinutes(Math.max(3,Math.round(cards.length*0.7)),"note");save();closeLesson();setTimeout(()=>openNote(id),50)};
+      lessonCards(cards,b.dataset.np==="v"?"単語カード（ノート）":"文カード（ノート）",back)});
+    body.querySelector("#np-all").onclick=async()=>{const tk=++speakToken;for(const x of (n.sentences||[])){if(tk!==speakToken)return;await speak(x.en);await sleep(1200)}};
+    const rp=body.querySelector("#np-rp");if(rp)rp.onclick=()=>{const w=W(S.week);
+      const pseudo={week:S.week,cefr:w?w.cefr:phaseOf(S.week).cefr,scene:(n.channel||"")+"での会話の続き。前回の内容："+(n.summary||n.title),title:n.title,grammar:{title:(n.grammar||[]).map(g=>g.title).join(" / ")||"自由"},
+        vocab:(n.vocab||[]).concat((n.sentences||[]).map(s=>({en:s.en}))),dialogue:{lines:[{s:"B",name:n.partner||"Raj"}]},speaking:`前回 ${n.partner||"相手"} さんと話した「${n.title}」の続きを、ヒンディー語でもう一度話してみましょう。ノートの文を使えたら合格です。`};
+      lessonRoleplay(pseudo,()=>{logMinutes(15,"note");save();closeLesson()})};
+    const del=body.querySelector("#np-del");del.onclick=async()=>{if(!del.dataset.ok){del.dataset.ok=1;del.textContent="もう一度押すと削除します（元に戻せません）";return}
+      await deleteNote(id);closeLesson();toast("削除しました")};
+  })}
+
+/* ============ 自己紹介（ヒンディー語。経歴は公式サイトから） ============
+   lines は {hi,rom,ja}。qa は {q:{…}, a:{…}} */
+const INTRO=[
+ {id:0,label:"30秒",level:"A1",scene:"初対面のあいさつ",tip:"まずはこれを暗記。合掌（नमस्ते）しながら言えるようにします。",lines:[
+  {hi:"नमस्ते! मेरा नाम आकिहिरो इवाता है।",rom:"namaste! merā nām Ākihiro Ivātā hai.",ja:"こんにちは。岩田章弘です。"},
+  {hi:"मैं जापान से हूँ।",rom:"maiṁ Jāpān se hūṁ.",ja:"日本から来ました。"},
+  {hi:"मेरा जन्म योकोहामा में हुआ था।",rom:"merā janm Yokohāmā meṁ huā thā.",ja:"横浜で生まれました。"},
+  {hi:"एहिमे में मेरा एक क्लिनिक है।",rom:"Ehime meṁ merā ek klinik hai.",ja:"愛媛に自分の院があります。"},
+  {hi:"मैं एक्यूपंक्चर का काम करता हूँ।",rom:"maiṁ ekyūpankchar kā kām kartā hūṁ.",ja:"鍼灸の仕事をしています。"},
+  {hi:"मैं थोड़ी-थोड़ी हिंदी सीख रहा हूँ।",rom:"maiṁ thoṛī-thoṛī hindī sīkh rahā hūṁ.",ja:"少しずつヒンディー語を勉強しています。"},
+  {hi:"आपसे मिलकर बहुत खुशी हुई।",rom:"āpse milkar bahut khushī huī.",ja:"お会いできてとてもうれしいです。"}]},
+ {id:1,label:"1分",level:"A1 → A2",scene:"インドの仲間の集まりで",tip:"あいさつ → 出身 → 資格と経歴 → 院 → インドが好き → お願い → 締め。過去の話は決まり文句として丸ごと覚えます。",lines:[
+  {hi:"सबको नमस्ते! मेरा नाम आकिहिरो इवाता है।",rom:"sabko namaste! merā nām Ākihiro Ivātā hai.",ja:"皆さん、こんにちは。岩田章弘です。"},
+  {hi:"मैं जापान के योकोहामा शहर से हूँ।",rom:"maiṁ Jāpān ke Yokohāmā shahar se hūṁ.",ja:"日本の横浜市の出身です。"},
+  {hi:"मेरे पास एक्यूपंक्चर और जूडो थेरेपी के लाइसेंस हैं।",rom:"mere pās ekyūpankchar aur jūḍo therepī ke lāisens haiṁ.",ja:"鍼灸と柔道整復の資格を持っています。"},
+  {hi:"पहले मैं खिलाड़ियों का ट्रेनर था।",rom:"pahle maiṁ khilāṛiyoṁ kā ṭrenar thā.",ja:"以前はスポーツ選手のトレーナーでした。"},
+  {hi:"2018 में मैंने एहिमे के ओज़ू शहर में अपना क्लिनिक खोला।",rom:"2018 meṁ maine Ehime ke Ozū shahar meṁ apnā klinik kholā.",ja:"2018年に、愛媛県大洲市で自分の院を開きました。"},
+  {hi:"हमारी टीम में चार लोग हैं।",rom:"hamārī ṭīm meṁ chār log haiṁ.",ja:"スタッフは4人です。"},
+  {hi:"मुझे भारत बहुत पसंद है, और मैं अक्सर भारत आता हूँ।",rom:"mujhe Bhārat bahut pasand hai, aur maiṁ aksar Bhārat ātā hūṁ.",ja:"インドが大好きで、よくインドに来ます。"},
+  {hi:"मेरी हिंदी अभी थोड़ी कमज़ोर है, कृपया धीरे बोलिए।",rom:"merī hindī abhī thoṛī kamzor hai, kripayā dhīre boliye.",ja:"ヒンディー語はまだ苦手なので、ゆっくり話してください。"},
+  {hi:"आप सबसे मिलकर बहुत खुशी हुई। धन्यवाद!",rom:"āp sabse milkar bahut khushī huī. dhanyavād!",ja:"皆さんにお会いできてうれしいです。ありがとうございました。"}]},
+ {id:2,label:"よく聞かれる質問",level:"A1 → A2",scene:"自己紹介のあとの質問",tip:"自己紹介のあとに必ず来る質問です。答えを1〜2文で言えるようにしておきます。",qa:true,lines:[
+  {q:{hi:"एहिमे कहाँ है?",rom:"Ehime kahāṁ hai?",ja:"愛媛はどこですか。"},a:{hi:"एहिमे जापान के पश्चिम में है। वहाँ के संतरे मशहूर हैं।",rom:"Ehime Jāpān ke pashchim meṁ hai. vahāṁ ke santare mashhūr haiṁ.",ja:"日本の西のほうです。みかんが有名です。"}},
+  {q:{hi:"आप क्या काम करते हैं?",rom:"āp kyā kām karte haiṁ?",ja:"お仕事は何ですか。"},a:{hi:"मैं एक्यूपंक्चर क्लिनिक चलाता हूँ।",rom:"maiṁ ekyūpankchar klinik chalātā hūṁ.",ja:"鍼灸の院を経営しています。"}},
+  {q:{hi:"आप हिंदी क्यों सीख रहे हैं?",rom:"āp hindī kyoṁ sīkh rahe haiṁ?",ja:"どうしてヒンディー語を勉強しているのですか。"},a:{hi:"मेरे बहुत से दोस्त भारत में हैं। मैं उनसे हिंदी में बात करना चाहता हूँ।",rom:"mere bahut se dost Bhārat meṁ haiṁ. maiṁ unse hindī meṁ bāt karnā chāhtā hūṁ.",ja:"インドに友だちがたくさんいて、ヒンディー語で話したいからです。"}},
+  {q:{hi:"क्या आपको भारतीय खाना पसंद है?",rom:"kyā āpko bhāratīya khānā pasand hai?",ja:"インド料理は好きですか。"},a:{hi:"जी हाँ, मुझे दाल-चावल बहुत पसंद है।",rom:"jī hāṁ, mujhe dāl-chāval bahut pasand hai.",ja:"はい、ダールとご飯が大好きです。"}},
+  {q:{hi:"आप भारत कितनी बार आते हैं?",rom:"āp Bhārat kitnī bār āte haiṁ?",ja:"インドには何回くらい来ますか。"},a:{hi:"मैं साल में कई बार आता हूँ।",rom:"maiṁ sāl meṁ kaī bār ātā hūṁ.",ja:"年に何回か来ます。"}},
+  {q:{hi:"आपका परिवार कहाँ रहता है?",rom:"āpkā parivār kahāṁ rahtā hai?",ja:"ご家族はどこに住んでいますか。"},a:{hi:"मेरा परिवार जापान में रहता है।",rom:"merā parivār Jāpān meṁ rahtā hai.",ja:"家族は日本に住んでいます。"}}]}
+];
+INTRO.forEach(sc=>sc.lines.forEach(l=>{if(sc.qa){addRom(l.q.hi,l.q.rom);addRom(l.a.hi,l.a.rom)}else addRom(l.hi,l.rom)}));
+function introCard(v,i){const sc=INTRO[v];if(!sc)return null;const l=sc.lines[i];if(!l)return null;
+  if(sc.qa)return{key:`i${v}-${i}`,type:"s",item:{q:l.q.hi,hint:"この質問にヒンディー語で答えると？（"+l.q.ja+"）",en:l.a.hi,ja:l.a.ja},week:S.week,noteLabel:"自己紹介"};
+  return{key:`i${v}-${i}`,type:"s",item:{ja:l.ja,en:l.hi},week:S.week,noteLabel:"自己紹介 "+sc.label}}
+function introRow(){return `<button class="introbtn" data-act="intro"><span class="seal">${IMG_HAVE.has("aki-card")?pic("aki-card","",""):"名"}</span><span><b>自己紹介を仕上げる</b><small class="muted" style="display:block;font-size:12.5px">30秒・1分の2種類と、よく聞かれる質問。岩田さんの経歴から作りました。</small></span><span class="min mono small muted">→</span></button>`}
+function openIntro(tab){let cur=tab||0;
+  openLesson("自己紹介","",()=>"",body=>{
+    function draw(){const sc=INTRO[cur];const practiced=sc.lines.filter((_,i)=>S.srs[`i${cur}-${i}`]&&S.srs[`i${cur}-${i}`].b>=2).length;
+      body.innerHTML=`<div class="stack">
+       <div class="mascot-side">${pic("aki-card","","")}<div><div class="eyebrow">आत्म-परिचय · 自己紹介</div><h2>自己紹介</h2><p class="small muted" style="margin-top:4px">公式サイトの経歴（横浜出身・トレーナー・2018年に大洲で開業・スタッフ4名）から作りました。インドの方に一度聞いてもらうと安心です。</p></div></div>
+       <div class="tabs">${INTRO.map(s=>`<button data-tab2="${s.id}" class="${s.id===cur?"on":""}">${s.label}</button>`).join("")}</div>
+       <div class="row"><span class="chip a">${sc.level}</span><span class="chip">${esc(sc.scene)}</span><span class="small muted mono">言えた ${practiced}/${sc.lines.length}</span></div>
+       <div class="tip">${esc(sc.tip)}</div>
+       <div class="card script">${sc.lines.map(l=>sc.qa?`<div class="exline">${spkBtn(l.a.hi)}<div class="t"><span class="small" style="font-weight:700">Q. <span class="en">${tg(l.q.hi)}</span></span><span class="en">${tg(l.a.hi)}</span><span class="small muted">${esc(l.q.ja)}／${esc(l.a.ja)}</span></div></div>`
+         :`<div class="exline">${spkBtn(l.hi)}<div class="t"><span class="en">${tg(l.hi)}</span><span class="small muted">${esc(l.ja)}</span></div></div>`).join("")}</div>
+       <div class="row"><button class="btn accent" id="i-shadow">シャドーイングで練習</button><button class="btn" id="i-cards">日本語から言う練習</button></div>
+       <p class="note">おすすめの順番：①全文を聞く → ②シャドーイングの「⑤役になりきる」で、自分の番に何も見ずに言う → ③日本語から言う練習。iPhone のボイスメモで録音して聞き直すと、さらに伸びます。</p>
+      </div>`;
+      body.querySelectorAll("[data-tab2]").forEach(b=>b.onclick=()=>{stopSpeak();cur=+b.dataset.tab2;draw()});
+      body.querySelector("#i-shadow").onclick=()=>{const lines=sc.qa?sc.lines.flatMap(l=>[{s:"B",name:"Partner",en:l.q.hi,ja:l.q.ja},{s:"A",name:"Akihiro",en:l.a.hi,ja:l.a.ja}]):sc.lines.map(l=>({s:"A",name:"Akihiro",en:l.hi,ja:l.ja}));
+        lessonShadow({week:S.week,scene:"自己紹介 "+sc.label,dialogue:{title:sc.scene,lines}},"listen",()=>{logMinutes(10,"intro");save();closeLesson();setTimeout(()=>openIntro(cur),50)})};
+      body.querySelector("#i-cards").onclick=()=>{const cards=sc.lines.map((_,i)=>introCard(cur,i)).filter(Boolean);
+        lessonCards(cards,"自己紹介 "+sc.label,()=>{logMinutes(8,"intro");save();closeLesson();setTimeout(()=>openIntro(cur),50)})};
+    }
+    draw()})}
+
+/* ============ 話す練習（毎日10分）と、話した相手の記録 ============ */
+const MINUTES=[5,10,15,20,30,45,60,90];
+const TALK_TOPICS=[
+ ["自己紹介","名前・出身・仕事を、何も見ずに言ってみましょう。","मेरा नाम आकिहिरो है।","merā nām Ākihiro hai."],
+ ["今日の1日","今日どこにいて、何をしたか。知っている単語だけでOK。","आज मैं क्लिनिक में था।","āj maiṁ klinik meṁ thā."],
+ ["家族","家族の人数や、だれが何をしているか。","मेरे परिवार में चार लोग हैं।","mere parivār meṁ chār log haiṁ."],
+ ["好きな食べ物","日本とインドの好きな食べ物と飲み物。","मुझे चाय बहुत पसंद है।","mujhe chāy bahut pasand hai."],
+ ["インドでしたいこと","次にインドへ行ったら、どこへ行って何をしたいか。","मैं दिल्ली जाना चाहता हूँ।","maiṁ Dillī jānā chāhtā hūṁ."],
+ ["横浜と愛媛","生まれた町と、院がある町の紹介。","योकोहामा एक बड़ा शहर है।","Yokohāmā ek baṛā shahar hai."],
+ ["数字と値段","身の回りの物の値段や、今の時刻を言う練習。","यह कितने का है?","yah kitne kā hai?"]];
+TALK_TOPICS.forEach(t=>addRom(t[2],t[3]));
+function people(){if(!Array.isArray(S.people))S.people=[];return S.people}
+function ensurePerson(name){name=(name||"").trim();if(!name)return null;let p=people().find(x=>x.name===name);if(!p){p={name,org:"",memo:""};people().push(p)}return p}
+function personStats(name){const ns=NOTES.filter(n=>n.partner===name);return{count:ns.length,minutes:ns.reduce((a,n)=>a+(+n.minutes||0),0),last:ns.map(n=>n.date).sort().slice(-1)[0]||""}}
+function allPartners(){const s=new Set(people().map(p=>p.name));NOTES.forEach(n=>{if(n.partner)s.add(n.partner)});return [...s]}
+function speakingMinutes(){return Object.values(S.log).reduce((a,l)=>a+(l.s||0),0)+NOTES.reduce((a,n)=>a+(+n.minutes||0),0)}
+function speakTopic(w){
+  if(S.day<=3&&w)return{ja:"今週のテーマ「"+w.title+"」",desc:w.speaking,task:true};
+  if(S.day===4){const v=S.week<=8?0:1;return{ja:"自己紹介（"+INTRO[v].label+"）",desc:"原稿を見ずに、自己紹介を言ってみましょう。",hi:INTRO[v].lines[0].hi,intro:v}}
+  const t=TALK_TOPICS[(S.week*7+S.day)%TALK_TOPICS.length];return{ja:t[0],desc:t[1],hi:t[2]}}
+function speakPrompt(topic,partner,cefr){const p=partner?people().find(x=>x.name===partner):null;
+  return `You are my Hindi speaking partner${partner?`, playing ${partner}`:""}, a friendly person from India${p&&(p.org||p.memo)?` (about ${partner}: ${[p.org,p.memo].filter(Boolean).join(". ")})`:""}. I am Akihiro Iwata, a Japanese man who runs an acupuncture clinic in Ozu, Ehime. I am a beginner learning Hindi (CEFR ${cefr}). I already speak some English, but please use Hindi.
+Today's topic: ${topic.ja} — ${topic.desc}${topic.hi?` (for example: ${topic.hi} / ${romOf(topic.hi)})`:""}
+Talk with me for about 10 minutes in very simple, slow Hindi, using आप. Say one short sentence and ask one question at a time. If I get stuck, give me a hint in Japanese and the Hindi words I need (with romanization). Do not correct my mistakes during the talk. If I say something in Japanese, tell me how to say it in Hindi and continue.
+When I say "finish" or "終わり", stop and give feedback in simple Japanese: 1) good points (2 lines), 2) up to 4 of my sentences rewritten as natural Hindi (Devanagari + romanization) with a short reason, 3) three useful phrases for next time (Devanagari + romanization + Japanese).
+Start now with a friendly greeting and your first question.`}
+function lessonSpeak(w,done){
+  const cefr=w?w.cefr:phaseOf(S.week).cefr;const topic=speakTopic(w);let left=600,timer=null,heard="";
+  const partners=allPartners();
+  openLesson("話す練習 10分",`W${S.week}`,()=>`<div class="stack">
+   <div class="card stack" style="align-items:center;text-align:center">${pic("aki-talk","empty-img","")}
+    <div class="eyebrow">Speaking time</div>
+    <div class="mono" id="sp-clock" style="font-size:52px;font-weight:600;line-height:1">10:00</div>
+    <div class="row" style="justify-content:center"><button class="btn primary" id="sp-start">▶ スタート</button><button class="btn" id="sp-reset">リセット</button></div>
+    <p class="small muted">10分間、ヒンディー語で口を動かし続けることが目標です。止まってもOK、日本語や英語が混ざってもOK。</p></div>
+   <div class="card stack"><div class="eyebrow">今日のお題</div><h3>${esc(topic.ja)}</h3><p class="small">${esc(topic.desc)}</p>${topic.hi?`<div class="row" style="flex-wrap:nowrap">${spkBtn(topic.hi)}<span class="en" style="font-size:17px">${tg(topic.hi)}<span class="small muted" style="display:block">こんなふうに始めてみましょう</span></span></div>`:""}
+    ${topic.intro!=null?`<div><button class="btn sm" id="sp-intro">自己紹介の原稿を開く</button></div>`:""}</div>
+   <h3>やり方を1つ選ぶ</h3>
+   <div class="card stack"><div class="mascot-side">${IMG_HAVE.has("aki-online")?pic("aki-online","",""):""}<b>① Claude アプリの音声モードで話す（おすすめ）</b></div>
+    <p class="small muted">Claude がインドの方の役をして、やさしいヒンディー語でお題について質問してくれます。困ったら日本語で聞いてOK。最後に「終わり」と言うと、日本語でフィードバックがもらえます。</p>
+    ${partners.length?`<label class="small" for="sp-partner">相手の役（記録した人から選べます）</label><select id="sp-partner"><option value="">インドの友人（おまかせ）</option>${partners.map(n=>`<option>${esc(n)}</option>`).join("")}</select>`:""}
+    ${SAMPLE?`<div><button class="btn accent" id="sp-inapp">このアプリの中でAIと話す（文字）</button></div>`:""}
+    <div id="sp-bridge"></div></div>
+   <div class="card stack"><b>② 今日インドの方と実際に話した</b><p class="small muted">ひとことでもヒンディー語を使ったら、それが今日の話す練習です。誰と何分話したかを記録しましょう。</p>
+    <div><button class="btn" id="sp-real">話した記録をつける</button></div></div>
+   <div class="card stack"><b>③ ひとりで話す</b><p class="small muted">お題について、次の順で話します。①結論を1文 → ②理由や具体例を2〜3文 → ③最後にもう一度まとめ。3回くり返すと、2回目からぐっと楽になります。</p>
+    ${HAS_MIC?`<div><button class="btn" id="sp-mic">🎤 話したヒンディー語を文字で確かめる</button></div><div id="sp-heard"></div>`:`<p class="small muted">iPhone のボイスメモで録音して、聞き直すのもおすすめです。</p>`}</div>
+   ${finishBtn("10分話した・完了")}</div>`,
+  body=>{
+    const clock=body.querySelector("#sp-clock"),st=body.querySelector("#sp-start");
+    const show=()=>{clock.textContent=String(Math.floor(left/60)).padStart(2,"0")+":"+String(left%60).padStart(2,"0")};
+    st.onclick=()=>{if(timer){clearInterval(timer);timer=null;st.textContent="▶ 再開";return}
+      st.textContent="❚❚ 一時停止";timer=setInterval(()=>{left--;show();if(left<=0){clearInterval(timer);timer=null;st.textContent="▶ スタート";left=0;speak("समय पूरा हुआ। बहुत बढ़िया!");toast("10分たちました。おつかれさまでした")}},1000)};
+    body.querySelector("#sp-reset").onclick=()=>{clearInterval(timer);timer=null;left=600;show();st.textContent="▶ スタート"};
+    onClose=()=>{clearInterval(timer)};
+    const ib=body.querySelector("#sp-intro");if(ib)ib.onclick=()=>openIntro(topic.intro);
+    const drawBridge=()=>{const sel=body.querySelector("#sp-partner");claudeBridge(body.querySelector("#sp-bridge"),speakPrompt(topic,sel?sel.value:"",cefr),{title:"Claude アプリでヒンディー語を10分話す",noPaste:true})};
+    drawBridge();const sel=body.querySelector("#sp-partner");if(sel)sel.onchange=drawBridge;
+    const ia=body.querySelector("#sp-inapp");if(ia)ia.onclick=()=>{const nm=(sel&&sel.value)||"Raj";
+      lessonRoleplay({week:S.week,cefr,scene:topic.desc,title:topic.ja,grammar:{title:w?w.grammar.title:"自由"},vocab:w?w.vocab:[],dialogue:{lines:[{s:"B",name:nm}]},speaking:topic.ja+"："+topic.desc},()=>{done()})};
+    body.querySelector("#sp-real").onclick=()=>openQuickLog("",()=>done("speak-real"));
+    const mc=body.querySelector("#sp-mic");if(mc)mc.onclick=async()=>{mc.disabled=true;mc.textContent="🎤 聞いています…";
+      try{const t=await listenOnce();heard+=(heard?" ":"")+t;body.querySelector("#sp-heard").innerHTML=`<div class="ai"><div class="small muted">あなたが話したヒンディー語</div><p class="en" style="font-size:16.5px">${esc(heard||"（聞き取れませんでした）")}</p>${heard?`<div style="margin-top:6px"><button class="btn sm" id="sp-fix">AI に自然なヒンディー語にしてもらう</button></div><div id="sp-fixout"></div>`:""}</div>`;
+        const fx=body.querySelector("#sp-fix");if(fx)fx.onclick=()=>askAI(`あなたはヒンディー語の講師です。日本人学習者（CEFR ${cefr}）が「${topic.ja}：${topic.desc}」というお題で話したヒンディー語（音声認識の文字起こし）です。\n\n${heard}\n\n言いたかったことを、同じレベルの自然なヒンディー語に直した全文（デーヴァナーガリーとローマ字）と、大事な直しを3つまで、やさしい日本語で教えてください。`,body.querySelector("#sp-fixout"))}
+      catch(e){toast(e==="not-allowed"||e==="service-not-allowed"?"マイクの使用を許可してください（設定 → Safari → マイク）":"うまく聞き取れませんでした")}
+      mc.disabled=false;mc.textContent="🎤 続けて話す"};
+    bindFinish(body,done)})}
+
+/* --- 話した記録だけ残す（AI なし・30秒） --- */
+function openQuickLog(name,after){
+  const partners=allPartners();
+  openLesson("話した記録","",`<div class="stack">
+   <p class="small muted">誰と、どうやって、何分くらい話したかを残します。話した内容はひとことでOK。</p>
+   <div class="row"><div style="flex:1;min-width:140px"><label class="small" for="q-date">日付</label><input type="date" id="q-date" value="${today()}"></div>
+    <div style="flex:1;min-width:140px"><label class="small" for="q-partner">相手</label><input type="text" id="q-partner" list="q-plist" value="${esc(name||"")}" placeholder="例：Raj"><datalist id="q-plist">${partners.map(p=>`<option value="${esc(p)}">`).join("")}</datalist></div></div>
+   <div class="row"><div style="flex:1;min-width:140px"><label class="small" for="q-ch">方法</label><select id="q-ch" style="width:100%">${CHANNELS.map(c=>`<option>${c}</option>`).join("")}</select></div>
+    <div style="flex:1;min-width:140px"><label class="small" for="q-min">話した時間</label><select id="q-min" style="width:100%">${MINUTES.map(m=>`<option value="${m}" ${m===15?"selected":""}>${m}分</option>`).join("")}</select></div></div>
+   <label class="small" for="q-topic">話したこと（ひとこと）</label><input type="text" id="q-topic" placeholder="例：ディワリの話、次に会う日">
+   <label class="small" for="q-own">言えなかったこと・覚えたい表現（任意。1行に「ヒンディー語 = 日本語」）</label>
+   <textarea id="q-own" style="min-height:80px" placeholder="शुभ दीपावली = ディワリおめでとう"></textarea>
+   <div class="row"><button class="btn primary" id="q-save">記録する</button></div>
+   <p class="note">内容をくわしく整理して練習カードにしたいときは、「会話ノート」の「＋ 会話を記録する」を使ってください。</p></div>`,
+  body=>{body.querySelector("#q-save").onclick=()=>{const partner=body.querySelector("#q-partner").value.trim();if(!partner){toast("相手の名前を入れてください");return}
+    const topic=body.querySelector("#q-topic").value.trim();
+    const own=body.querySelector("#q-own").value.split(/\n/).map(l=>l.split(/\s*[=＝]\s*/)).filter(p=>p[0]&&p[0].trim()).map(p=>({en:p[0].trim(),ja:(p[1]||"").trim(),note:"自分で足した表現"}));
+    const n={date:body.querySelector("#q-date").value||today(),partner,channel:body.querySelector("#q-ch").value,minutes:+body.querySelector("#q-min").value,title:topic||"会話",summary:topic,topics:[],raw:"",quick:true,sentences:own,grammar:[],vocab:[],fixes:[]};
+    saveNewNote(n,{quiet:true});if(after)after();else setTimeout(()=>openPerson(partner),80)}})}
+
+/* --- 相手ごとのページ --- */
+function openPerson(name){const p=ensurePerson(name);save();
+  const ns=NOTES.filter(n=>n.partner===name);const st=personStats(name);
+  openLesson(name+" さん","",`<div class="stack">
+   <div class="mascot-side">${partnerPic(name,"avatar big")}${IMG_HAVE.has("aki-travel")?pic("aki-travel","",""):""}<div><div class="eyebrow">Partner</div><h2>${esc(name)} さん</h2>${p.org?`<p class="small muted">${esc(p.org)}</p>`:""}</div></div>
+   <div class="stats"><div class="stat"><b>${st.count}</b><span>話した回数</span></div><div class="stat"><b>${st.minutes}</b><span>合計（分）</span></div><div class="stat"><b class="small">${esc(st.last||"—")}</b><span>最後に話した日</span></div><div class="stat"><b>${ns.reduce((a,n)=>a+noteCount(n),0)}</b><span>カード</span></div></div>
+   <div class="card stack"><h3>この人のこと</h3>
+    <label class="small" for="pp-org">会社・立場</label><input type="text" id="pp-org" value="${esc(p.org||"")}" placeholder="例：デリーの取引先・社長 ／ インドのメンバー">
+    <label class="small" for="pp-memo">メモ（家族・好きな話題・注意すること など）</label><textarea id="pp-memo" style="min-height:80px;font-family:var(--f-body);font-size:16px" placeholder="例：クリケット好き。娘さんが日本に興味。">${esc(p.memo||"")}</textarea>
+    <div><button class="btn sm" id="pp-save">保存</button></div></div>
+   <div class="row"><button class="btn accent" id="pp-log">この人と話した記録をつける</button><button class="btn" id="pp-note">くわしく記録（AIで整理）</button><button class="btn" id="pp-prep">次に話すときの準備</button></div>
+   <div id="pp-out"></div>
+   <h3>会話の記録</h3>
+   ${ns.length?`<div class="cardgrid">${ns.map(n=>`<button class="notecard" data-pnote="${esc(n.id)}"><div class="spread"><span class="small mono muted">${esc(n.date)}</span><span class="row" style="gap:6px">${chChip(n.channel)}${n.minutes?`<span class="chip">${n.minutes}分</span>`:""}</span></div><h3 style="margin:4px 0 2px">${esc(n.title||"会話")}</h3><p>${esc(n.summary||"")}</p></button>`).join("")}</div>`:`<p class="small muted">まだ記録はありません。</p>`}
+  </div>`,
+  body=>{body.querySelector("#pp-save").onclick=()=>{p.org=body.querySelector("#pp-org").value.trim();p.memo=body.querySelector("#pp-memo").value.trim();save();toast("保存しました")};
+    body.querySelector("#pp-log").onclick=()=>openQuickLog(name);
+    body.querySelector("#pp-note").onclick=()=>openNoteEditor(name);
+    body.querySelector("#pp-prep").onclick=()=>{const w=W(S.week);const hist=ns.slice(0,5).map(n=>`- ${n.date}（${n.channel||""}）${n.title}：${n.summary||""}`).join("\n")||"（まだ記録なし）";
+      askAI(`あなたはヒンディー語の講師です。日本人学習者の岩田章弘さん（愛媛県大洲市の鍼灸整骨院の代表、ヒンディー語は CEFR ${w?w.cefr:phaseOf(S.week).cefr}）が、インドの ${name} さんと次にヒンディー語で話す準備を手伝ってください。\n${name} さんについて：${[p.org,p.memo].filter(Boolean).join("／")||"情報なし"}\nこれまでの会話：\n${hist}\n\n次の形で、ヒンディー語（デーヴァナーガリー・ローマ字）とやさしい日本語訳で答えてください。\n## 最初のあいさつと雑談（2文）\n## 前回の続きで聞くとよい質問（3つ）\n## 使えそうなフレーズ（5つ）\n## 気をつけること（1〜2行・日本語）`,body.querySelector("#pp-out"),{title:"Claude に準備を手伝ってもらう"})};
+    body.querySelectorAll("[data-pnote]").forEach(b=>b.onclick=()=>openNote(b.dataset.pnote))})}
+function peopleSection(){const ps=allPartners();if(!ps.length)return"";
+  const rows=ps.map(n=>({n,...personStats(n)})).sort((a,b)=>(b.last||"").localeCompare(a.last||""));
+  return `<div class="card stack"><div class="spread"><h3>話した相手</h3><span class="small muted">${ps.length}人</span></div>
+   <div class="tablewrap"><table><tr><th>名前</th><th>回数</th><th>合計</th><th>最後</th></tr>${rows.map(r=>{const p=people().find(x=>x.name===r.n)||{};return `<tr data-person="${esc(r.n)}" style="cursor:pointer"><td><span class="row" style="gap:8px;flex-wrap:nowrap">${partnerPic(r.n,"avatar")}<span><b>${esc(r.n)}</b>${p.org?`<br><span class="small muted">${esc(p.org)}</span>`:""}</span></span></td><td class="mono">${r.count}</td><td class="mono">${r.minutes}分</td><td class="mono small">${esc((r.last||"").slice(5).replace("-","/"))}</td></tr>`}).join("")}</table></div>
+   <p class="small muted">名前をタップすると、その人との記録・メモ・次に話す準備が見られます。</p></div>`}
+
+/* ============ iPhone と iPad の同期（合言葉方式・Supabase） ============ */
+const SB_RPC="https://clfmhgnkwanhnbsjpyxc.supabase.co/rest/v1/rpc/";
+const SB_KEY="sb_publishable_XFVzuu-ijKqT-pZmHkb95Q_ZI7DgL01";
+const SYNCKEY="hindi52-sync-v1";
+const SYNCPFX="hindi52:"; // 英語版と同じ表を使うので、合言葉に印を付けて記録を分ける
+let syncing=false,syncAgain=false,syncTimer=null,syncState="";
+function syncCfg(){try{return JSON.parse(localStorage.getItem(SYNCKEY)||"null")}catch(e){return null}}
+function setSyncCfg(c){try{c?localStorage.setItem(SYNCKEY,JSON.stringify(c)):localStorage.removeItem(SYNCKEY)}catch(e){}}
+async function rpc(fn,body){const r=await fetch(SB_RPC+fn,{method:"POST",headers:{apikey:SB_KEY,"Content-Type":"application/json"},body:JSON.stringify(body)});
+  if(!r.ok)throw new Error("http "+r.status);return r.json()}
+function genCode(){const A="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";const b=new Uint8Array(20);crypto.getRandomValues(b);let s="";b.forEach((x,i)=>{s+=A[x%32];if(i%5===4&&i<19)s+="-"});return s}
+function normCode(s){return String(s||"").toUpperCase().replace(/[^A-Z0-9]/g,"").replace(/(.{5})(?=.)/g,"$1-")}
+function scheduleSync(){if(IN_ARTIFACT||!syncCfg())return;clearTimeout(syncTimer);syncTimer=setTimeout(syncNow,2500)}
+function mergeRemote(d){if(!d||!d.state)return;const R=merge(d.state),L=S;
+  const newer=(R.updatedAt||0)>(L.updatedAt||0)?R:L,older=newer===L?R:L;const out=Object.assign({},newer);
+  out.srs=Object.assign({},L.srs);Object.entries(R.srs||{}).forEach(([k,c])=>{const a=out.srs[k];if(!a||c.d>a.d||(c.d===a.d&&c.b>a.b))out.srs[k]=c});
+  out.log=Object.assign({},L.log);Object.entries(R.log||{}).forEach(([day,l])=>{const a=out.log[day];out.log[day]=!a?l:{m:Math.max(a.m||0,l.m||0),s:Math.max(a.s||0,l.s||0),t:(a.t||[]).length>=(l.t||[]).length?a.t:l.t}});
+  out.tests=Object.assign({},L.tests);Object.entries(R.tests||{}).forEach(([w,p])=>{out.tests[w]=Math.max(out.tests[w]||0,p)});
+  const uniq=(arr,key)=>{const m=new Map();arr.forEach(x=>{if(x)m.set(key(x),x)});return [...m.values()]};
+  out.scores=uniq([...(older.scores||[]),...(newer.scores||[])],x=>x.date+"|"+x.test+"|"+x.result);
+  out.diary=uniq([...(older.diary||[]),...(newer.diary||[])],x=>x.date).sort((a,b)=>a.date<b.date?-1:1);
+  const pm=new Map();[...(older.people||[]),...(newer.people||[])].forEach(p=>{if(!p||!p.name)return;const o=pm.get(p.name)||{};pm.set(p.name,{name:p.name,org:p.org||o.org||"",memo:p.memo||o.memo||""})});out.people=[...pm.values()];
+  out.deletedNotes=[...new Set([...(L.deletedNotes||[]),...(R.deletedNotes||[])])];
+  if(L.doneToday&&R.doneToday&&L.doneToday.date===R.doneToday.date&&L.week===R.week&&L.day===R.day)out.doneToday={date:L.doneToday.date,tasks:[...new Set([...(L.doneToday.tasks||[]),...(R.doneToday.tasks||[])])]};
+  out.updatedAt=Math.max(L.updatedAt||0,R.updatedAt||0);S=out;
+  const del=new Set(S.deletedNotes);const nm=new Map();[...(d.notes||[]),...NOTES].forEach(n=>{if(n&&n.id&&!del.has(n.id))nm.set(n.id,n)});
+  NOTES=[...nm.values()].sort((a,b)=>(b.date+b.createdAt)>(a.date+a.createdAt)?1:-1);
+  lsSet(S);try{localStorage.setItem(NKEY,JSON.stringify(NOTES))}catch(e){}}
+async function syncNow(){const c=syncCfg();if(!c||IN_ARTIFACT)return;if(syncing){syncAgain=true;return}syncing=true;setSyncState("sync");
+  const before=JSON.stringify([S.week,S.day,NOTES.length,Object.keys(S.srs).length,S.doneToday]);
+  try{let done=false;for(let i=0;i<3&&!done;i++){
+      const rows=await rpc("eigo52_pull",{p_code:SYNCPFX+c.code});const remote=rows&&rows[0];
+      if(remote)mergeRemote(remote.data);
+      const r=await rpc("eigo52_push",{p_code:SYNCPFX+c.code,p_data:{app:"hindi52",v:1,state:S,notes:NOTES},p_base:remote?remote.updated_at:null});
+      if(r&&r.ok){setSyncCfg(Object.assign(syncCfg()||c,{last:Date.now()}));done=true}}
+    setSyncState(done?"ok":"ng")}
+  catch(e){setSyncState("ng")}
+  syncing=false;
+  const after=JSON.stringify([S.week,S.day,NOTES.length,Object.keys(S.srs).length,S.doneToday]);
+  if(before!==after&&$("#lesson").hidden)render();
+  if(syncAgain){syncAgain=false;scheduleSync()}}
+function setSyncState(s){syncState=s;const el=document.getElementById("syncchip");if(el)el.innerHTML=syncChipText()}
+function syncChipText(){const c=syncCfg();if(!c)return"";
+  if(syncState==="sync")return"☁ 同期中…";if(syncState==="ng")return"☁ 同期できませんでした";
+  return c.last?"☁ 同期 "+new Date(c.last).toTimeString().slice(0,5):"☁ つながっています"}
+function syncCard(){if(IN_ARTIFACT)return"";const c=syncCfg();
+  if(!c)return `<div class="card stack" id="synccard"><div class="mascot-side">${pic("sync-devices","","")}<h3>iPhone と iPad をつなぐ</h3></div>
+   <p class="small">「合言葉」で2台の記録（進み具合・カード・会話ノート・話した相手）を自動でそろえます。ログインは不要です。英語52週の合言葉とは別に作ってください。</p>
+   <p class="small"><b>1台目（例：iPhone）</b>で「合言葉を作る」→ 表示された合言葉を <b>2台目（iPad）</b>の「合言葉を入れてつなぐ」に入れます。</p>
+   <div><button class="btn accent" data-act="syncnew">この端末で合言葉を作る</button></div>
+   <label class="small" for="sync-in">合言葉を入れてつなぐ（2台目）</label>
+   <input type="text" id="sync-in" placeholder="XXXXX-XXXXX-XXXXX-XXXXX" autocapitalize="characters" autocomplete="off" spellcheck="false" style="font-family:var(--f-mono)">
+   <div><button class="btn" data-act="syncjoin">つなぐ</button></div>
+   <p class="small muted">合言葉を知っている人は記録を見られるので、人には教えないでください。</p></div>`;
+  return `<div class="card stack" id="synccard"><div class="spread"><h3>iPhone と iPad をつなぐ</h3><span class="chip g" id="syncchip">${syncChipText()}</span></div>
+   <p class="small">この端末はつながっています。もう1台に、この合言葉を入れてください。</p>
+   <div class="mono" style="font-size:20px;font-weight:600;letter-spacing:.06em;overflow-wrap:anywhere">${esc(c.code)}</div>
+   <div class="row"><button class="btn sm" data-act="synccopy">合言葉をコピー</button>${navigator.share?`<button class="btn sm" data-act="syncshare">AirDrop などで送る</button>`:""}<button class="btn sm" data-act="syncnow">今すぐ同期</button></div>
+   <textarea id="sync-code-src" readonly hidden style="min-height:40px">${esc(c.code)}</textarea>
+   <div><button class="btn sm ghost" data-act="syncoff" id="syncoffbtn">この端末の同期をやめる</button></div></div>`}
+async function syncJoin(code){code=normCode(code);if(code.replace(/-/g,"").length<16){toast("合言葉が短すぎます");return}
+  try{const rows=await rpc("eigo52_pull",{p_code:SYNCPFX+code});if(!rows||!rows[0]){toast("その合言葉は見つかりません。1台目の合言葉を確かめてください");return}
+    setSyncCfg({code});await syncNow();render();toast("つながりました。記録をそろえました")}
+  catch(e){toast("つながりませんでした。インターネット接続を確かめてください")}}
+
+/* ============ イベント ============ */
+document.addEventListener("click",e=>{
+  const s=e.target.closest("[data-say]");if(s){e.stopPropagation();stopSpeak();speak(s.dataset.say);return}
+  const tb=e.target.closest(".nav [data-tab]");if(tb){TAB=tb.dataset.tab;render();window.scrollTo(0,0);return}
+  const tk=e.target.closest("#app [data-task]");if(tk){const i=+tk.dataset.task;runTask(todayTasks()[i],W(S.week),i);return}
+  const pe=e.target.closest("#app [data-person]");if(pe){openPerson(pe.dataset.person);return}
+  const nt=e.target.closest("#app [data-note]");if(nt){openNote(nt.dataset.note);return}
+  const wk=e.target.closest("#app [data-week]");if(wk){openWeek(+wk.dataset.week);return}
+  const a=e.target.closest("#app [data-act]");if(!a)return;
+  const act=a.dataset.act;
+  if(act==="nextday"){if(S.day<7)S.day++;else if(S.week<52){S.week++;S.day=1}S.doneToday={date:today(),tasks:[]};save();render();window.scrollTo(0,0);toast(`Week ${S.week} の ${S.day}日目へ`)}
+  else if(act==="addscore"){const r=$("#sc-res").value.trim();if(!r){toast("結果を入力してください");return}S.scores.push({date:$("#sc-date").value,test:$("#sc-test").value,result:r});save();render();toast("記録しました")}
+  else if(act==="newnote"){openNoteEditor()}
+  else if(act==="quickpaste"){pasteInto($("#quick-raw"))}
+  else if(act==="quickgo"){const v=$("#quick-raw").value.trim();if(!v){toast("会話を貼り付けてください");return}openNoteEditor("",v);$("#quick-raw").value=""}
+  else if(act==="intro"){openIntro(0)}
+  else if(act==="quicklog"){openQuickLog("")}
+  else if(act==="notereview"){lessonCards(dueNoteKeys().slice(0,30).map(cardFromKey).filter(Boolean),"ノートの復習",()=>{logMinutes(10,"note");save();closeLesson()},true)}
+  else if(act==="backup"||act==="backupcopy"){const data=JSON.stringify({app:"hindi52",v:1,savedAt:new Date().toISOString(),state:S,notes:NOTES});
+    if(act==="backup"){try{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([data],{type:"application/json"}));a.download="hindi52-backup-"+today()+".json";document.body.appendChild(a);a.click();a.remove();toast("保存しました（ファイルAppの「ダウンロード」）")}catch(e){toast("保存できませんでした。コピーを使ってください")}}
+    else copyText(data,$("#bk-text"))}
+  else if(act==="restore"){restoreBackup($("#bk-paste").value)}
+  else if(act==="syncnew"){setSyncCfg({code:genCode()});syncNow().then(()=>{render();toast("合言葉を作りました。もう1台に入れてください")});render()}
+  else if(act==="syncjoin"){syncJoin($("#sync-in").value)}
+  else if(act==="synccopy"){copyText(syncCfg().code,$("#sync-code-src"))}
+  else if(act==="syncshare"){navigator.share({title:"ヒンディー語52週の合言葉",text:syncCfg().code}).catch(()=>{})}
+  else if(act==="syncnow"){syncNow().then(()=>{render();toast(syncState==="ok"?"同期しました":"同期できませんでした")})}
+  else if(act==="syncoff"){const b=$("#syncoffbtn");if(!b.dataset.ok){b.dataset.ok=1;b.textContent="もう一度押すと、この端末の同期をやめます（記録は残ります）";return}setSyncCfg(null);render();toast("この端末の同期をやめました")}
+  else if(act==="testvoice"){speak("नमस्ते, मैं आकिहिरो हूँ। आपसे मिलकर खुशी हुई।")}
+  else if(act==="cyclescript"){const o=["both","hi","rom"];S.settings.script=o[(o.indexOf(S.settings.script||"both")+1)%3];save();render();toast("表示："+SCRIPTNAME[S.settings.script])}
+});
+document.addEventListener("focusin",e=>{if(e.target.matches("textarea,input[type=text]"))setTimeout(()=>{try{e.target.scrollIntoView({block:"center",behavior:"smooth"})}catch(_){}},350)});
+function restoreBackup(txt){const d=parseJSONLoose(txt);if(!d||d.app!=="hindi52"||!d.state){toast(d&&d.app==="eigo52"?"これは英語52週のバックアップです":"バックアップの形が違います");return}
+  S=merge(d.state);NOTES=Array.isArray(d.notes)?d.notes:[];save();saveNotesLocal();NOTES.forEach(n=>pushNote(n));render();toast("バックアップを読み込みました")}
+document.addEventListener("change",e=>{
+  if(e.target.id==="bk-file"&&e.target.files[0]){const r=new FileReader();r.onload=()=>restoreBackup(String(r.result||""));r.readAsText(e.target.files[0])}
+  if(e.target.id==="set-script"){S.settings.script=e.target.value;save();render()}
+  if(e.target.id==="set-voice"){const [nm,uri]=e.target.value.split("|");S.settings.voiceName=nm||"";S.settings.voiceURI=uri||"";save();render();speak("नमस्ते, मैं आकिहिरो हूँ।")}
+  if(e.target.id==="set-rate"){S.settings.rate=+e.target.value;save()}
+  if(e.target.id==="set-start"&&e.target.value){S.startDate=e.target.value;save()}
+});
+const _rg=render;render=function(){_rg();const a=$("#set-script");if(a)a.value=S.settings.script||"both";const r=$("#set-rate");if(r)r.value=String(S.settings.rate)};
+initStore().then(()=>{if(!IN_ARTIFACT&&syncCfg()){syncNow();setInterval(()=>{if(document.visibilityState==="visible")syncNow()},120000)}});
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&!IN_ARTIFACT&&syncCfg())syncNow()});
+</script>
+
+<script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}))}</script>
+</body>
+</html>
