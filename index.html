@@ -527,6 +527,13 @@ details.card[open] summary{margin-bottom:8px}
 #termpop{position:fixed;inset:0;background:rgba(20,26,48,.35);z-index:200;display:flex;align-items:flex-end;justify-content:center;padding:16px}
 .tp-card{background:#fff;border-radius:20px;padding:16px 18px;max-width:560px;width:100%;display:flex;flex-direction:column;gap:10px;box-shadow:0 10px 40px rgba(0,0,0,.2);max-height:80vh;overflow:auto;margin-bottom:env(safe-area-inset-bottom)}
 .tp-t{font-family:var(--f-head);font-size:18px}.tp-easy{font-weight:700;font-size:16px}
+.tipbtn{display:flex;flex-direction:column;gap:6px;width:100%;text-align:left;background:linear-gradient(135deg,#FFF6DD,#FFFDF5);border:2px solid #FFE27A;border-radius:20px;padding:14px 16px;box-shadow:var(--shadow)}
+.tipbtn .tip-top{display:flex;justify-content:space-between;align-items:center;gap:8px}.tipbtn .tip-eb{font-weight:900;font-size:13px;color:#9A6B00}
+.tipbtn b{font-size:17px;line-height:1.5}.tipbtn small{font-size:13px;color:var(--muted);line-height:1.6}.tipbtn .tip-more{font-size:12.5px;color:var(--accent-ink);font-weight:700}
+.tipcard h2{line-height:1.5}
+.tipcats{flex-wrap:wrap}
+.tiprow{display:grid;grid-template-columns:22px 1fr;gap:8px;align-items:flex-start;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid var(--line);padding:10px 0}
+.tiprow:last-child{border-bottom:none}.tiprow small{display:block;font-size:12.5px;line-height:1.6}.tiprow .ok{color:var(--green);font-weight:900}.tiprow.now b{color:var(--accent-ink)}
 </style>
 </head>
 <body>
@@ -558,6 +565,7 @@ details.card[open] summary{margin-bottom:8px}
 <script src="data/geasy2.js"></script>
 <script src="data/geasy3.js"></script>
 <script src="data/geasy4.js"></script>
+<script src="data/tips.js"></script>
 <script src="data/hitokoto.js"></script>
 <script src="data/catch.js"></script>
 <script src="data/present1.js"></script>
@@ -911,6 +919,7 @@ function viewToday(){
    <div class="stat"><b>${mastered("v")}</b><span>覚えた単語</span></div>
    <div class="stat"><b>${(speakingMinutes()/60).toFixed(1)}</b><span>ヒンディー語で話した（h）</span></div>
   </div>
+  ${tipRow()}
   ${teacherRow()}
   ${catchRow()}
   ${hkTodayCard()}
@@ -1176,6 +1185,47 @@ function openGlossary(){const keys=Object.keys(GLO());
 document.addEventListener("click",e=>{const b=e.target.closest("[data-term]");if(b){e.preventDefault();e.stopPropagation();showTerm(b.dataset.term)}},true);
 function partsHTML(p){return `<div class="gpart"><div class="gchips">${p.chunks.map(c=>`<span class="gchip" style="--c:${ROLE_COLOR[c.r]||"#7A8099"}"><b class="hi">${esc(c.t)}</b><em>${esc(c.rom||"")}</em><i>${esc(c.r)}</i><small>${esc(c.ja)}</small></span>`).join("")}</div>
   <div class="exline">${spkBtn(p.hi)}<div class="t"><span class="en">${tg(p.hi)}</span><span class="small muted">${esc(p.ja)}</span>${p.point?`<span class="exnote">💡 ${linkTerms(p.point)}</span>`:""}</div></div></div>`}
+/* ============ 今日のワンポイント（覚えるコツ・話すコツ）。教材は data/tips.js（window.TIPS） ============
+   その週に合うコツ（w が今の週をふくむ）から、まだ「覚えた」にしていないものを1日1つ。S.tip={date,id}、覚えた S.tipsDone=[id] */
+const TIPS=()=>window.TIPS||[];
+const tipFind=id=>TIPS().find(t=>t.id===+id);
+TIPS().forEach(x=>(x.ex||[]).forEach(e=>addRom(e.hi,e.rom)));
+const tipDone=()=>S.tipsDone||(S.tipsDone=[]);
+function tipToday(){const t=today();if(S.tip&&S.tip.date===t&&tipFind(S.tip.id))return tipFind(S.tip.id);
+  const all=TIPS();if(!all.length)return null;const done=new Set(tipDone()),wk=S.week;
+  if(!S.tipSeen)S.tipSeen=[];const seen=new Set(S.tipSeen);
+  const fit=all.filter(x=>x.w&&x.w[0]<=wk&&wk<=x.w[1]&&!done.has(x.id)).sort((a,b)=>a.id-b.id);
+  let pick=fit.find(x=>!seen.has(x.id))||all.filter(x=>!done.has(x.id)&&!seen.has(x.id)).sort((a,b)=>a.id-b.id)[0];
+  if(!pick){S.tipSeen=[];pick=fit[0]||all.find(x=>!done.has(x.id))||all[0]}
+  S.tipSeen.push(pick.id);S.tip={date:t,id:pick.id};save();return pick}
+function tipEx(e){return `<div class="exline">${spkBtn(e.hi,"swara")}<div class="t"><span class="en">${tg(e.hi)}</span><span class="small muted">${esc(e.ja)}</span></div></div>`}
+function tipRow(){const tp=tipToday();if(!tp)return"";const n=tipDone().length;
+  return `<button class="tipbtn" data-act="tips"><span class="tip-top"><span class="tip-eb">💡 今日のワンポイント</span><span class="chip">${esc(tp.cat)}</span></span>
+   <b>${esc(tp.title)}</b><small>${esc(tp.body.length>58?tp.body.slice(0,58)+"…":tp.body)}</small><span class="tip-more">くわしく見る → 　<span class="mono">覚えたコツ ${n}/${TIPS().length}</span></span></button>`}
+function tipsForWeek(wk,max){return TIPS().filter(x=>x.w&&x.w[0]<=wk&&wk<=x.w[1]&&x.w[1]-x.w[0]<51).slice(0,max||2)}
+function tipCardHTML(tp){const d=tipDone().includes(tp.id);
+  return `<div class="card stack tipcard"><div class="spread"><span class="chip a">${esc(tp.cat)}</span>${d?`<span class="small" style="color:var(--green);font-weight:800">✓ 覚えた</span>`:""}</div>
+   <h2 style="font-size:20px">${esc(tp.title)}</h2><p>${esc(tp.body)}</p>
+   ${(tp.ex||[]).map(tipEx).join("")}
+   <div class="tip"><b>${esc(tp.try.replace(/^今日やってみよう[：:]?/,"今日やってみよう："))}</b></div></div>`}
+function openTips(id){let cur=id||(tipToday()||{}).id,cat="すべて";
+  openLesson("ワンポイント","覚えるコツ",()=>"",body=>{
+    function draw(){const tp=tipFind(cur);const cats=["すべて",...new Set(TIPS().map(t=>t.cat))];const done=new Set(tipDone());
+      const list=TIPS().filter(t=>cat==="すべて"||t.cat===cat);
+      body.innerHTML=`<div class="stack"><div class="mascot-side">${pic("aki-point","","")}<div><div class="eyebrow">Coaching Tips</div><h2>覚えるコツ・話すコツ</h2><p class="small muted" style="margin-top:4px">毎日1つ、その週の勉強に合うコツが「今日」の画面に出ます。読んだら「やってみよう」を30秒だけ試して、「覚えた」を押しましょう。</p></div></div>
+       ${tp?tipCardHTML(tp)+`<div class="row"><button class="btn ${done.has(tp.id)?"":"primary"}" id="tp-done">${done.has(tp.id)?"「覚えた」を取り消す":"✓ 覚えた"}</button><button class="btn" id="tp-next">次のコツ →</button></div>`:""}
+       <h3>コツ集（覚えた ${done.size}/${TIPS().length}）</h3>
+       <div class="tabs tipcats">${cats.map(c=>`<button data-tcat="${esc(c)}" class="${c===cat?"on":""}">${esc(c)}</button>`).join("")}</div>
+       <div class="card hklist">${list.map(t=>`<button class="tiprow ${t.id===cur?"now":""}" data-tid="${t.id}"><span class="ok">${done.has(t.id)?"✓":"・"}</span><span><b>${esc(t.title)}</b><small class="muted">${esc(t.cat)}・第${t.w[0]}〜${t.w[1]}週に役立つ</small></span></button>`).join("")}</div></div>`;
+      const dn=body.querySelector("#tp-done");if(dn)dn.onclick=()=>{const a=tipDone();const i=a.indexOf(tp.id);if(i<0){a.push(tp.id);toast("覚えたコツに入れました")}else a.splice(i,1);save();draw()};
+      const nx=body.querySelector("#tp-next");if(nx)nx.onclick=()=>{const all=TIPS();const i=all.findIndex(t=>t.id===cur);const rest=[...all.slice(i+1),...all.slice(0,i+1)];const n=rest.find(t=>!tipDone().includes(t.id))||rest[0];cur=n.id;draw();const L=$("#lesson");if(L)L.scrollTop=0};
+      body.querySelectorAll("[data-tcat]").forEach(b=>b.onclick=()=>{cat=b.dataset.tcat;draw()});
+      body.querySelectorAll("[data-tid]").forEach(b=>b.onclick=()=>{cur=+b.dataset.tid;stopSpeak();draw();const L=$("#lesson");if(L)L.scrollTop=0});
+    }
+    draw()})}
+
+document.addEventListener("click",e=>{const b=e.target.closest("[data-opentip]");if(b){e.preventDefault();e.stopPropagation();const id=+b.dataset.opentip;closeLesson();setTimeout(()=>openTips(id),60)}},true);
+
 function lessonGrammar(w,done){const g=w.grammar,E=(window.GEASY||{})[w.week];let tab=E?"easy":"full";const ans={};
   openLesson("文法ミニ講義",`W${w.week}`,"",body=>{
     function draw(){const seen=new Set();
@@ -1190,6 +1240,7 @@ function lessonGrammar(w,done){const g=w.grammar,E=(window.GEASY||{})[w.week];le
          <div class="card stack"><h3>🔧 文の作り方</h3>${E.steps.map((s,i)=>`<div class="point"><span class="n">${i+1}</span><p>${linkTerms(s.replace(/^[①②③④⑤]\s*/,""),seen)}</p></div>`).join("")}</div>
          <div class="card stack"><h3>🧩 文を分解してみよう</h3><p class="small muted">色ごとに「文の中での役わり」です。ヒンディー語は <b style="color:#3D7BFF">だれが</b> → <b style="color:#E08A00">どこで・いつ</b> → <b style="color:#13A37A">なにを</b> → <b style="color:#F0473F">どうする・です</b> の順で、<b>日本語とほとんど同じ</b>です。「〜から・〜に」（<b style="color:#0096B4">後置詞</b>）も、日本語と同じく言葉のうしろにつきます。</p>${E.parts.map(partsHTML).join("")}</div>
          <div class="card stack"><h3>✅ 理解チェック</h3>${E.quiz.map((q,k)=>{const a=ans[k];return `<div class="gq"><p><b>Q${k+1}.</b> ${esc(q.q)}</p><div class="opts">${q.opts.map((o,j)=>`<button class="opt ${a!=null?(j===q.a?"ok":a===j?"ng":""):""}" data-gq="${k}" data-go="${j}">${esc(o)}</button>`).join("")}</div>${a!=null?`<p class="small ${a===q.a?"gq-ok":"gq-ng"}">${a===q.a?"⭕ 正解！":"❌ 正解は「"+esc(q.opts[q.a])+"」"}　${linkTerms(q.why,seen)}</p>`:""}</div>`}).join("")}</div>
+         ${tipsForWeek(w.week,2).length?`<div class="card stack"><h3>💡 今週のワンポイント</h3>${tipsForWeek(w.week,2).map(x=>`<button class="tiprow" data-opentip="${x.id}"><span class="ok">💡</span><span><b>${esc(x.title)}</b><small class="muted">${esc(x.body)}</small></span></button>`).join("")}</div>`:""}
          ${(E.terms||[]).length?`<div class="card stack"><h3>📚 今週の用語（タップで説明）</h3><div class="tp-grid">${E.terms.filter(t=>GLO()[t]).map(t=>`<button class="term big" data-term="${esc(t)}">${esc(t)}</button>`).join("")}</div></div>`:""}
          <div class="row"><button class="btn accent" data-gtab="full">② くわしい解説と例文へ →</button></div>`}
       else{
@@ -2301,6 +2352,7 @@ document.addEventListener("click",e=>{
   else if(act==="intro"){openIntro(0)}
   else if(act==="pron"){openPron(0)}
   else if(act==="hk"){openHitokoto("today")}
+  else if(act==="tips"){openTips()}
   else if(act==="daycheck"){lessonDayCheck()}
   else if(act==="book"){openPresentBook()}
   else if(act==="teacher"){openTeacher()}
